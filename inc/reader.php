@@ -11,10 +11,11 @@
  * Read XML feed data from url and return parsed as php array
  *
  * @param string $url
+ * @param string $title
  * @param int $limit
  * @return array
  */
-function getChannelData($url, $limit=null) {
+function getChannelData($url, $title=null, $limit=null) {
     $data = [];
     $content = null;
 
@@ -38,6 +39,9 @@ function getChannelData($url, $limit=null) {
     if (is_string($content)) {
 
         $data = parseChannelContent($content, $limit);
+        if (!empty($title)) {
+            $data['title'] = $title;
+        }
     }
 
     return $data;
@@ -94,7 +98,6 @@ function parseChannelContent($content, $limit=null)
             $itemData['pubDate'] = sprintf('%s GMT', gmdate('Y.m.d H:i', $pubTime));
         }
 
-
         $media = $item->children('http://search.yahoo.com/mrss/');
 
         if (isset($media->group->content)) {
@@ -117,7 +120,7 @@ function parseChannelContent($content, $limit=null)
 
         if (isset($media->thumbnail)) {
 
-            //  BuzzFeed only has thumbnail
+            //  BuzzFeed has only thumbnail
             $attrs = $media->thumbnail->attributes();
             $itemData['thumbUrl'] = strval($attrs['url']);
         }
