@@ -13,9 +13,6 @@
 :root {
     --top-header-bg-color: forestgreen;
     --top-header-text-color: #fffffc;
-    --poll-open-bg-color: white;
-    --poll-completed-bg-color: honeydew;
-    --poll-completed-title-bg-color: #b0e0b0;
 }
 
 html, body {
@@ -82,7 +79,6 @@ html, body {
 
 .wn-tab {
     float: left;
-    width: 100%;
     border: 2px solid #444;
     border-top-width: 0px;
     border-left-width: 0px;
@@ -97,7 +93,7 @@ html, body {
 }
 
 .wn-tabs > .wn-tab-left {
-	border-right-color: rgba(0, 0, 0, 0);
+    border-right-width: 1px;
 }
 
 
@@ -108,28 +104,111 @@ html, body {
 /*****   LINKS   *****/
 
 
+.wn-links-wrapper {
+    position: relative;
+	float: left;
+    border-right: 2px solid #444;
+    padding: 0;
+}
 
+.wn-links-wrapper.wn-links-left {
+    border-right-width: 1px;
+}
 
+.wn-link-block {
+    position: relative;
+	display: block;
+	width: 100%;
+	height: auto;
+	padding: 15px 33px;
+	border-bottom: 1px solid #444;
+	background-color: #fff;
+	text-decoration: none;
+	color: #111;
+}
 
+.wn-link-block:hover,
+.wn-link-block:active {
+    text-decoration: none;
+    color: #111;
+}
+
+.wn-link-image {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid #aaa;
+    margin-top: 5px;
+    margin-bottom: 1rem;
+}
+
+.wn-link-image  img {
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.wn-link-text {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.wn-link-title {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    
+    font-size: 150%;
+    line-height: 133%;
+    font-weight: 500;
+}
+
+.wn-link-date {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    
+    padding-top: 5px;
+    font-size: 100%;
+    color: #585858;
+}
+
+.wn-link-description {
+    position: relative;
+    display: none;
+    width: 100%;
+    height: auto;
+    
+    padding-top: 5px;
+    font-size: 100%;
+}
 
 
 
 /*****   COLUMN WIDTHS   *****/
 
+.wn-col {
+	width: 100%;
+}
 
-.wn-cols-2  .wn-tab {
+.wn-cols-2  .wn-col {
     width: 50%;
 }
 
-.wn-cols-3  .wn-tab {
+.wn-cols-3  .wn-col {
     width: 33.33333%;
 }
 
-.wn-cols-4  .wn-tab {
+.wn-cols-4  .wn-col {
     width: 25%;
 }
 
-.wn-cols-5  .wn-tab {
+.wn-cols-5  .wn-col {
     width: 20%;
 }
 

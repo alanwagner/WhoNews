@@ -9,14 +9,33 @@
 
 include_once (__DIR__ . '/../../inc/reader.php');
 
+$feedList = include(__DIR__ . '/../../inc/feedlist.php');
+
+$limit = isset($_GET['limit']) ? $_GET['limit'] : null;
+
 $feedData = [];
-foreach ($_GET['feed'] as $url) {
-    $feedData[] = getChannelData($url, 2);
-}
-if (empty($feedData)) {
-    $feedData[] = getChannelData('https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml', 2);
+
+$queryFeeds = [];
+if (isset($_GET['feed'])) {
+    $queryFeeds = array_filter($_GET['feed']);
 }
 
+if (empty($queryFeeds)) {
+    $queryFeeds = [
+	   'buzzfeed-news',
+	   'nyt-homepage',
+	   'foxnews-national'
+    ];
+}
+
+foreach ($queryFeeds as $url) {
+    $title = null;
+    if (in_array($url, array_keys($feedList))) {
+        $title = str_replace(' > ', '&nbsp; > &nbsp;', $feedList[$url]['title']);
+        $url = $feedList[$url]['url'];
+    }
+    $feedData[] = getChannelData($url, $title, $limit);
+}
 
 ?>
 <!DOCTYPE html>
@@ -48,7 +67,7 @@ if (empty($feedData)) {
     <div class="wn-tabs clearfix">
         <?php
         foreach($feedData as $idx => $feed):
-            $tabClass = 'wn-tab ' . ($idx === count($feedData) - 1 ? 'wn-tab-left' : '');
+            $tabClass = 'wn-col wn-tab ' . ($idx === count($feedData) - 1 ? 'wn-tab-left' : '');
         ?>
             <div class="<?php echo $tabClass ?>">
                 <?php echo $feed['title'] ?>
@@ -61,12 +80,12 @@ if (empty($feedData)) {
 
 
 
-  <div class="tablet-inner">
+  <div class="tablet-inner clearfix">
 
 
     <?php
     foreach($feedData as $idx => $feed):
-        $wrapperClass = 'wn-links-wrapper ' . ($idx === count($feedData) - 1 ? 'wn-links-left' : '');
+        $wrapperClass = 'wn-col wn-links-wrapper ' . ($idx === count($feedData) - 1 ? 'wn-links-left' : '');
     ?>
         <div class="<?php echo $wrapperClass ?>">
         <?php
@@ -78,7 +97,7 @@ if (empty($feedData)) {
                 $imgUrl = $item['thumbUrl'];
             }
         ?>
-            <a href="<?php echo $item['guid'] ?>" class="">
+            <a href="<?php echo $item['guid'] ?>" class="wn-link-block">
                 <?php
                 if (!empty($imgUrl)):
                 ?>
@@ -90,7 +109,10 @@ if (empty($feedData)) {
                 ?>
                 <span class="wn-link-text">
     	            <span class="wn-link-title"><?php echo $item['title'] ?></span>
-    	            <span class="wn-link-date"><?php echo $item['pubDate'] ?></span>
+    	            <span class="wn-link-date">
+    	               <?php echo $feed['title'] ?><br />
+    	               <?php echo $item['pubDate'] ?>
+    	           </span>
     	            <span class="wn-link-description"><?php echo $item['description'] ?></span>
                 </span>
             </a>
@@ -103,8 +125,6 @@ if (empty($feedData)) {
     <?php
     endforeach;
     ?>
-
-    <div class="clearfix"></div>
 
   </div><!-- .tablet-inner -->
 </div><!-- .tablet-outer -->
