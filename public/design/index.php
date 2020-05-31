@@ -48,12 +48,6 @@ function getChannelData($url) {
             $description = $item->description;
             if (!is_string($description)) {
                 $description = $description->__toString();
-
-                // BuzzFeed puts image in description
-                if (preg_match("#<img[^>]* src=.([^ >]+)[ >]#i", $description, $matches)) {
-                    //  matches will contain trailing "'
-                    // $itemData['image'] = substr($matches[1], 0, -1);
-                }
             }
             if (strstr($description, '<')) {
                 $description = strip_tags(substr($description, 0, strpos($description, '<', 10)));
