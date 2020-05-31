@@ -1,4 +1,11 @@
 <?php
+/**
+ * WhoNews : feed.php
+ *
+ * @author     Alan G. Wagner <mail@alanwagner.org>
+ * @copyright  2020 Alan G. Wagner
+ * @license    GNU GPL 3.0
+ */
 
 $data = null;
 $xml = null;
