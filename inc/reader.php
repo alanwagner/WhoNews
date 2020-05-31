@@ -88,7 +88,7 @@ function parseChannelContent($content, $limit=null)
         }
         if (strstr($description, '<')) {
             //  Clean tags and embedded links
-            $description = strip_tags(substr($description, 0, strpos($description, '<', 10)));
+            $description = strip_tags(substr($description, 0, strpos($description, '<', 13)));
         }
         $itemData['description'] = $description;
 

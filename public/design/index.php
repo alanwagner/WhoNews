@@ -11,7 +11,7 @@ include_once (__DIR__ . '/../../inc/reader.php');
 
 $feedList = include(__DIR__ . '/../../inc/feedlist.php');
 
-$limit = isset($_GET['limit']) ? $_GET['limit'] : 3;
+$limit = isset($_GET['limit']) ? $_GET['limit'] : null;
 
 $feedData = [];
 
@@ -97,7 +97,7 @@ foreach ($queryFeeds as $url) {
                 $imgUrl = $item['thumbUrl'];
             }
         ?>
-            <a href="<?php echo $item['guid'] ?>" class="">
+            <a href="<?php echo $item['guid'] ?>" class="wn-link-block">
                 <?php
                 if (!empty($imgUrl)):
                 ?>
@@ -109,7 +109,10 @@ foreach ($queryFeeds as $url) {
                 ?>
                 <span class="wn-link-text">
     	            <span class="wn-link-title"><?php echo $item['title'] ?></span>
-    	            <span class="wn-link-date"><?php echo $item['pubDate'] ?></span>
+    	            <span class="wn-link-date">
+    	               <?php echo $feed['title'] ?><br />
+    	               <?php echo $item['pubDate'] ?>
+    	           </span>
     	            <span class="wn-link-description"><?php echo $item['description'] ?></span>
                 </span>
             </a>
