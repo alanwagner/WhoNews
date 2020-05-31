@@ -1,7 +1,7 @@
 /**********************************************************************************
 
     Project Name : WhoNews
-    File Name    : whonews-design.css
+    File Name    : whonews.css
     Author       : Alan G. Wagner
     Author Email : mail@alanwagner.org
     Copyright    : 2020 Alan G. Wagner
@@ -11,28 +11,39 @@
 @CHARSET "UTF-8";
 
 :root {
-    --top-header-bg-color: forestgreen;
     --top-header-text-color: #fffffc;
+    --top-header-bg-color: forestgreen;
+    --top-header-height: 4rem;
+    --sub-header-text-color: #fffffc;
+    --sub-header-height: 4rem;
+    --links-bg-color: white;
 }
 
+
+
+
+/*****   BASE LAYOUT   *****/
+
+
+
 html, body {
-	position: relative;
-	height: 100%;
+    position: relative;
+    height: 100%;
 }
 
 
 .tablet-outer {
-	min-width: 720px;
-	height: 100%;
-	margin: 0;
-	border: 2px solid #444;
-	
+    min-width: 720px;
+    height: 100%;
+    margin: 0;
+    border: 2px solid #444;
 }
 
 .tablet-inner {
-	position: relative;
-	height: calc(100% - 8rem);
+    position: relative;
+    height: calc(100% - var(--top-header-height) - var(--sub-header-height) );
     overflow-y: scroll;
+    background-color: var(--links-bg-color);
 }
 
 
@@ -40,26 +51,26 @@ html, body {
 /*****   TOP HEADER   *****/
 
 .wn-top-header {
-	background-color: var(--top-header-bg-color); 
-	font-size: 160%;
-	padding: 4px 8px;
-	height: 4rem;
+    background-color: var(--top-header-bg-color);
+    font-size: 160%;
+    padding: 4px 8px;
+    height: var(--top-header-height);
 }
 
 .wn-header-title {
-    color: var(--top-header-text-color); 
+    color: var(--top-header-text-color);
     font-weight: 600;
     text-align: center;
 }
 
 
-/*****   CATEGORY BAR   *****/
+/*****   SUB-HEADER BAR   *****/
 
 
-.wn-category-header {
+.wn-sub-header {
     background-color: #101010;
-    color: var(--top-header-text-color); 
-    height: 4rem;
+    color: var(--sub-header-text-color);
+    height: var(--sub-header-height);
     font-size: 120%;
     padding: 7px 15px 0;
     font-weight: 300;
@@ -81,10 +92,8 @@ html, body {
     float: left;
     border: 2px solid #444;
     border-top-width: 0px;
-    border-left-width: 0px;
-    
     border-bottom-color: gray;
-    
+
     padding: 6px 0px;
     background-color: white;
     text-align: center;
@@ -106,7 +115,7 @@ html, body {
 
 .wn-links-wrapper {
     position: relative;
-	float: left;
+    float: left;
     border-right: 2px solid #444;
     padding: 0;
 }
@@ -117,14 +126,14 @@ html, body {
 
 .wn-link-block {
     position: relative;
-	display: block;
-	width: 100%;
-	height: auto;
-	padding: 15px 33px;
-	border-bottom: 1px solid #444;
-	background-color: #fff;
-	text-decoration: none;
-	color: #111;
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 15px 33px;
+    border-bottom: 1px solid #444;
+    background-color: var(--links-bg-color);
+    text-decoration: none;
+    color: #111;
 }
 
 .wn-link-block:hover,
@@ -161,7 +170,7 @@ html, body {
     display: block;
     width: 100%;
     height: auto;
-    
+
     font-size: 150%;
     line-height: 133%;
     font-weight: 500;
@@ -172,7 +181,7 @@ html, body {
     display: block;
     width: 100%;
     height: auto;
-    
+
     padding-top: 5px;
     font-size: 100%;
     color: #585858;
@@ -183,7 +192,7 @@ html, body {
     display: none;
     width: 100%;
     height: auto;
-    
+
     padding-top: 5px;
     font-size: 100%;
 }
@@ -193,7 +202,7 @@ html, body {
 /*****   COLUMN WIDTHS   *****/
 
 .wn-col {
-	width: 100%;
+    width: 100%;
 }
 
 .wn-cols-2  .wn-col {

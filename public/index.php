@@ -7,9 +7,9 @@
  * @license    GNU GPL 3.0
  */
 
-include_once (__DIR__ . '/../../inc/reader.php');
+include_once (__DIR__ . '/../inc/reader.php');
 
-$feedList = include(__DIR__ . '/../../inc/feedlist.php');
+$feedList = include(__DIR__ . '/../inc/feedlist.php');
 
 $limit = isset($_GET['limit']) ? $_GET['limit'] : null;
 
@@ -44,9 +44,9 @@ foreach ($queryFeeds as $url) {
 <meta charset="UTF-8">
 <title>WhoNews : MVP</title>
 
-<link href="../css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
-<link href="../css/bootstrap-theme.css" media="screen" rel="stylesheet" type="text/css" />
-<link href="whonews-design.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="css/bootstrap-theme.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="css/whonews.css" media="screen" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
@@ -60,7 +60,7 @@ foreach ($queryFeeds as $url) {
         <div class="wn-header-title">WhoNews</div>
     </div>
 
-    <div class="wn-category-header">
+    <div class="wn-sub-header">
         Pop Your Info Bubble!
     </div>
 
