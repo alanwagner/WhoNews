@@ -28,13 +28,25 @@ if (empty($queryFeeds)) {
     ];
 }
 
-foreach ($queryFeeds as $url) {
+
+foreach ($queryFeeds as $idx => $url) {
+
     $title = null;
     if (in_array($url, array_keys($feedList))) {
-        $title = str_replace(' > ', '&nbsp; > &nbsp;', $feedList[$url]['title']);
+        $title = $feedList[$url]['title'];
         $url = $feedList[$url]['url'];
     }
+
     $feedData[] = getChannelData($url, $title, $limit);
+}
+
+$pageTitle = 'WhoNews :: ';
+
+foreach ($feedData as $idx => $feed) {
+    $pageTitle .= $feed['title'];
+    if ($idx !== count($queryFeeds) - 1) {
+        $pageTitle .= ' • ';
+    }
 }
 
 ?>
@@ -42,7 +54,7 @@ foreach ($queryFeeds as $url) {
 <html>
 <head>
 <meta charset="UTF-8">
-<title>WhoNews : MVP</title>
+<title><?php echo $pageTitle; ?></title>
 
 <link href="css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
 <link href="css/bootstrap-theme.css" media="screen" rel="stylesheet" type="text/css" />
@@ -50,7 +62,7 @@ foreach ($queryFeeds as $url) {
 </head>
 <body>
 
-<div class="tablet-outer wn-cols-<?php echo count($feedData) ?>">
+<div class="tablet-outer wn-cols-<?php echo count($feedData); ?>">
 
     <div class="wn-top-header">
 <!--
@@ -70,7 +82,7 @@ foreach ($queryFeeds as $url) {
             $tabClass = 'wn-col wn-tab ' . ($idx === count($feedData) - 1 ? 'wn-tab-left' : '');
         ?>
             <div class="<?php echo $tabClass ?>">
-                <?php echo $feed['title'] ?>
+                <?php echo str_replace(' > ', '&nbsp; > &nbsp;', $feed['title']); ?>
             </div>
         <?php
         endforeach;

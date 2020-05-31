@@ -92,6 +92,7 @@ html, body {
     float: left;
     border: 2px solid #444;
     border-top-width: 0px;
+    border-left-width: 0px;
     border-bottom-color: gray;
 
     padding: 6px 0px;
