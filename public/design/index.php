@@ -7,111 +7,14 @@
  * @license    GNU GPL 3.0
  */
 
-function getChannelData($url) {
-    $data = [];
-    $content = null;
-
-    $ch = curl_init();
-
-    ob_start();
-
-    // Configuration de l'URL et d'autres options
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_HEADER, 0);
-
-    // Récupération de l'URL
-    curl_exec($ch);
-
-    // Fermeture de la session cURL
-    curl_close($ch);
-
-    $content = ob_get_contents();
-    ob_end_clean();
-
-    if (is_string($content)) {
-
-        $xml=simplexml_load_string($content);
-        $channel = $xml->channel;
-
-        $data['title'] = $channel->title;
-        $data['items'] = [];
-
-        foreach($channel->item as $item) {
-
-            $itemData = [];
-
-            $guid = $item->guid;
-            if (!is_string($guid)) {
-                $guid = $guid->__toString();
-            }
-            $itemData['guid'] = strip_tags($guid);
-
-            $title = $item->title;
-            if (!is_string($title)) {
-                $title = $title->__toString();
-            }
-            $itemData['title'] = strip_tags($title);
-
-            $description = $item->description;
-            if (!is_string($description)) {
-                $description = $description->__toString();
-            }
-            if (strstr($description, '<')) {
-                $description = strip_tags(substr($description, 0, strpos($description, '<', 10)));
-            }
-            $itemData['description'] = $description;
-
-            $pubTime = strtotime($item->pubDate);
-            if ($pubTime > 1000000000) {
-                $itemData['pubDate'] = sprintf('%s GMT', gmdate('Y.m.d H:i', $pubTime));
-            }
-
-
-            $media = $item->children('http://search.yahoo.com/mrss/');
-
-             if (isset($media->group->content)) {
-
-                //  Fox
-                $attrs = $media->group->content->attributes();
-                $itemData['imgUrl'] = strval($attrs['url']);
-
-                //print_r($media->group->content->attributes());
-
-            } else if (isset($media->content)) {
-
-
-                //  NYT
-                $attrs = $media->content->attributes();
-                $itemData['imgUrl'] = strval($attrs['url']);
-
-                //print_r($media->content->attributes());
-            }
-
-            if (isset($media->thumbnail)) {
-
-                //  BuzzFeed only has thumbnail
-                $attrs = $media->thumbnail->attributes();
-                $itemData['thumbUrl'] = strval($attrs['url']);
-            }
-
-
-            $data['items'][] = $itemData;
-
-            if (count($data['items']) > 1) {
-                break;
-            }
-        }
-    }
-
-    return $data;
-}
+include_once (__DIR__ . '/../../inc/reader.php');
 
 $feedData = [];
 foreach ($_GET['feed'] as $url) {
-    $feedData[] = getChannelData($url);
+    $feedData[] = getChannelData($url, 2);
 }
 if (empty($feedData)) {
-    $feedData[] = getChannelData('https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml');
+    $feedData[] = getChannelData('https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml', 2);
 }
 
 
