@@ -24,9 +24,9 @@ if (isset($_GET['feed'])) {
 if (empty($queryFeeds)) {
     //  Use default values if no feeds read
     $queryFeeds = [
-	   'buzzfeed-news',
-	   'nyt-homepage',
-	   'foxnews-national'
+       'buzzfeed-news',
+       'nyt-homepage',
+       'foxnews-national'
     ];
     $defaultTitle = true;
 }
@@ -109,7 +109,7 @@ if ($defaultTitle === false) {
         foreach($feed['items'] as $item):
             $imgUrl = null;
             if (!empty($item['imgUrl'])) {
-            	$imgUrl = $item['imgUrl'];
+                $imgUrl = $item['imgUrl'];
             } else if (!empty($item['thumbUrl'])) {
                 $imgUrl = $item['thumbUrl'];
             }
@@ -125,8 +125,8 @@ if ($defaultTitle === false) {
                 endif;
                 ?>
                 <span class="wn-link-text">
-    	            <span class="wn-link-title"><?php echo $item['title'] ?></span>
-    	            <span class="wn-link-date">
+                    <span class="wn-link-title"><?php echo $item['title'] ?></span>
+                    <span class="wn-link-date">
                         <?php echo $feed['title'] ?>
                         <br />
                         <?php echo $item['pubDate'] ?>
