@@ -14,18 +14,21 @@ $feedList = include(__DIR__ . '/../inc/feedlist.php');
 $limit = isset($_GET['limit']) ? $_GET['limit'] : null;
 
 $feedData = [];
-
 $queryFeeds = [];
+$defaultTitle = false;
+
 if (isset($_GET['feed'])) {
     $queryFeeds = array_filter($_GET['feed']);
 }
 
 if (empty($queryFeeds)) {
+    //  Use default values if no feeds read
     $queryFeeds = [
 	   'buzzfeed-news',
 	   'nyt-homepage',
 	   'foxnews-national'
     ];
+    $defaultTitle = true;
 }
 
 
@@ -42,11 +45,15 @@ foreach ($queryFeeds as $idx => $url) {
 
 $pageTitle = 'WhoNews :: ';
 
-foreach ($feedData as $idx => $feed) {
-    $pageTitle .= $feed['title'];
-    if ($idx !== count($queryFeeds) - 1) {
-        $pageTitle .= ' • ';
+if ($defaultTitle === false) {
+    foreach ($feedData as $idx => $feed) {
+        $pageTitle .= $feed['title'];
+        if ($idx !== count($queryFeeds) - 1) {
+            $pageTitle .= ' • ';
+        }
     }
+} else {
+    $pageTitle .= 'Pop Your Info Bubble';
 }
 
 ?>
