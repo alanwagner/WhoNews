@@ -90,6 +90,10 @@ function parseChannelContent($content, $limit=null)
             //  Clean tags and embedded links
             $description = strip_tags(substr($description, 0, strpos($description, '<', 13)));
         }
+        //  Eliminate title if also is beginning of description. May result in empty description.
+        if (strpos($description, $title) === 0) {
+            $description = str_replace($title, '', $description);
+        }
         $itemData['description'] = $description;
 
         $pubTime = strtotime($item->pubDate);

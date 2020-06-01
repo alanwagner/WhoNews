@@ -127,11 +127,18 @@ if ($defaultTitle === false) {
                 <span class="wn-link-text">
     	            <span class="wn-link-title"><?php echo $item['title'] ?></span>
     	            <span class="wn-link-date">
-    	               <?php echo $feed['title'] ?><br />
-    	               <?php echo $item['pubDate'] ?>
-    	           </span>
-    	            <span class="wn-link-description"><?php echo $item['description'] ?></span>
-                </span>
+                        <?php echo $feed['title'] ?>
+                        <br />
+                        <?php echo $item['pubDate'] ?>
+                    </span>
+                <?php
+                if (!empty($item['description'])):
+                ?>
+                    <span class="wn-link-description"><?php echo $item['description'] ?></span>
+                <?php
+                endif;
+                ?>
+                </span><!-- .wn-link-text -->
             </a>
 
         <?php
