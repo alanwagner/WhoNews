@@ -260,7 +260,7 @@ if (isset($_GET['description'])) {
                     </label>
                     <br />
                     <label class="wn-input-custom <?php echo ($feed === null || isset($feedList[$feed]) ? 'wn-custom-hidden' : '');?>" id="wn-input-custom-<?php echo $i; ?>">
-                        URL :&nbsp;
+                        RSS URL :&nbsp;
                         <input type="text" name="custom[]" size="40" value="<?php echo (!isset($feedList[$feed]) ? $feed : ''); ?>" />
                     </label>
                 </div>
