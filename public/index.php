@@ -13,12 +13,28 @@ $feedList = include(__DIR__ . '/../inc/feedlist.php');
 
 $limit = isset($_GET['limit']) ? $_GET['limit'] : null;
 
+const WN_MAX_FEEDS = 5;
+
 $feedData = [];
 $queryFeeds = [];
 $defaultTitle = false;
 
 if (isset($_GET['feed'])) {
-    $queryFeeds = array_merge(array_filter($_GET['feed']));
+
+    for ($i = 0; $i < WN_MAX_FEEDS; $i++) {
+
+        if (!empty($_GET['feed'][$i])) {
+            $feed = $_GET['feed'][$i];
+
+            if ($feed === 'custom') {
+                if (!empty($_GET['custom'][$i])) {
+                    $queryFeeds[] = $_GET['custom'][$i];
+                }
+            } else {
+                $queryFeeds[] = $feed;
+            }
+        }
+    }
 }
 
 if (empty($queryFeeds)) {
@@ -101,7 +117,7 @@ if (isset($_GET['description'])) {
         <div class="wn-header-burger">&#9776;</div>
         <div class="wn-header-beta">Beta</div>
 -->
-        <h1 class="wn-header-title">WhoNews</h1>
+        <h1 class="wn-header-title">Who<span class="wn-header-title-spacer"></span>News</h1>
     </div>
 
     <div class="wn-sub-header">
@@ -222,7 +238,7 @@ if (isset($_GET['description'])) {
             <h3>FEEDS</h3>
 
             <?php
-            for ($i = 1; $i <= 5; $i++):
+            for ($i = 1; $i <= WN_MAX_FEEDS; $i++):
                 $feed = isset($queryFeeds[$i-1]) ? $queryFeeds[$i-1] : null;
             ?>
                 <div class="wn-settings-row">
@@ -242,6 +258,11 @@ if (isset($_GET['description'])) {
                             ?>
                         </select>
                     </label>
+                    <br />
+                    <label class="wn-input-custom">
+                        URL :&nbsp;
+                        <input type="text" name="custom[]" size="40" value="<?php echo (!isset($feedList[$feed]) ? $feed : ''); ?>" />
+                    </label>
                 </div>
             <?php
             endfor;
@@ -249,7 +270,7 @@ if (isset($_GET['description'])) {
 
 
             <div class="wn-settings-row text-center">
-                <button type="submit" class="btn btn-success btn-sm">Save</button>
+                <button type="submit" class="btn btn-success btn-sm" title="Apply">Apply</button>
             </div>
 
         </form>

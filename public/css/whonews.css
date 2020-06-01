@@ -80,6 +80,11 @@ h1.wn-header-title {
     padding: 0;
 }
 
+.wn-header-title-spacer {
+    display: inline-block;
+    width: 1px;
+}
+
 
 
 
