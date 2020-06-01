@@ -272,7 +272,7 @@ h1.wn-header-title {
     padding-top: 1rem;
 }
 
-.wn-settings-row  label  span {
+.wn-settings-row  label  span.label_wide {
     display: inline-block;
     width: 90px;
 }

@@ -18,7 +18,7 @@ $queryFeeds = [];
 $defaultTitle = false;
 
 if (isset($_GET['feed'])) {
-    $queryFeeds = array_filter($_GET['feed']);
+    $queryFeeds = array_merge(array_filter($_GET['feed']));
 }
 
 if (empty($queryFeeds)) {
@@ -189,7 +189,7 @@ if (isset($_GET['description'])) {
 
             <div class="wn-settings-row">
                 <label>
-                    <span>Scrolling :</span>
+                    <span class="label_wide">Scrolling :</span>
                     <select name="scroll">
                         <option value="free" <?php echo (!isset($_GET['scroll']) || $_GET['scroll'] === 'free' ? 'selected="selected"' : '');?>>Free</option>
                         <option value="sync" <?php echo (isset($_GET['scroll']) && $_GET['scroll'] === 'sync' ? 'selected="selected"' : '');?>>Sync</option>
@@ -199,7 +199,7 @@ if (isset($_GET['description'])) {
 
             <div class="wn-settings-row">
                 <label>
-                    <span>Images :</span>
+                    <span class="label_wide">Images :</span>
                     <select name="images">
                         <option value="show" <?php echo (!isset($_GET['images']) || $_GET['images'] === 'show' ? 'selected="selected"' : '');?>>Show</option>
                         <option value="hide" <?php echo (isset($_GET['images']) && $_GET['images'] === 'hide' ? 'selected="selected"' : '');?>>Hide</option>
@@ -209,7 +209,7 @@ if (isset($_GET['description'])) {
 
             <div class="wn-settings-row">
                 <label>
-                    <span>Description :</span>
+                    <span class="label_wide">Description :</span>
                     <select name="description">
                         <option value="full" <?php echo (isset($_GET['description']) && $_GET['description'] === 'full' ? 'selected="selected"' : '');?>>Full</option>
                         <option value="short" <?php echo (isset($_GET['description']) && $_GET['description'] === 'short' ? 'selected="selected"' : '');?>>Short</option>
@@ -218,12 +218,44 @@ if (isset($_GET['description'])) {
                 </label>
             </div>
 
+
+            <h3>FEEDS</h3>
+
+            <?php
+            for ($i = 1; $i <= 5; $i++):
+                $feed = isset($queryFeeds[$i-1]) ? $queryFeeds[$i-1] : null;
+            ?>
+                <div class="wn-settings-row">
+                    <label>
+                        <span><?php echo $i; ?> :&nbsp;</span>
+                        <select name="feed[]">
+                            <option value=""></option>
+                            <option value="custom" <?php echo ($feed !== null && !isset($feedList[$feed]) ? 'selected="selected"' : '');?>>Custom...</option>
+                            <?php
+                            foreach ($feedList as $key => $conf):
+                            ?>
+                                <option value="<?php echo $key; ?>" <?php echo ($feed === $key ? 'selected="selected"' : '');?>>
+                                    <?php echo $conf['menuLabel']?>
+                                </option>
+                            <?php
+                            endforeach;
+                            ?>
+                        </select>
+                    </label>
+                </div>
+            <?php
+            endfor;
+            ?>
+
+
             <div class="wn-settings-row text-center">
                 <button type="submit" class="btn btn-success btn-sm">Save</button>
             </div>
 
         </form>
     </div><!-- #wn-settings-wrapper -->
+
+
 </div><!-- .tablet-outer -->
 
 </body>
