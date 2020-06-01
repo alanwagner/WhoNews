@@ -257,10 +257,8 @@ h1.wn-header-title {
     border: 1px solid #999;
     border-top-width: 0;
     box-shadow: -3px 4px 10px 1px #c0c0c0;
-}
-
-.wn-settings-hidden {
-    display: none;
+    width: auto;
+    height: auto;
 }
 
 #wn-settings-form {
@@ -280,6 +278,23 @@ h1.wn-header-title {
 .wn-settings-row  label  span.label_wide {
     display: inline-block;
     width: 90px;
+}
+
+.wn-settings-hidden {
+    display: none;
+}
+
+.wn-input-custom {
+    display: block;
+    padding-top: 10px;
+    overflow: hidden;
+    height: 3.5rem;
+    transition: height 0.3s;
+}
+
+.wn-input-custom.wn-custom-hidden  {
+    padding: 0;
+    height: 0;
 }
 
 

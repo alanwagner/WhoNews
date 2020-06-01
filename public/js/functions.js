@@ -10,3 +10,12 @@ function toggleSettings() {
   var element = document.getElementById("wn-settings-wrapper");
   element.classList.toggle("wn-settings-hidden");
 }
+
+function toggleCustomInput(id, selected) {
+  var element = document.getElementById(id);
+  if (selected === "custom") {
+	  element.classList.remove("wn-custom-hidden");
+  } else {
+	  element.classList.add("wn-custom-hidden");
+  }
+}

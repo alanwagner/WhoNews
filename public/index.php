@@ -171,7 +171,7 @@ if (isset($_GET['description'])) {
                     <span class="wn-link-date">
                         <?php echo $feed['title'] ?>
                         <br />
-                        <?php echo $item['pubDate'] ?>
+                        <?php echo isset($item['pubDate']) ? $item['pubDate'] : ''; ?>
                     </span>
                 <?php
                 if (!empty($item['description'])):
@@ -244,7 +244,7 @@ if (isset($_GET['description'])) {
                 <div class="wn-settings-row">
                     <label>
                         <span><?php echo $i; ?> :&nbsp;</span>
-                        <select name="feed[]">
+                        <select name="feed[]" onchange="toggleCustomInput('wn-input-custom-<?php echo $i; ?>', this.options[this.selectedIndex].value)">
                             <option value=""></option>
                             <option value="custom" <?php echo ($feed !== null && !isset($feedList[$feed]) ? 'selected="selected"' : '');?>>Custom...</option>
                             <?php
@@ -259,7 +259,7 @@ if (isset($_GET['description'])) {
                         </select>
                     </label>
                     <br />
-                    <label class="wn-input-custom">
+                    <label class="wn-input-custom <?php echo ($feed === null || isset($feedList[$feed]) ? 'wn-custom-hidden' : '');?>" id="wn-input-custom-<?php echo $i; ?>">
                         URL :&nbsp;
                         <input type="text" name="custom[]" size="40" value="<?php echo (!isset($feedList[$feed]) ? $feed : ''); ?>" />
                     </label>
