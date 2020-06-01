@@ -86,9 +86,8 @@ if ($defaultTitle === false) {
     <div class="wn-tabs clearfix">
         <?php
         foreach($feedData as $idx => $feed):
-            $tabClass = 'wn-col wn-tab ' . ($idx === count($feedData) - 1 ? 'wn-tab-left' : '');
         ?>
-            <div class="<?php echo $tabClass ?>">
+            <div class="wn-col wn-tab">
                 <?php echo str_replace(' > ', '&nbsp; > &nbsp;', $feed['title']); ?>
             </div>
         <?php
@@ -104,9 +103,8 @@ if ($defaultTitle === false) {
 
     <?php
     foreach($feedData as $idx => $feed):
-        $wrapperClass = 'wn-col wn-links-wrapper ' . ($idx === count($feedData) - 1 ? 'wn-links-left' : '');
     ?>
-        <div class="<?php echo $wrapperClass ?>">
+        <div class="wn-col wn-links-wrapper">
         <?php
         foreach($feed['items'] as $item):
             $imgUrl = null;
