@@ -117,7 +117,8 @@ h1.wn-header-title {
     color: var(--sub-header-text-color);
     background-color: var(--sub-header-bg-color);
     text-align: center;
-    font-size: 190%;
+    line-height: 87%;
+    font-size: 290%;
     font-weight: 500;
     cursor: pointer;
 }
