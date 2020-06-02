@@ -113,13 +113,13 @@ h1.wn-header-title {
     top: 0px;
     right: 0px;
     height: var(--sub-header-height);
-    width: var(--sub-header-height);
+    width: calc( var(--sub-header-height) * 1.2 );
     color: var(--sub-header-text-color);
     background-color: var(--sub-header-bg-color);
-    text-align: center;
-    line-height: 87%;
-    font-size: 290%;
-    font-weight: 500;
+    background-image: url(gears-icon-white.png);
+    background-size: 67%;
+    background-position: center center;
+    background-repeat: no-repeat;
     cursor: pointer;
 }
 

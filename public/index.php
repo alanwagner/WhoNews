@@ -122,7 +122,7 @@ if (isset($_GET['description'])) {
 
     <div class="wn-sub-header">
         <span class="wn-sub-header-text">Pop Your Info Bubble</span>
-        <span title="Settings" class="wn-settings-btn" onclick="toggleSettings()">&#x2699;</span>
+        <span title="Settings" class="wn-settings-btn" onclick="toggleSettings()">&nbsp;</span>
     </div>
 
     <div class="wn-tabs clearfix">
