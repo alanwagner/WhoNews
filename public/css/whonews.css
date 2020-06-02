@@ -14,16 +14,22 @@
     --top-header-text-color: #fffffc;
     --top-header-bg-color: forestgreen;
     --top-header-height: 4rem;
+
     --sub-header-text-color: #fffffc;
+    --sub-header-bg-color: #101010;
     --sub-header-height: 4rem;
-    --links-bg-color: white;
+
+    --tab-row-height: 4rem;
+    --tab-row-bg-color: white;
+
+    --links-bg-color: #fffffc;
 }
 
 
 
 
-/*****   BASE LAYOUT   *****/
 
+/*****   BASE LAYOUT   *****/
 
 
 html, body {
@@ -32,50 +38,88 @@ html, body {
 }
 
 
-.tablet-outer {
+.wn-tablet-outer {
+    position: relative;
     min-width: 720px;
     height: 100%;
     margin: 0;
     border: 2px solid #444;
 }
 
-.tablet-inner {
+.wn-tablet-inner {
     position: relative;
-    height: calc(100% - var(--top-header-height) - var(--sub-header-height) );
-    overflow-y: scroll;
+    height: calc(100% - var(--top-header-height) - var(--sub-header-height) - var(--tab-row-height) );
     background-color: var(--links-bg-color);
+
+    /*  sync scroll
+    overflow-y: scroll; */
+    overflow-y: hidden;
 }
+
+
 
 
 
 /*****   TOP HEADER   *****/
 
+
 .wn-top-header {
+    position: relative;
     background-color: var(--top-header-bg-color);
     font-size: 160%;
-    padding: 4px 8px;
+    padding: 8px 8px 0;
     height: var(--top-header-height);
 }
 
-.wn-header-title {
+h1.wn-header-title {
     color: var(--top-header-text-color);
     font-weight: 600;
     text-align: center;
+    font-size: inherit;
+    margin: 0;
+    padding: 0;
 }
+
+.wn-header-title-spacer {
+    display: inline-block;
+    width: 1px;
+}
+
+
+
 
 
 /*****   SUB-HEADER BAR   *****/
 
 
 .wn-sub-header {
-    background-color: #101010;
-    color: var(--sub-header-text-color);
+    position: relative;
+    background-color: var(--sub-header-bg-color);
     height: var(--sub-header-height);
-    font-size: 120%;
-    padding: 7px 15px 0;
+    padding: 9px 15px 0;
+    vertical-align: center;
+}
+
+.wn-sub-header-text {
+    color: var(--sub-header-text-color);
     font-weight: 300;
     font-style: italic;
-    vertical-align: center;
+    font-size: 120%;
+}
+
+.wn-settings-btn {
+    position: absolute;
+    display: block;
+    top: 0px;
+    right: 0px;
+    height: var(--sub-header-height);
+    width: var(--sub-header-height);
+    color: var(--sub-header-text-color);
+    background-color: var(--sub-header-bg-color);
+    text-align: center;
+    font-size: 190%;
+    font-weight: 500;
+    cursor: pointer;
 }
 
 
@@ -86,26 +130,24 @@ html, body {
 
 
 .wn-tabs {
+    font-size: 120%;
 }
 
 .wn-tab {
     float: left;
-    border: 2px solid #444;
-    border-top-width: 0px;
-    border-left-width: 0px;
+    border-right: 1px solid #444;
+    border-left: 1px solid #444;
+    border-bottom: 2px solid gray;
     border-bottom-color: gray;
 
-    padding: 6px 0px;
-    background-color: white;
+    height: var(--tab-row-height);
+    background-color: var(--tab-row-bg-color);
     text-align: center;
     font-weight: 600;
-    font-size: 16px;
+    font-size: inherit;
+    margin: 0;
+    padding: 10px 0px 0px;
 }
-
-.wn-tabs > .wn-tab-left {
-    border-right-width: 1px;
-}
-
 
 
 
@@ -117,12 +159,14 @@ html, body {
 .wn-links-wrapper {
     position: relative;
     float: left;
-    border-right: 2px solid #444;
+    border-right: 1px solid #444;
+    border-left: 1px solid #444;
     padding: 0;
-}
 
-.wn-links-wrapper.wn-links-left {
-    border-right-width: 1px;
+    /*  sync scroll
+    height: auto;  */
+    height: 100%;
+    overflow-y: scroll;
 }
 
 .wn-link-block {
@@ -132,7 +176,6 @@ html, body {
     height: auto;
     padding: 15px 33px;
     border-bottom: 1px solid #444;
-    background-color: var(--links-bg-color);
     text-decoration: none;
     color: #111;
 }
@@ -197,6 +240,88 @@ html, body {
     padding-top: 5px;
     font-size: 100%;
 }
+
+
+
+
+
+/*****   SETTINGS FORM   *****/
+
+
+#wn-settings-wrapper {
+    position: absolute;
+    top: calc(var(--top-header-height) + var(--sub-header-height));
+    right: 0px;
+    z-index: 1000;
+    background-color: #eee;
+    border: 1px solid #999;
+    border-top-width: 0;
+    box-shadow: -3px 4px 10px 1px #c0c0c0;
+    width: auto;
+    height: auto;
+}
+
+#wn-settings-form {
+    position: relative;
+    margin: 20px 30px;
+}
+
+#wn-settings-form  h3 {
+    font-size: 125%;
+    text-align: center;
+}
+
+.wn-settings-row {
+    padding-top: 1rem;
+}
+
+.wn-settings-row  label  span.label_wide {
+    display: inline-block;
+    width: 90px;
+}
+
+.wn-settings-hidden {
+    display: none;
+}
+
+.wn-input-custom {
+    display: block;
+    padding-top: 10px;
+    overflow: hidden;
+    height: 3.5rem;
+    transition: height 0.3s;
+}
+
+.wn-input-custom.wn-custom-hidden  {
+    padding: 0;
+    height: 0;
+}
+
+
+
+
+
+/*****   DISPLAY SETTINGS   *****/
+
+
+.wn-scroll-sync  .wn-tablet-inner {
+    overflow-y: scroll;
+}
+
+.wn-scroll-sync  .wn-links-wrapper {
+    height: auto;
+}
+
+.wn-images-hide  .wn-link-image {
+    display: none;
+}
+
+.wn-description-full  .wn-link-description,
+.wn-description-short  .wn-link-description {
+    display: block;
+}
+
+
 
 
 

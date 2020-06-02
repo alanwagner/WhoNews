@@ -82,6 +82,10 @@ function parseChannelContent($content, $limit=null)
         }
         $itemData['title'] = strip_tags($title);
 
+        if (empty($itemData['guid']) || empty($itemData['title'])) {
+            continue;
+        }
+
         $description = $item->description;
         if (!is_string($description)) {
             $description = $description->__toString();
@@ -89,6 +93,10 @@ function parseChannelContent($content, $limit=null)
         if (strstr($description, '<')) {
             //  Clean tags and embedded links
             $description = strip_tags(substr($description, 0, strpos($description, '<', 13)));
+        }
+        //  Eliminate title if also is beginning of description. May result in empty description.
+        if (!empty($description) && strpos($description, $title) === 0) {
+            $description = str_replace($title, '', $description);
         }
         $itemData['description'] = $description;
 
