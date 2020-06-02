@@ -121,7 +121,7 @@ if (isset($_GET['description'])) {
     </div>
 
     <div class="wn-sub-header">
-        <span class="wn-sub-header-text">Pop Your Info Bubble!</span>
+        <span class="wn-sub-header-text">Pop Your Info Bubble</span>
         <span title="Settings" class="wn-settings-btn" onclick="toggleSettings()">&#x2699;</span>
     </div>
 
@@ -201,7 +201,7 @@ if (isset($_GET['description'])) {
 
     <div id="wn-settings-wrapper" class="wn-settings-hidden">
         <form id="wn-settings-form" action="" method="get">
-            <h3>SETTINGS</h3>
+            <h3>DISPLAY OPTIONS</h3>
 
             <div class="wn-settings-row">
                 <label>
