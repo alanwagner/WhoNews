@@ -1,6 +1,6 @@
 # WhoNews
 
-*WhoNews* is an online newsfeed viewer which allows users to compare multliple news sources by displaying them side-by-side.
+*WhoNews* is an online newsfeed viewer which allows users to compare multiple news sources by displaying them side-by-side.
 
 
 *WhoNews* is a **Web 3.0** project:
