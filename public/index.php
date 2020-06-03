@@ -114,10 +114,6 @@ if (isset($_GET['description'])) {
 <div class="<?php echo $wrapperClass; ?>">
 
     <div class="wn-top-header">
-<!--
-        <div class="wn-header-burger">&#9776;</div>
-        <div class="wn-header-beta">Beta</div>
--->
         <h1 class="wn-header-title">Who<span class="wn-header-title-spacer"></span>News</h1>
     </div>
 
@@ -207,7 +203,7 @@ if (isset($_GET['description'])) {
             <div class="wn-settings-row">
                 <label>
                     <span class="label_wide">Scrolling :</span>
-                    <select name="scroll">
+                    <select name="scroll" tabindex="1">
                         <option value="free" <?php echo (!isset($_GET['scroll']) || $_GET['scroll'] === 'free' ? 'selected="selected"' : '');?>>Free</option>
                         <option value="sync" <?php echo (isset($_GET['scroll']) && $_GET['scroll'] === 'sync' ? 'selected="selected"' : '');?>>Sync</option>
                     </select>
@@ -217,7 +213,7 @@ if (isset($_GET['description'])) {
             <div class="wn-settings-row">
                 <label>
                     <span class="label_wide">Images :</span>
-                    <select name="images">
+                    <select name="images" tabindex="2">
                         <option value="show" <?php echo (!isset($_GET['images']) || $_GET['images'] === 'show' ? 'selected="selected"' : '');?>>Show</option>
                         <option value="hide" <?php echo (isset($_GET['images']) && $_GET['images'] === 'hide' ? 'selected="selected"' : '');?>>Hide</option>
                     </select>
@@ -227,7 +223,7 @@ if (isset($_GET['description'])) {
             <div class="wn-settings-row">
                 <label>
                     <span class="label_wide">Description :</span>
-                    <select name="description">
+                    <select name="description" tabindex="3">
                         <option value="full" <?php echo (isset($_GET['description']) && $_GET['description'] === 'full' ? 'selected="selected"' : '');?>>Full</option>
                         <option value="short" <?php echo (isset($_GET['description']) && $_GET['description'] === 'short' ? 'selected="selected"' : '');?>>Short</option>
                         <option value="none" <?php echo (!isset($_GET['description']) || $_GET['description'] === 'none' ? 'selected="selected"' : '');?>>None</option>
@@ -245,7 +241,7 @@ if (isset($_GET['description'])) {
                 <div class="wn-settings-row">
                     <label>
                         <span><?php echo $i; ?> :&nbsp;</span>
-                        <select name="feed[]" onchange="toggleCustomInput('wn-input-custom-<?php echo $i; ?>', this.options[this.selectedIndex].value)">
+                        <select name="feed[]" onchange="toggleCustomInput('wn-input-custom-<?php echo $i; ?>', this.options[this.selectedIndex].value)" tabindex="<?php echo($i+3); ?>">
                             <option value=""></option>
                             <option value="custom" <?php echo ($feed !== null && !isset($feedList[$feed]) ? 'selected="selected"' : '');?>>Custom...</option>
                             <?php
@@ -271,7 +267,7 @@ if (isset($_GET['description'])) {
 
 
             <div class="wn-settings-row text-center">
-                <button type="submit" class="btn btn-success btn-sm" title="Apply">Apply</button>
+                <button type="submit" class="btn btn-success btn-sm" title="Apply" tabindex="<?php echo(WN_MAX_FEEDS + 4); ?>">Apply</button>
             </div>
 
         </form>
