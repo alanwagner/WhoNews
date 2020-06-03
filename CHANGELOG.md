@@ -2,9 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1] - 2020.06.03
+
+Upgrade Release
+
+### Added
+
+- Added meta description
+- Added tabindex on Settings form
+
+### Changed
+
+- Removed HuffPost Opinions feed
+
+
 ## [1.0] - 2020.06.02
 
-Minimum Viable Product Release
+**Minimum Viable Product** - Public Release
 
 ### Added
 
@@ -14,7 +28,7 @@ Minimum Viable Product Release
 
 ## [0.1] - 2020.05.31
 
-Pre-release version with 3 fixed feeds
+Pre-public version with 3 fixed feeds
 
 ### Added
 
