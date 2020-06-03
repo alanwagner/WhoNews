@@ -7,6 +7,8 @@
  * @license    GNU GPL 3.0
  */
 
+include_once (__DIR__ . '/../inc/url.php');
+
 include_once (__DIR__ . '/../inc/reader.php');
 
 $feedList = include(__DIR__ . '/../inc/feedlist.php');
@@ -21,18 +23,14 @@ $defaultTitle = false;
 
 if (isset($_GET['feed'])) {
 
-    for ($i = 0; $i < WN_MAX_FEEDS; $i++) {
+    foreach ($_GET['feed'] as $key => $val) {
 
-        if (!empty($_GET['feed'][$i])) {
-            $feed = $_GET['feed'][$i];
-
-            if ($feed === 'custom') {
-                if (!empty($_GET['custom'][$i])) {
-                    $queryFeeds[] = $_GET['custom'][$i];
-                }
-            } else {
-                $queryFeeds[] = $feed;
+        if ($val === 'custom') {
+            if (!empty($_GET['custom'][$key])) {
+                $queryFeeds[] = $_GET['custom'][$key];
             }
+        } else {
+            $queryFeeds[] = $val;
         }
     }
 }
@@ -49,7 +47,6 @@ if (empty($queryFeeds)) {
 
 
 foreach ($queryFeeds as $idx => $url) {
-
     $title = null;
     if (in_array($url, array_keys($feedList))) {
         $title = $feedList[$url]['title'];
@@ -241,7 +238,7 @@ if (isset($_GET['description'])) {
                 <div class="wn-settings-row">
                     <label>
                         <span><?php echo $i; ?> :&nbsp;</span>
-                        <select name="feed[]" onchange="toggleCustomInput('wn-input-custom-<?php echo $i; ?>', this.options[this.selectedIndex].value)" tabindex="<?php echo($i+3); ?>">
+                        <select name="feed[<?php echo ($i-1); ?>]" onchange="toggleCustomInput('wn-input-custom-<?php echo $i; ?>', this.options[this.selectedIndex].value)" tabindex="<?php echo($i+3); ?>">
                             <option value=""></option>
                             <option value="custom" <?php echo ($feed !== null && !isset($feedList[$feed]) ? 'selected="selected"' : '');?>>Custom...</option>
                             <?php
@@ -258,7 +255,7 @@ if (isset($_GET['description'])) {
                     <br />
                     <label class="wn-input-custom <?php echo ($feed === null || isset($feedList[$feed]) ? 'wn-custom-hidden' : '');?>" id="wn-input-custom-<?php echo $i; ?>">
                         RSS URL :&nbsp;
-                        <input type="text" name="custom[]" size="40" value="<?php echo (!isset($feedList[$feed]) ? $feed : ''); ?>" />
+                        <input type="text" name="custom[<?php echo ($i-1); ?>]" size="40" value="<?php echo (!isset($feedList[$feed]) ? $feed : ''); ?>" />
                     </label>
                 </div>
             <?php

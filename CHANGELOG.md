@@ -10,6 +10,7 @@ Upgrade Release
 
 - Added meta description
 - Added tabindex on Settings form
+- Redirect to optimized (canonical) url
 
 ### Changed
 
