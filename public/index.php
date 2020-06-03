@@ -7,6 +7,8 @@
  * @license    GNU GPL 3.0
  */
 
+const WN_MAX_FEEDS = 5;
+
 include_once (__DIR__ . '/../inc/url.php');
 
 include_once (__DIR__ . '/../inc/reader.php');
@@ -15,36 +17,19 @@ $feedList = include(__DIR__ . '/../inc/feedlist.php');
 
 $limit = isset($_GET['limit']) ? $_GET['limit'] : null;
 
-const WN_MAX_FEEDS = 5;
-
 $feedData = [];
-$queryFeeds = [];
+$queryFeeds = [
+    'buzzfeed-news',
+    'nyt-homepage',
+    'foxnews-national',
+];
 $defaultTitle = false;
 
 if (isset($_GET['feed'])) {
-
-    foreach ($_GET['feed'] as $key => $val) {
-
-        if ($val === 'custom') {
-            if (!empty($_GET['custom'][$key])) {
-                $queryFeeds[] = $_GET['custom'][$key];
-            }
-        } else {
-            $queryFeeds[] = $val;
-        }
-    }
-}
-
-if (empty($queryFeeds)) {
-    //  Use default values if no feeds read
-    $queryFeeds = [
-       'buzzfeed-news',
-       'nyt-homepage',
-       'foxnews-national'
-    ];
+    $queryFeeds = $_GET['feed'];
+} else {
     $defaultTitle = true;
 }
-
 
 foreach ($queryFeeds as $idx => $url) {
     $title = null;

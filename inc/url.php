@@ -7,7 +7,7 @@
  * @license    GNU GPL 3.0
  */
 
-/**  Redirect to shortest possible (canonical) URL  **/
+/**  Redirect to shortest possible (canonical) URL, from Settings form submission  **/
 
 $q = $_REQUEST;
 
@@ -26,15 +26,12 @@ if (isset($q['description']) && $q['description'] === 'none') {
 }
 
 
-//  Unset empty / invalid 'feed' and 'custom' elements
+//  Optimize 'feed' array, copying in 'custom' elements
 
-if (!isset($q['feed'])) {
-    unset($q['custom']);
-} else {
+if (isset($q['feed'])) {
     if (isset($q['custom'])) {
 
-        //  Check custom values, building a fresh list and eliminating invalid 'feed' custom elements
-        $custom = [];
+        //  Check custom values, copying them into 'feed' array and eliminating invalid elements
         $feed = $q['feed'];
         foreach ($q['feed'] as $key => $val) {
             if ($val === 'custom') {
@@ -44,34 +41,21 @@ if (!isset($q['feed'])) {
                     $feed[$key] = null;
 
                 } else {
-                    $custom[] = $q['custom'][$key];
-                }
-
-            }
-        }
-
-        //  Now optimize keys of feed
-
-        $q['feed'] = array_merge(array_filter($feed));
-
-        //  Map custom values
-        if (empty($custom)) {
-            unset($q['custom']);
-        } else {
-            $q['custom'] = [];
-            $idx = 0;
-            foreach($q['feed'] as $key => $val) {
-                if ($val === 'custom') {
-                    $q['custom'][$key] = $custom[$idx];
-                    $idx++;
+                    $feed[$key] = $q['custom'][$key];
                 }
             }
         }
-    } else {
-        //  Just optimize keys of feed
-        $q['feed'] = array_merge(array_filter($q['feed']));
+
+        $q['feed'] = $feed;
     }
+    unset($q['custom']);
 
+    //  Optimize keys of feed
+    $q['feed'] = array_merge(array_filter($q['feed']));
+
+    if (empty($q['feed'])) {
+        unset($q['feed']);
+    }
 }
 
 
