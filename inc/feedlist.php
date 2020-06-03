@@ -173,11 +173,6 @@ return [
         'url'       => 'https://www.huffpost.com/section/world-news/feed',
         'menuLabel' => 'Huffington Post : World',
     ],
-    'huffpost-opinion' => [
-        'title'     => 'HuffPost > Opinion',
-        'url'       => 'https://www.huffpost.com/section/opinion/feed',
-        'menuLabel' => 'Huffington Post : Opinion',
-    ],
     'huffpost-politics' => [
         'title'     => 'HuffPost > U.S. Politics',
         'url'       => 'https://www.huffpost.com/section/politics/feed',
