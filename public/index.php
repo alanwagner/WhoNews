@@ -149,8 +149,9 @@ if (isset($_GET['description'])) {
                     <span class="wn-link-title"><?php echo $item['title'] ?></span>
                     <span class="wn-link-date">
                         <?php echo $feed['title'] ?>
-                        <br />
-                        <?php echo isset($item['pubDate']) ? $item['pubDate'] : ''; ?>
+                        <?php if (isset($item['pubDate'])): ?>
+                            &nbsp;•&nbsp;&nbsp;<?php echo $item['pubDate']; ?>
+                        <?php endif; ?>
                     </span>
                 <?php
                 if (!empty($item['description'])):
