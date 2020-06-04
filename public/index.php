@@ -15,76 +15,20 @@ include_once (__DIR__ . '/../inc/template.php');
 
 include_once (__DIR__ . '/../inc/reader.php');
 
+
 $feedList = include(__DIR__ . '/../inc/feedlist.php');
 
 $limit = isset($_GET['limit']) ? $_GET['limit'] : null;
 
-$feedData = [];
-$queryFeeds = [
-    'buzzfeed-news',
-    'nyt-homepage',
-    'foxnews-national',
-];
-$defaultTitle = false;
+$queryFeeds = getQueryFeeds();
 
-if (isset($_GET[WN_KEY_FEED])) {
-    $queryFeeds = $_GET[WN_KEY_FEED];
-} else {
-    $defaultTitle = true;
-}
+$feedData = getFeedData($queryFeeds, $limit);
 
-foreach ($queryFeeds as $idx => $url) {
-    $title = null;
-    if (in_array($url, array_keys($feedList))) {
-        $title = $feedList[$url]['title'];
-        $url = $feedList[$url]['url'];
-    }
+$pageTitle = getPageTitle($feedData);
 
-    $feedData[] = getChannelData($url, $title, $limit);
-}
+$wrapperClass = getWrapperClass(count($feedData));
 
-$pageTitle = 'WhoNews :: ';
-
-if ($defaultTitle === false) {
-    foreach ($feedData as $idx => $feed) {
-        $pageTitle .= $feed[WN_DATA_FEED_TITLE];
-        if ($idx !== count($queryFeeds) - 1) {
-            $pageTitle .= ' • ';
-        }
-    }
-} else {
-    $pageTitle .= 'Pop Your Info Bubble';
-}
-
-$wrapperClass = 'wn-tablet-outer wn-cols-' . count($feedData);
-if (isset($_GET[WN_KEY_SCROLL]) && $_GET[WN_KEY_SCROLL] === 'sync') {
-    //  Default is scroll-free
-    $wrapperClass .= ' wn-scroll-sync';
-}
-if (isset($_GET[WN_KEY_IMAGES])) {
-    //  Default is images-small
-    switch ($_GET[WN_KEY_IMAGES]) {
-        case 'large':
-            $wrapperClass .= ' wn-images-large';
-            break;
-        case 'none':
-            $wrapperClass .= ' wn-images-hide';
-            break;
-    }
-}
-$shortDescription = false;
-if (isset($_GET[WN_KEY_DESCRIPTION])) {
-    //  Default is description-none
-    switch ($_GET[WN_KEY_DESCRIPTION]) {
-        case 'full':
-            $wrapperClass .= ' wn-description-full';
-            break;
-        case 'short':
-            $wrapperClass .= ' wn-description-short';
-            $shortDescription = true;
-            break;
-    }
-}
+$shortDescription = (boolean)strstr($wrapperClass, ' wn-description-short');
 
 $targetNew = (isset($_GET[WN_KEY_TARGET]) && $_GET[WN_KEY_TARGET] === 'new');
 
