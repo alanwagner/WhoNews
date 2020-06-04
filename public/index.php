@@ -59,9 +59,16 @@ if (isset($_GET['scroll']) && $_GET['scroll'] === 'sync') {
     //  Default is scroll-free
     $wrapperClass .= ' wn-scroll-sync';
 }
-if (isset($_GET['images']) && $_GET['images'] === 'hide') {
-    //  Default is images-show
-    $wrapperClass .= ' wn-images-hide';
+if (isset($_GET['images'])) {
+    //  Default is images-small
+    switch ($_GET['images']) {
+        case 'large':
+            $wrapperClass .= ' wn-images-large';
+            break;
+        case 'none':
+            $wrapperClass .= ' wn-images-hide';
+            break;
+    }
 }
 $shortDescription = false;
 if (isset($_GET['description'])) {
@@ -147,23 +154,23 @@ if (isset($_GET['description'])) {
                 ?>
                 <span class="wn-link-text">
                     <span class="wn-link-title"><?php echo $item['title'] ?></span>
+                    <?php
+                    if (!empty($item['description'])):
+                        $descr = $item['description'];
+                        if ($shortDescription === true && strlen($descr) > 120):
+                            $descr = substr($descr, 0, strrpos(substr($descr, 0, 120), ' ')) . '...';
+                        endif;
+                    ?>
+                        <span class="wn-link-description"><?php echo $descr; ?></span>
+                    <?php
+                    endif;
+                    ?>
                     <span class="wn-link-date">
                         <?php echo $feed['title'] ?>
                         <?php if (isset($item['pubDate'])): ?>
                             &nbsp;•&nbsp;&nbsp;<?php echo $item['pubDate']; ?>
                         <?php endif; ?>
                     </span>
-                <?php
-                if (!empty($item['description'])):
-                    $descr = $item['description'];
-                    if ($shortDescription === true && strlen($descr) > 120):
-                        $descr = substr($descr, 0, strrpos(substr($descr, 0, 120), ' ')) . '...';
-                    endif;
-                ?>
-                    <span class="wn-link-description"><?php echo $descr; ?></span>
-                <?php
-                endif;
-                ?>
                 </span><!-- .wn-link-text -->
             </a>
 
@@ -197,8 +204,9 @@ if (isset($_GET['description'])) {
                 <label>
                     <span class="label_wide">Images :</span>
                     <select name="images" tabindex="2">
-                        <option value="show" <?php echo (!isset($_GET['images']) || $_GET['images'] === 'show' ? 'selected="selected"' : '');?>>Show</option>
-                        <option value="hide" <?php echo (isset($_GET['images']) && $_GET['images'] === 'hide' ? 'selected="selected"' : '');?>>Hide</option>
+                        <option value="large" <?php echo (isset($_GET['images']) && $_GET['images'] === 'large' ? 'selected="selected"' : '');?>>Large</option>
+                        <option value="small" <?php echo (!isset($_GET['images']) || $_GET['images'] === 'small' ? 'selected="selected"' : '');?>>Small</option>
+                        <option value="none" <?php echo (isset($_GET['images']) && $_GET['images'] === 'none' ? 'selected="selected"' : '');?>>None</option>
                     </select>
                 </label>
             </div>

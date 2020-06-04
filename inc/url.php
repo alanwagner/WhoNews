@@ -17,7 +17,7 @@ if (isset($q['scroll']) && $q['scroll'] === 'free') {
     unset($q['scroll']);
 }
 
-if (isset($q['images']) && $q['images'] === 'show') {
+if (isset($q['images']) && $q['images'] === 'small') {
     unset($q['images']);
 }
 
