@@ -181,12 +181,14 @@ h1.wn-header-title {
     border-bottom: 1px solid #444;
     text-decoration: none;
     color: #111;
+    cursor: pointer;
 }
 
 .wn-link-block:hover,
 .wn-link-block:active {
     text-decoration: none;
     color: #111;
+    background-color: #f8ffff;
 }
 
 .wn-link-image {
@@ -286,7 +288,7 @@ h1.wn-header-title {
 
 .wn-settings-row  label  span.label_wide {
     display: inline-block;
-    width: 90px;
+    width: 100px;
 }
 
 .wn-settings-hidden {
