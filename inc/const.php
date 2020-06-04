@@ -39,3 +39,22 @@ const WN_DEFAULT_IMAGES = 'small';
 const WN_DEFAULT_DESCRIPTION = 'none';
 
 const WN_DEFAULT_TARGET = 'same';
+
+
+//  Keys for array of xml feed data
+
+const WN_DATA_FEED_TITLE = 'title';
+
+const WN_DATA_FEED_ITEMS = 'items';
+
+const WN_DATA_ITEM_GUID = 'guid';
+
+const WN_DATA_ITEM_TITLE = 'title';
+
+const WN_DATA_ITEM_DESCRIPTION = 'description';
+
+const WN_DATA_ITEM_PUB_DATE = 'pubDate';
+
+const WN_DATA_ITEM_IMAGE_URL = 'imgUrl';
+
+const WN_DATA_ITEM_THUMB_URL = 'thumbUrl';

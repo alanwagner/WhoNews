@@ -47,7 +47,7 @@ $pageTitle = 'WhoNews :: ';
 
 if ($defaultTitle === false) {
     foreach ($feedData as $idx => $feed) {
-        $pageTitle .= $feed['title'];
+        $pageTitle .= $feed[WN_DATA_FEED_TITLE];
         if ($idx !== count($queryFeeds) - 1) {
             $pageTitle .= ' • ';
         }
@@ -120,7 +120,7 @@ $targetNew = (isset($_GET[WN_KEY_TARGET]) && $_GET[WN_KEY_TARGET] === 'new');
         foreach($feedData as $idx => $feed):
         ?>
             <h2 class="wn-col wn-tab">
-                <?php echo str_replace(' > ', '&nbsp; > &nbsp;', $feed['title']); ?>
+                <?php echo str_replace(' > ', '&nbsp; > &nbsp;', $feed[WN_DATA_FEED_TITLE]); ?>
             </h2>
         <?php
         endforeach;
@@ -138,15 +138,15 @@ $targetNew = (isset($_GET[WN_KEY_TARGET]) && $_GET[WN_KEY_TARGET] === 'new');
     ?>
         <div class="wn-col wn-links-wrapper">
         <?php
-        foreach($feed['items'] as $item):
+        foreach($feed[WN_DATA_FEED_ITEMS] as $item):
             $imgUrl = null;
-            if (!empty($item['imgUrl'])) {
-                $imgUrl = $item['imgUrl'];
-            } else if (!empty($item['thumbUrl'])) {
-                $imgUrl = $item['thumbUrl'];
+            if (!empty($item[WN_DATA_ITEM_IMAGE_URL])) {
+                $imgUrl = $item[WN_DATA_ITEM_IMAGE_URL];
+            } else if (!empty($item[WN_DATA_ITEM_THUMB_URL])) {
+                $imgUrl = $item[WN_DATA_ITEM_THUMB_URL];
             }
         ?>
-            <a href="<?php echo $item['guid'] ?>" class="wn-link-block" <?php echo ($targetNew) ? 'target="_blank"' : '';?>>
+            <a href="<?php echo $item[WN_DATA_ITEM_GUID] ?>" class="wn-link-block" <?php echo ($targetNew) ? 'target="_blank"' : '';?>>
                 <?php
                 if (!empty($imgUrl)):
                 ?>
@@ -157,10 +157,10 @@ $targetNew = (isset($_GET[WN_KEY_TARGET]) && $_GET[WN_KEY_TARGET] === 'new');
                 endif;
                 ?>
                 <span class="wn-link-text">
-                    <span class="wn-link-title"><?php echo $item['title'] ?></span>
+                    <span class="wn-link-title"><?php echo $item[WN_DATA_ITEM_TITLE] ?></span>
                     <?php
-                    if (!empty($item['description'])):
-                        $descr = $item['description'];
+                    if (!empty($item[WN_DATA_ITEM_DESCRIPTION])):
+                        $descr = $item[WN_DATA_ITEM_DESCRIPTION];
                         if ($shortDescription === true && strlen($descr) > 120):
                             $descr = substr($descr, 0, strrpos(substr($descr, 0, 120), ' ')) . '...';
                         endif;
@@ -170,9 +170,9 @@ $targetNew = (isset($_GET[WN_KEY_TARGET]) && $_GET[WN_KEY_TARGET] === 'new');
                     endif;
                     ?>
                     <span class="wn-link-date">
-                        <?php echo $feed['title'] ?>
-                        <?php if (isset($item['pubDate'])): ?>
-                            &nbsp;•&nbsp;&nbsp;<?php echo $item['pubDate']; ?>
+                        <?php echo $feed[WN_DATA_FEED_TITLE] ?>
+                        <?php if (isset($item[WN_DATA_ITEM_PUB_DATE])): ?>
+                            &nbsp;•&nbsp;&nbsp;<?php echo $item[WN_DATA_ITEM_PUB_DATE]; ?>
                         <?php endif; ?>
                     </span>
                 </span><!-- .wn-link-text -->

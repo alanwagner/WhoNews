@@ -40,7 +40,7 @@ function getChannelData($url, $title=null, $limit=null) {
 
         $data = parseChannelContent($content, $limit);
         if (!empty($title)) {
-            $data['title'] = $title;
+            $data[WN_DATA_FEED_TITLE] = $title;
         }
     }
 
@@ -63,8 +63,8 @@ function parseChannelContent($content, $limit=null)
     $xml=simplexml_load_string($content);
     $channel = $xml->channel;
 
-    $data['title'] = $channel->title;
-    $data['items'] = [];
+    $data[WN_DATA_FEED_TITLE] = $channel->title;
+    $data[WN_DATA_FEED_ITEMS] = [];
 
     foreach($channel->item as $item) {
 
@@ -74,15 +74,15 @@ function parseChannelContent($content, $limit=null)
         if (!is_string($guid)) {
             $guid = $guid->__toString();
         }
-        $itemData['guid'] = strip_tags($guid);
+        $itemData[WN_DATA_ITEM_GUID] = strip_tags($guid);
 
         $title = $item->title;
         if (!is_string($title)) {
             $title = $title->__toString();
         }
-        $itemData['title'] = strip_tags($title);
+        $itemData[WN_DATA_ITEM_TITLE] = strip_tags($title);
 
-        if (empty($itemData['guid']) || empty($itemData['title'])) {
+        if (empty($itemData[WN_DATA_ITEM_GUID]) || empty($itemData[WN_DATA_ITEM_TITLE])) {
             continue;
         }
 
@@ -98,12 +98,12 @@ function parseChannelContent($content, $limit=null)
         if (!empty($description) && strpos($description, $title) === 0) {
             $description = str_replace($title, '', $description);
         }
-        $itemData['description'] = $description;
+        $itemData[WN_DATA_ITEM_DESCRIPTION] = $description;
 
         $pubTime = strtotime($item->pubDate);
         if ($pubTime > 1000000000) {
             //  Format 2020.05.31 11:11 GMT
-            $itemData['pubDate'] = sprintf('%s GMT', gmdate('Y.m.d H:i', $pubTime));
+            $itemData[WN_DATA_ITEM_PUB_DATE] = sprintf('%s GMT', gmdate('Y.m.d H:i', $pubTime));
         }
 
         $media = $item->children('http://search.yahoo.com/mrss/');
@@ -112,7 +112,7 @@ function parseChannelContent($content, $limit=null)
 
             //  Fox
             $attrs = $media->group->content->attributes();
-            $itemData['imgUrl'] = strval($attrs['url']);
+            $itemData[WN_DATA_ITEM_IMAGE_URL] = strval($attrs['url']);
 
             //print_r($media->group->content->attributes());
 
@@ -121,7 +121,7 @@ function parseChannelContent($content, $limit=null)
 
             //  NYT
             $attrs = $media->content->attributes();
-            $itemData['imgUrl'] = strval($attrs['url']);
+            $itemData[WN_DATA_ITEM_IMAGE_URL] = strval($attrs['url']);
 
             //print_r($media->content->attributes());
         }
@@ -130,13 +130,13 @@ function parseChannelContent($content, $limit=null)
 
             //  BuzzFeed has only thumbnail
             $attrs = $media->thumbnail->attributes();
-            $itemData['thumbUrl'] = strval($attrs['url']);
+            $itemData[WN_DATA_ITEM_THUMB_URL] = strval($attrs['url']);
         }
 
 
-        $data['items'][] = $itemData;
+        $data[WN_DATA_FEED_ITEMS][] = $itemData;
 
-        if (!empty($limit) && count($data['items']) >= $limit) {
+        if (!empty($limit) && count($data[WN_DATA_FEED_ITEMS]) >= $limit) {
             break;
         }
     }
