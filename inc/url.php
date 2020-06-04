@@ -25,6 +25,10 @@ if (isset($q['description']) && $q['description'] === 'none') {
     unset($q['description']);
 }
 
+if (isset($q['target']) && $q['target'] === 'same') {
+    unset($q['target']);
+}
+
 
 //  Optimize 'feed' array, copying in 'custom' elements
 

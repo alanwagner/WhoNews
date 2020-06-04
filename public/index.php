@@ -84,6 +84,8 @@ if (isset($_GET['description'])) {
     }
 }
 
+$targetNew = (isset($_GET['target']) && $_GET['target'] === 'new');
+
 
 ?>
 <!DOCTYPE html>
@@ -142,7 +144,7 @@ if (isset($_GET['description'])) {
                 $imgUrl = $item['thumbUrl'];
             }
         ?>
-            <a href="<?php echo $item['guid'] ?>" class="wn-link-block">
+            <a href="<?php echo $item['guid'] ?>" class="wn-link-block" <?php echo ($targetNew) ? 'target="_blank"' : '';?>>
                 <?php
                 if (!empty($imgUrl)):
                 ?>
@@ -222,17 +224,27 @@ if (isset($_GET['description'])) {
                 </label>
             </div>
 
+            <div class="wn-settings-row">
+                <label>
+                    <span class="label_wide">Open links in :</span>
+                    <select name="target" tabindex="4">
+                        <option value="same" <?php echo (!isset($_GET['target']) || $_GET['target'] === 'same' ? 'selected="selected"' : '');?>>Current tab</option>
+                        <option value="new" <?php echo (isset($_GET['target']) && $_GET['target'] === 'new' ? 'selected="selected"' : '');?>>New tab</option>
+                    </select>
+                </label>
+            </div>
+
 
             <h3>FEEDS</h3>
 
             <?php
-            for ($i = 1; $i <= WN_MAX_FEEDS; $i++):
-                $feed = isset($queryFeeds[$i-1]) ? $queryFeeds[$i-1] : null;
+            for ($i = 0; $i < WN_MAX_FEEDS; $i++):
+                $feed = isset($queryFeeds[$i]) ? $queryFeeds[$i] : null;
             ?>
                 <div class="wn-settings-row">
                     <label>
-                        <span><?php echo $i; ?> :&nbsp;</span>
-                        <select name="feed[<?php echo ($i-1); ?>]" onchange="toggleCustomInput('wn-input-custom-<?php echo $i; ?>', this.options[this.selectedIndex].value)" tabindex="<?php echo($i+3); ?>">
+                        <span><?php echo ($i+1); ?> :&nbsp;</span>
+                        <select name="feed[<?php echo $i; ?>]" onchange="toggleCustomInput('wn-input-custom-<?php echo $i; ?>', this.options[this.selectedIndex].value)" tabindex="<?php echo($i+5); ?>">
                             <option value=""></option>
                             <option value="custom" <?php echo ($feed !== null && !isset($feedList[$feed]) ? 'selected="selected"' : '');?>>Custom...</option>
                             <?php
@@ -249,7 +261,7 @@ if (isset($_GET['description'])) {
                     <br />
                     <label class="wn-input-custom <?php echo ($feed === null || isset($feedList[$feed]) ? 'wn-custom-hidden' : '');?>" id="wn-input-custom-<?php echo $i; ?>">
                         RSS URL :&nbsp;
-                        <input type="text" name="custom[<?php echo ($i-1); ?>]" size="40" value="<?php echo (!isset($feedList[$feed]) ? $feed : ''); ?>" />
+                        <input type="text" name="custom[<?php echo $i; ?>]" size="40" value="<?php echo (!isset($feedList[$feed]) ? $feed : ''); ?>" />
                     </label>
                 </div>
             <?php
