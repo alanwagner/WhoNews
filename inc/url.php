@@ -13,52 +13,52 @@ $q = $_REQUEST;
 
 //  Unset default values
 
-if (isset($q['scroll']) && $q['scroll'] === 'free') {
-    unset($q['scroll']);
-}
+$defaults = [
+    WN_KEY_SCROLL => WN_DEFAULT_SCROLL,
+    WN_KEY_IMAGES => WN_DEFAULT_IMAGES,
+    WN_KEY_DESCRIPTION => WN_DEFAULT_DESCRIPTION,
+    WN_KEY_TARGET => WN_DEFAULT_TARGET,
+];
 
-if (isset($q['images']) && $q['images'] === 'small') {
-    unset($q['images']);
-}
-
-if (isset($q['description']) && $q['description'] === 'none') {
-    unset($q['description']);
-}
-
-if (isset($q['target']) && $q['target'] === 'same') {
-    unset($q['target']);
+foreach ($defaults as $key => $val) {
+    if (isset($q[$key]) && $q[$key] === $val) {
+        unset($q[$key]);
+    }
 }
 
 
 //  Optimize 'feed' array, copying in 'custom' elements
 
-if (isset($q['feed'])) {
-    if (isset($q['custom'])) {
+if (isset($q[WN_KEY_FEED])) {
+    if (isset($q[WN_KEY_CUSTOM])) {
 
         //  Check custom values, copying them into 'feed' array and eliminating invalid elements
-        $feed = $q['feed'];
-        foreach ($q['feed'] as $key => $val) {
+
+        $feed = $q[WN_KEY_FEED];
+
+        foreach ($q[WN_KEY_FEED] as $key => $val) {
+
             if ($val === 'custom') {
-                if (empty($q['custom'][$key])) {
+
+                if (!empty($q[WN_KEY_CUSTOM][$key])) {
+                    $feed[$key] = $q[WN_KEY_CUSTOM][$key];
+                } else {
                     //  Invalid 'custom' value for feed
                     //  array_filter below will eliminate it
                     $feed[$key] = null;
-
-                } else {
-                    $feed[$key] = $q['custom'][$key];
                 }
             }
         }
 
-        $q['feed'] = $feed;
+        $q[WN_KEY_FEED] = $feed;
     }
-    unset($q['custom']);
+    unset($q[WN_KEY_CUSTOM]);
 
     //  Optimize keys of feed
-    $q['feed'] = array_merge(array_filter($q['feed']));
+    $q[WN_KEY_FEED] = array_merge(array_filter($q[WN_KEY_FEED]));
 
-    if (empty($q['feed'])) {
-        unset($q['feed']);
+    if (empty($q[WN_KEY_FEED])) {
+        unset($q[WN_KEY_FEED]);
     }
 }
 

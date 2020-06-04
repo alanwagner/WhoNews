@@ -7,9 +7,11 @@
  * @license    GNU GPL 3.0
  */
 
-const WN_MAX_FEEDS = 5;
+include_once (__DIR__ . '/../inc/const.php');
 
 include_once (__DIR__ . '/../inc/url.php');
+
+include_once (__DIR__ . '/../inc/template.php');
 
 include_once (__DIR__ . '/../inc/reader.php');
 
@@ -25,8 +27,8 @@ $queryFeeds = [
 ];
 $defaultTitle = false;
 
-if (isset($_GET['feed'])) {
-    $queryFeeds = $_GET['feed'];
+if (isset($_GET[WN_KEY_FEED])) {
+    $queryFeeds = $_GET[WN_KEY_FEED];
 } else {
     $defaultTitle = true;
 }
@@ -55,13 +57,13 @@ if ($defaultTitle === false) {
 }
 
 $wrapperClass = 'wn-tablet-outer wn-cols-' . count($feedData);
-if (isset($_GET['scroll']) && $_GET['scroll'] === 'sync') {
+if (isset($_GET[WN_KEY_SCROLL]) && $_GET[WN_KEY_SCROLL] === 'sync') {
     //  Default is scroll-free
     $wrapperClass .= ' wn-scroll-sync';
 }
-if (isset($_GET['images'])) {
+if (isset($_GET[WN_KEY_IMAGES])) {
     //  Default is images-small
-    switch ($_GET['images']) {
+    switch ($_GET[WN_KEY_IMAGES]) {
         case 'large':
             $wrapperClass .= ' wn-images-large';
             break;
@@ -71,9 +73,9 @@ if (isset($_GET['images'])) {
     }
 }
 $shortDescription = false;
-if (isset($_GET['description'])) {
+if (isset($_GET[WN_KEY_DESCRIPTION])) {
     //  Default is description-none
-    switch ($_GET['description']) {
+    switch ($_GET[WN_KEY_DESCRIPTION]) {
         case 'full':
             $wrapperClass .= ' wn-description-full';
             break;
@@ -84,7 +86,7 @@ if (isset($_GET['description'])) {
     }
 }
 
-$targetNew = (isset($_GET['target']) && $_GET['target'] === 'new');
+$targetNew = (isset($_GET[WN_KEY_TARGET]) && $_GET[WN_KEY_TARGET] === 'new');
 
 
 ?>
@@ -195,9 +197,9 @@ $targetNew = (isset($_GET['target']) && $_GET['target'] === 'new');
             <div class="wn-settings-row">
                 <label>
                     <span class="label_wide">Scrolling :</span>
-                    <select name="scroll" tabindex="1">
-                        <option value="free" <?php echo (!isset($_GET['scroll']) || $_GET['scroll'] === 'free' ? 'selected="selected"' : '');?>>Free</option>
-                        <option value="sync" <?php echo (isset($_GET['scroll']) && $_GET['scroll'] === 'sync' ? 'selected="selected"' : '');?>>Sync</option>
+                    <select name="<?php echo WN_KEY_SCROLL; ?>" tabindex="1">
+                        <option value="free" <?php echo (checkGet(WN_KEY_SCROLL, WN_DEFAULT_SCROLL, true) ? 'selected="selected"' : ''); ?>>Free</option>
+                        <option value="sync" <?php echo (checkGet(WN_KEY_SCROLL, 'sync') ? 'selected="selected"' : ''); ?>>Sync</option>
                     </select>
                 </label>
             </div>
@@ -205,10 +207,10 @@ $targetNew = (isset($_GET['target']) && $_GET['target'] === 'new');
             <div class="wn-settings-row">
                 <label>
                     <span class="label_wide">Images :</span>
-                    <select name="images" tabindex="2">
-                        <option value="large" <?php echo (isset($_GET['images']) && $_GET['images'] === 'large' ? 'selected="selected"' : '');?>>Large</option>
-                        <option value="small" <?php echo (!isset($_GET['images']) || $_GET['images'] === 'small' ? 'selected="selected"' : '');?>>Small</option>
-                        <option value="none" <?php echo (isset($_GET['images']) && $_GET['images'] === 'none' ? 'selected="selected"' : '');?>>None</option>
+                    <select name="<?php echo WN_KEY_IMAGES; ?>" tabindex="2">
+                        <option value="large" <?php echo (checkGet(WN_KEY_IMAGES, 'large') ? 'selected="selected"' : ''); ?>>Large</option>
+                        <option value="small" <?php echo (checkGet(WN_KEY_IMAGES, WN_DEFAULT_IMAGES, true) ? 'selected="selected"' : ''); ?>>Small</option>
+                        <option value="none"  <?php echo (checkGet(WN_KEY_IMAGES, 'none') ? 'selected="selected"' : ''); ?>>None</option>
                     </select>
                 </label>
             </div>
@@ -216,10 +218,10 @@ $targetNew = (isset($_GET['target']) && $_GET['target'] === 'new');
             <div class="wn-settings-row">
                 <label>
                     <span class="label_wide">Description :</span>
-                    <select name="description" tabindex="3">
-                        <option value="full" <?php echo (isset($_GET['description']) && $_GET['description'] === 'full' ? 'selected="selected"' : '');?>>Full</option>
-                        <option value="short" <?php echo (isset($_GET['description']) && $_GET['description'] === 'short' ? 'selected="selected"' : '');?>>Short</option>
-                        <option value="none" <?php echo (!isset($_GET['description']) || $_GET['description'] === 'none' ? 'selected="selected"' : '');?>>None</option>
+                    <select name="<?php echo WN_KEY_DESCRIPTION; ?>" tabindex="3">
+                        <option value="full"  <?php echo (checkGet(WN_KEY_DESCRIPTION, 'full') ? 'selected="selected"' : ''); ?>>Full</option>
+                        <option value="short" <?php echo (checkGet(WN_KEY_DESCRIPTION, 'short') ? 'selected="selected"' : ''); ?>>Short</option>
+                        <option value="none"  <?php echo (checkGet(WN_KEY_DESCRIPTION, WN_DEFAULT_DESCRIPTION, true) ? 'selected="selected"' : ''); ?>>None</option>
                     </select>
                 </label>
             </div>
@@ -227,9 +229,9 @@ $targetNew = (isset($_GET['target']) && $_GET['target'] === 'new');
             <div class="wn-settings-row">
                 <label>
                     <span class="label_wide">Open links in :</span>
-                    <select name="target" tabindex="4">
-                        <option value="same" <?php echo (!isset($_GET['target']) || $_GET['target'] === 'same' ? 'selected="selected"' : '');?>>Current tab</option>
-                        <option value="new" <?php echo (isset($_GET['target']) && $_GET['target'] === 'new' ? 'selected="selected"' : '');?>>New tab</option>
+                    <select name="<?php echo WN_KEY_TARGET; ?>" tabindex="4">
+                        <option value="same" <?php echo (checkGet(WN_KEY_TARGET, WN_DEFAULT_TARGET, true) ? 'selected="selected"' : ''); ?>>Current tab</option>
+                        <option value="new"  <?php echo (checkGet(WN_KEY_TARGET, 'new') ? 'selected="selected"' : ''); ?>>New tab</option>
                     </select>
                 </label>
             </div>
@@ -244,7 +246,7 @@ $targetNew = (isset($_GET['target']) && $_GET['target'] === 'new');
                 <div class="wn-settings-row">
                     <label>
                         <span><?php echo ($i+1); ?> :&nbsp;</span>
-                        <select name="feed[<?php echo $i; ?>]" onchange="toggleCustomInput('wn-input-custom-<?php echo $i; ?>', this.options[this.selectedIndex].value)" tabindex="<?php echo($i+5); ?>">
+                        <select name="<?php echo sprintf('%s[%d]', WN_KEY_FEED, $i); ?>" onchange="toggleCustomInput('wn-input-custom-<?php echo $i; ?>', this.options[this.selectedIndex].value)" tabindex="<?php echo($i+5); ?>">
                             <option value=""></option>
                             <option value="custom" <?php echo ($feed !== null && !isset($feedList[$feed]) ? 'selected="selected"' : '');?>>Custom...</option>
                             <?php
@@ -261,7 +263,7 @@ $targetNew = (isset($_GET['target']) && $_GET['target'] === 'new');
                     <br />
                     <label class="wn-input-custom <?php echo ($feed === null || isset($feedList[$feed]) ? 'wn-custom-hidden' : '');?>" id="wn-input-custom-<?php echo $i; ?>">
                         RSS URL :&nbsp;
-                        <input type="text" name="custom[<?php echo $i; ?>]" size="40" value="<?php echo (!isset($feedList[$feed]) ? $feed : ''); ?>" />
+                        <input type="text" name="<?php echo sprintf('%s[%d]', WN_KEY_CUSTOM, $i); ?>" size="40" value="<?php echo (!isset($feedList[$feed]) ? $feed : ''); ?>" />
                     </label>
                 </div>
             <?php
@@ -270,7 +272,7 @@ $targetNew = (isset($_GET['target']) && $_GET['target'] === 'new');
 
 
             <div class="wn-settings-row text-center">
-                <button type="submit" class="btn btn-success btn-sm" title="Apply" tabindex="<?php echo(WN_MAX_FEEDS + 4); ?>">Apply</button>
+                <button type="submit" class="btn btn-success btn-sm" title="Apply" tabindex="<?php echo(WN_MAX_FEEDS + 5); ?>">Apply</button>
             </div>
 
         </form>
