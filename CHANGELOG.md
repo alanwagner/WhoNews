@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2] - 2020.06.06
+
+Interface and Tech Upgrade Release
+
+### Added
+
+- Added images-small option, as default
+- Added target-new option
+- Added hover effect
+
+### Changed
+
+- Source / Date as single line at bottom
+- Color on settings button
+- Removed USA Today Opinions feed
+- TECH: Added constants
+- TECH: Refactored functions into classes
+
+
 ## [1.1] - 2020.06.03
 
 Upgrade Release
