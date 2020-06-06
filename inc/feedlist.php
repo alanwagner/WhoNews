@@ -279,11 +279,6 @@ return [
         'url'       => 'http://rssfeeds.usatoday.com/UsatodaycomWorld-TopStories',
         'menuLabel' => 'USA Today : World',
     ],
-    'usatoday-opinion' => [
-        'title'     => 'USA Today > Opinion',
-        'url'       => 'http://rssfeeds.usatoday.com/News-Opinion',
-        'menuLabel' => 'USA Today : Opinion',
-    ],
     'usatoday-politics' => [
         'title'     => 'USA Today > Politics',
         'url'       => 'http://rssfeeds.usatoday.com/UsatodaycomWashington-TopStories',
