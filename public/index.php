@@ -39,7 +39,7 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
 <head>
 <meta charset="UTF-8">
 <title><?php echo $template->getPageTitle(); ?></title>
-<meta name="description" content="WhoNews.org is an online newsfeed viewer which allows users to compare multiple news sources by displaying them side-by-side. It is free, open-source, and does not use cookies or trackers of any kind.">
+<meta name="description" content="WhoNews.org is an online newsfeed viewer which allows users to compare multiple news sources by displaying them side-by-side. WhoNews follows no ideology or agenda; it is free, open-source, and does not use cookies or trackers of any kind.">
 
 <link href="css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
 <link href="css/bootstrap-theme.css" media="screen" rel="stylesheet" type="text/css" />
