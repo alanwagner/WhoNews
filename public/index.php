@@ -9,28 +9,28 @@
 
 include_once (__DIR__ . '/../inc/const.php');
 
-include_once (__DIR__ . '/../inc/url.php');
+include_once (__DIR__ . '/../inc/Controller.php');
 
-include_once (__DIR__ . '/../inc/template.php');
-
-include_once (__DIR__ . '/../inc/reader.php');
+include_once (__DIR__ . '/../inc/Template.php');
 
 
 $feedList = include(__DIR__ . '/../inc/feedlist.php');
 
+$controller = new Controller();
+$template = new Template();
+
+$url = $controller->optimizeUrl($_GET);
+if ($url !== null) {
+
+    header("Location:?" . $url);
+    exit;
+}
+
+$template->query = $_GET;
+$template->queryFeeds = $controller->getQueryFeeds($_GET);
+
 $limit = isset($_GET['limit']) ? $_GET['limit'] : null;
-
-$queryFeeds = getQueryFeeds();
-
-$feedData = getFeedData($queryFeeds, $limit);
-
-$pageTitle = getPageTitle($feedData);
-
-$wrapperClass = getWrapperClass(count($feedData));
-
-$shortDescription = (boolean)strstr($wrapperClass, ' wn-description-short');
-
-$targetNew = (isset($_GET[WN_KEY_TARGET]) && $_GET[WN_KEY_TARGET] === 'new');
+$template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
 
 
 ?>
@@ -38,7 +38,7 @@ $targetNew = (isset($_GET[WN_KEY_TARGET]) && $_GET[WN_KEY_TARGET] === 'new');
 <html>
 <head>
 <meta charset="UTF-8">
-<title><?php echo $pageTitle; ?></title>
+<title><?php echo $template->getPageTitle(); ?></title>
 <meta name="description" content="WhoNews.org is an online newsfeed viewer which allows users to compare multiple news sources by displaying them side-by-side. It is free, open-source, and does not use cookies or trackers of any kind.">
 
 <link href="css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
@@ -48,7 +48,7 @@ $targetNew = (isset($_GET[WN_KEY_TARGET]) && $_GET[WN_KEY_TARGET] === 'new');
 </head>
 <body>
 
-<div class="<?php echo $wrapperClass; ?>">
+<div class="<?php echo $template->getWrapperClass(); ?>">
 
     <div class="wn-top-header">
         <h1 class="wn-header-title">Who<span class="wn-header-title-spacer"></span>News</h1>
@@ -61,7 +61,7 @@ $targetNew = (isset($_GET[WN_KEY_TARGET]) && $_GET[WN_KEY_TARGET] === 'new');
 
     <div class="wn-tabs clearfix">
         <?php
-        foreach($feedData as $idx => $feed):
+        foreach($template->feedData as $idx => $feed):
         ?>
             <h2 class="wn-col wn-tab">
                 <?php echo str_replace(' > ', '&nbsp; > &nbsp;', $feed[WN_DATA_FEED_TITLE]); ?>
@@ -78,7 +78,7 @@ $targetNew = (isset($_GET[WN_KEY_TARGET]) && $_GET[WN_KEY_TARGET] === 'new');
 
 
     <?php
-    foreach($feedData as $idx => $feed):
+    foreach($template->feedData as $idx => $feed):
     ?>
         <div class="wn-col wn-links-wrapper">
         <?php
@@ -90,7 +90,7 @@ $targetNew = (isset($_GET[WN_KEY_TARGET]) && $_GET[WN_KEY_TARGET] === 'new');
                 $imgUrl = $item[WN_DATA_ITEM_THUMB_URL];
             }
         ?>
-            <a href="<?php echo $item[WN_DATA_ITEM_GUID] ?>" class="wn-link-block" <?php echo ($targetNew) ? 'target="_blank"' : '';?>>
+            <a href="<?php echo $item[WN_DATA_ITEM_GUID] ?>" class="wn-link-block" <?php echo $template->getTarget(); ?>>
                 <?php
                 if (!empty($imgUrl)):
                 ?>
@@ -104,12 +104,8 @@ $targetNew = (isset($_GET[WN_KEY_TARGET]) && $_GET[WN_KEY_TARGET] === 'new');
                     <span class="wn-link-title"><?php echo $item[WN_DATA_ITEM_TITLE] ?></span>
                     <?php
                     if (!empty($item[WN_DATA_ITEM_DESCRIPTION])):
-                        $descr = $item[WN_DATA_ITEM_DESCRIPTION];
-                        if ($shortDescription === true && strlen($descr) > 120):
-                            $descr = substr($descr, 0, strrpos(substr($descr, 0, 120), ' ')) . '...';
-                        endif;
                     ?>
-                        <span class="wn-link-description"><?php echo $descr; ?></span>
+                        <span class="wn-link-description"><?php echo $template->formatDescription($item[WN_DATA_ITEM_DESCRIPTION]); ?></span>
                     <?php
                     endif;
                     ?>
@@ -142,8 +138,8 @@ $targetNew = (isset($_GET[WN_KEY_TARGET]) && $_GET[WN_KEY_TARGET] === 'new');
                 <label>
                     <span class="label_wide">Scrolling :</span>
                     <select name="<?php echo WN_KEY_SCROLL; ?>" tabindex="1">
-                        <option value="free" <?php echo (checkGet(WN_KEY_SCROLL, WN_DEFAULT_SCROLL, true) ? 'selected="selected"' : ''); ?>>Free</option>
-                        <option value="sync" <?php echo (checkGet(WN_KEY_SCROLL, 'sync') ? 'selected="selected"' : ''); ?>>Sync</option>
+                        <option value="free" <?php echo ($template->checkQuery(WN_KEY_SCROLL, WN_DEFAULT_SCROLL, true) ? 'selected="selected"' : ''); ?>>Free</option>
+                        <option value="sync" <?php echo ($template->checkQuery(WN_KEY_SCROLL, 'sync') ? 'selected="selected"' : ''); ?>>Sync</option>
                     </select>
                 </label>
             </div>
@@ -152,9 +148,9 @@ $targetNew = (isset($_GET[WN_KEY_TARGET]) && $_GET[WN_KEY_TARGET] === 'new');
                 <label>
                     <span class="label_wide">Images :</span>
                     <select name="<?php echo WN_KEY_IMAGES; ?>" tabindex="2">
-                        <option value="large" <?php echo (checkGet(WN_KEY_IMAGES, 'large') ? 'selected="selected"' : ''); ?>>Large</option>
-                        <option value="small" <?php echo (checkGet(WN_KEY_IMAGES, WN_DEFAULT_IMAGES, true) ? 'selected="selected"' : ''); ?>>Small</option>
-                        <option value="none"  <?php echo (checkGet(WN_KEY_IMAGES, 'none') ? 'selected="selected"' : ''); ?>>None</option>
+                        <option value="large" <?php echo ($template->checkQuery(WN_KEY_IMAGES, 'large') ? 'selected="selected"' : ''); ?>>Large</option>
+                        <option value="small" <?php echo ($template->checkQuery(WN_KEY_IMAGES, WN_DEFAULT_IMAGES, true) ? 'selected="selected"' : ''); ?>>Small</option>
+                        <option value="none"  <?php echo ($template->checkQuery(WN_KEY_IMAGES, 'none') ? 'selected="selected"' : ''); ?>>None</option>
                     </select>
                 </label>
             </div>
@@ -163,9 +159,9 @@ $targetNew = (isset($_GET[WN_KEY_TARGET]) && $_GET[WN_KEY_TARGET] === 'new');
                 <label>
                     <span class="label_wide">Description :</span>
                     <select name="<?php echo WN_KEY_DESCRIPTION; ?>" tabindex="3">
-                        <option value="full"  <?php echo (checkGet(WN_KEY_DESCRIPTION, 'full') ? 'selected="selected"' : ''); ?>>Full</option>
-                        <option value="short" <?php echo (checkGet(WN_KEY_DESCRIPTION, 'short') ? 'selected="selected"' : ''); ?>>Short</option>
-                        <option value="none"  <?php echo (checkGet(WN_KEY_DESCRIPTION, WN_DEFAULT_DESCRIPTION, true) ? 'selected="selected"' : ''); ?>>None</option>
+                        <option value="full"  <?php echo ($template->checkQuery(WN_KEY_DESCRIPTION, 'full') ? 'selected="selected"' : ''); ?>>Full</option>
+                        <option value="short" <?php echo ($template->checkQuery(WN_KEY_DESCRIPTION, 'short') ? 'selected="selected"' : ''); ?>>Short</option>
+                        <option value="none"  <?php echo ($template->checkQuery(WN_KEY_DESCRIPTION, WN_DEFAULT_DESCRIPTION, true) ? 'selected="selected"' : ''); ?>>None</option>
                     </select>
                 </label>
             </div>
@@ -174,8 +170,8 @@ $targetNew = (isset($_GET[WN_KEY_TARGET]) && $_GET[WN_KEY_TARGET] === 'new');
                 <label>
                     <span class="label_wide">Open links in :</span>
                     <select name="<?php echo WN_KEY_TARGET; ?>" tabindex="4">
-                        <option value="same" <?php echo (checkGet(WN_KEY_TARGET, WN_DEFAULT_TARGET, true) ? 'selected="selected"' : ''); ?>>Current tab</option>
-                        <option value="new"  <?php echo (checkGet(WN_KEY_TARGET, 'new') ? 'selected="selected"' : ''); ?>>New tab</option>
+                        <option value="same" <?php echo ($template->checkQuery(WN_KEY_TARGET, WN_DEFAULT_TARGET, true) ? 'selected="selected"' : ''); ?>>Current tab</option>
+                        <option value="new"  <?php echo ($template->checkQuery(WN_KEY_TARGET, 'new') ? 'selected="selected"' : ''); ?>>New tab</option>
                     </select>
                 </label>
             </div>
@@ -185,7 +181,7 @@ $targetNew = (isset($_GET[WN_KEY_TARGET]) && $_GET[WN_KEY_TARGET] === 'new');
 
             <?php
             for ($i = 0; $i < WN_MAX_FEEDS; $i++):
-                $feed = isset($queryFeeds[$i]) ? $queryFeeds[$i] : null;
+                $feed = isset($template->queryFeeds[$i]) ? $template->queryFeeds[$i] : null;
             ?>
                 <div class="wn-settings-row">
                     <label>
