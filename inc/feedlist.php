@@ -189,26 +189,31 @@ return [
         'title'     => 'HuffPost > Breaking',
         'url'       => 'https://www.huffpost.com/section/front-page/feed',
         'menuLabel' => 'Huffington Post : Breaking News',
+        'img'       => 'huffpost-logo-1.png',
     ],
     'huffpost-us' => [
         'title'     => 'HuffPost > U.S.',
         'url'       => 'https://www.huffpost.com/section/us-news/feed',
         'menuLabel' => 'Huffington Post : U.S.',
+        'img'       => 'huffpost-logo-1.png',
     ],
     'huffpost-world' => [
         'title'     => 'HuffPost > World',
         'url'       => 'https://www.huffpost.com/section/world-news/feed',
         'menuLabel' => 'Huffington Post : World',
+        'img'       => 'huffpost-logo-1.png',
     ],
     'huffpost-politics' => [
         'title'     => 'HuffPost > U.S. Politics',
         'url'       => 'https://www.huffpost.com/section/politics/feed',
         'menuLabel' => 'Huffington Post : U.S. Politics',
+        'img'       => 'huffpost-logo-1.png',
     ],
     'huffpost-business' => [
         'title'     => 'HuffPost > Business',
         'url'       => 'https://www.huffpost.com/section/business/feed',
         'menuLabel' => 'Huffington Post : Business',
+        'img'       => 'huffpost-logo-1.png',
     ],
 
 
@@ -216,37 +221,37 @@ return [
         'title'     => 'NYT > Home Page',
         'url'       => 'https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml',
         'menuLabel' => 'New York Times : Home Page',
-        'img'       => 'NYT_logo_rss_250x40.png',
+        'img'       => 'nyt.jpg',
     ],
     'nyt-popular' => [
         'title'     => 'NYT > Most Popular',
         'url'       => 'https://rss.nytimes.com/services/xml/rss/nyt/MostEmailed.xml',
         'menuLabel' => 'New York Times : Most Popular',
-        'img'       => 'NYT_logo_rss_250x40.png',
+        'img'       => 'nyt.jpg',
     ],
     'nyt-world' => [
         'title'     => 'NYT > World',
         'url'       => 'https://rss.nytimes.com/services/xml/rss/nyt/World.xml',
         'menuLabel' => 'New York Times : World',
-        'img'       => 'NYT_logo_rss_250x40.png',
+        'img'       => 'nyt.jpg',
     ],
     'nyt-opinion' => [
         'title'     => 'NYT > Opinion',
         'url'       => 'https://rss.nytimes.com/services/xml/rss/nyt/Opinion.xml',
         'menuLabel' => 'New York Times : Opinion',
-        'img'       => 'NYT_logo_rss_250x40.png',
+        'img'       => 'nyt.jpg',
     ],
     'nyt-politics' => [
         'title'     => 'NYT > U.S. Politics',
         'url'       => 'https://rss.nytimes.com/services/xml/rss/nyt/Politics.xml',
         'menuLabel' => 'New York Times : U.S. Politics',
-        'img'       => 'NYT_logo_rss_250x40.png',
+        'img'       => 'nyt.jpg',
     ],
     'nyt-business' => [
         'title'     => 'NYT > Business',
         'url'       => 'https://rss.nytimes.com/services/xml/rss/nyt/Business.xml',
         'menuLabel' => 'New York Times : Business',
-        'img'       => 'NYT_logo_rss_250x40.png',
+        'img'       => 'nyt.jpg',
     ],
 
 
@@ -254,6 +259,7 @@ return [
         'title'     => 'NPR > News',
         'url'       => 'https://feeds.npr.org/1001/rss.xml',
         'menuLabel' => 'NPR : News',
+        'img'       => 'npr_generic_image_300.jpg'
     ],
 
 
@@ -261,26 +267,31 @@ return [
         'title'     => 'Reuters > Top Stories',
         'url'       => 'http://feeds.reuters.com/reuters/topNews',
         'menuLabel' => 'Reuters : Top Stories',
+        'img'       => 'reuters-clear.png',
     ],
     'reuters-us' => [
         'title'     => 'Reuters > U.S.',
         'url'       => 'http://feeds.reuters.com/reuters/domesticNews',
         'menuLabel' => 'Reuters : U.S.',
+        'img'       => 'reuters-clear.png',
     ],
     'reuters-world' => [
         'title'     => 'Reuters > World',
         'url'       => 'http://feeds.reuters.com/reuters/worldNews',
         'menuLabel' => 'Reuters : World',
+        'img'       => 'reuters-clear.png',
     ],
     'reuters-politics' => [
         'title'     => 'Reuters > U.S. Politics',
         'url'       => 'http://feeds.reuters.com/reuters/politicsNews',
         'menuLabel' => 'Reuters : U.S. Politics',
+        'img'       => 'reuters-clear.png',
     ],
     'reuters-business' => [
         'title'     => 'Reuters > Business',
         'url'       => 'http://feeds.reuters.com/reuters/businessNews',
         'menuLabel' => 'Reuters : Business',
+        'img'       => 'reuters-clear.png',
     ],
 
 /*
@@ -301,26 +312,31 @@ return [
         'title'     => 'USA Today > Top Stories',
         'url'       => 'http://rssfeeds.usatoday.com/usatoday-NewsTopStories',
         'menuLabel' => 'USA Today : Top Stories',
+        'img'       => 'usa-today.png',
     ],
     'usatoday-us' => [
         'title'     => 'USA Today > U.S.',
         'url'       => 'http://rssfeeds.usatoday.com/UsatodaycomNation-TopStories',
         'menuLabel' => 'USA Today : U.S.',
+        'img'       => 'usa-today.png',
     ],
     'usatoday-world' => [
         'title'     => 'USA Today > World',
         'url'       => 'http://rssfeeds.usatoday.com/UsatodaycomWorld-TopStories',
         'menuLabel' => 'USA Today : World',
+        'img'       => 'usa-today.png',
     ],
     'usatoday-politics' => [
         'title'     => 'USA Today > Politics',
         'url'       => 'http://rssfeeds.usatoday.com/UsatodaycomWashington-TopStories',
         'menuLabel' => 'USA Today : Politics',
+        'img'       => 'usa-today.png',
     ],
     'usatoday-money' => [
         'title'     => 'USA Today > Money',
         'url'       => 'http://rssfeeds.usatoday.com/UsatodaycomMoney-TopStories',
         'menuLabel' => 'USA Today : Money',
+        'img'       => 'usa-today.png',
     ],
 
 
@@ -328,16 +344,19 @@ return [
         'title'     => 'WSJ > World',
         'url'       => 'https://feeds.a.dj.com/rss/RSSWorldNews.xml',
         'menuLabel' => 'Wall Street Journal : World',
+        'img'       => 'wsj_header2-870x276.jpg',
     ],
     'wsj-opinion' => [
         'title'     => 'WSJ > Opinion',
         'url'       => 'https://feeds.a.dj.com/rss/RSSOpinion.xml',
         'menuLabel' => 'Wall Street Journal : Opinion',
+        'img'       => 'wsj_header2-870x276.jpg',
     ],
     'wsj-business' => [
         'title'     => 'WSJ > U.S. Business',
         'url'       => 'https://feeds.a.dj.com/rss/WSJcomUSBusiness.xml',
         'menuLabel' => 'Wall Street Journal : U.S. Business',
+        'img'       => 'wsj_header2-870x276.jpg',
     ],
 
 
@@ -345,26 +364,31 @@ return [
         'title'     => 'WaPo > U.S.',
         'url'       => 'http://feeds.washingtonpost.com/rss/national',
         'menuLabel' => 'Washington Post : U.S.',
+        'img'       => 'wapo.png',
     ],
     'wapo-world' => [
         'title'     => 'WaPo > World',
         'url'       => 'http://feeds.washingtonpost.com/rss/world',
         'menuLabel' => 'Washington Post : World',
+        'img'       => 'wapo.png',
     ],
     'wapo-opinion' => [
         'title'     => 'WaPo > Opinions',
         'url'       => 'http://feeds.washingtonpost.com/rss/opinions',
         'menuLabel' => 'Washington Post : Opinions',
+        'img'       => 'wapo.png',
     ],
     'wapo-politics' => [
         'title'     => 'WaPo > Politics',
         'url'       => 'http://feeds.washingtonpost.com/rss/politics',
         'menuLabel' => 'Washington Post : Politics',
+        'img'       => 'wapo.png',
     ],
     'wapo-business' => [
         'title'     => 'WaPo > Business',
         'url'       => 'http://feeds.washingtonpost.com/rss/business',
         'menuLabel' => 'Washington Post : Business',
+        'img'       => 'wapo.png',
     ],
 ];
 
