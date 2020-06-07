@@ -13,21 +13,25 @@ return [
         'title'     => 'BBC > Top Stories',
         'url'       => 'http://feeds.bbci.co.uk/news/rss.xml',
         'menuLabel' => 'BBC : Top Stories',
+        'img'       => 'bbc_banner.png',
     ],
     'bbc-us' => [
         'title'     => 'BBC > U.S. &amp; Canada',
         'url'       => 'http://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml',
         'menuLabel' => 'BBC : U.S. &amp; Canada',
+        'img'       => 'bbc_banner.png',
     ],
     'bbc-world' => [
         'title'     => 'BBC > World',
         'url'       => 'http://feeds.bbci.co.uk/news/world/rss.xml',
         'menuLabel' => 'BBC : World',
+        'img'       => 'bbc_banner.png',
     ],
     'bbc-business' => [
         'title'     => 'BBC > Business',
         'url'       => 'http://feeds.bbci.co.uk/news/business/rss.xml',
         'menuLabel' => 'BBC : Business',
+        'img'       => 'bbc_banner.png',
     ],
 
 
@@ -35,6 +39,7 @@ return [
         'title'     => 'Breitbart > News',
         'url'       => 'http://feeds.feedburner.com/breitbart',
         'menuLabel' => 'Breitbart : News',
+        'img'       => 'bb_horizontal-p-800.png',
     ],
 
 
@@ -74,26 +79,31 @@ return [
         'title'     => 'CNN > Top Stories',
         'url'       => 'http://rss.cnn.com/rss/edition.rss',
         'menuLabel' => 'CNN : Top Stories',
+        'img'       => 'cnn.digital.png',
     ],
     'cnn-latest' => [
         'title'     => 'CNN > Most Recent',
         'url'       => 'http://rss.cnn.com/rss/cnn_latest.rss',
         'menuLabel' => 'CNN : Most Recent',
+        'img'       => 'cnn.digital.png',
     ],
     'cnn-us' => [
         'title'     => 'CNN > U.S.',
         'url'       => 'http://rss.cnn.com/rss/cnn_us.rss',
         'menuLabel' => 'CNN : U.S.',
+        'img'       => 'cnn.digital.png',
     ],
     'cnn-world' => [
         'title'     => 'CNN > World',
         'url'       => 'http://rss.cnn.com/rss/cnn_world.rss',
         'menuLabel' => 'CNN : World',
+        'img'       => 'cnn.digital.png',
     ],
     'cnn-money' => [
         'title'     => 'CNN > Money',
         'url'       => 'http://rss.cnn.com/rss/money_news_international.rss',
         'menuLabel' => 'CNN : Money',
+        'img'       => 'cnn.digital.png',
     ],
 
 
@@ -101,31 +111,37 @@ return [
         'title'     => 'CS Monitor > All Stories',
         'url'       => 'https://rss.csmonitor.com/feeds/all',
         'menuLabel' => 'Christian Science Monitor : All Stories',
+        'img'       => 'csm-masthead_232x60.png',
     ],
     'csm-usa' => [
         'title'     => 'CS Monitor > U.S.',
         'url'       => 'https://rss.csmonitor.com/feeds/usa',
         'menuLabel' => 'Christian Science Monitor : U.S.',
+        'img'       => 'csm-masthead_232x60.png',
     ],
     'csm-world' => [
         'title'     => 'CS Monitor > World',
         'url'       => 'https://rss.csmonitor.com/feeds/world',
         'menuLabel' => 'Christian Science Monitor : World',
+        'img'       => 'csm-masthead_232x60.png',
     ],
     'csm-commentary' => [
         'title'     => 'CS Monitor > Commentary',
         'url'       => 'https://rss.csmonitor.com/feeds/commentary',
         'menuLabel' => 'Christian Science Monitor : Commentary',
+        'img'       => 'csm-masthead_232x60.png',
     ],
     'csm-politics' => [
         'title'     => 'CS Monitor > Politics',
         'url'       => 'https://rss.csmonitor.com/feeds/politics',
         'menuLabel' => 'Christian Science Monitor : Politics',
+        'img'       => 'csm-masthead_232x60.png',
     ],
     'csm-business' => [
         'title'     => 'CS Monitor > Business',
         'url'       => 'https://rss.csmonitor.com/feeds/wam',
         'menuLabel' => 'Christian Science Monitor : Business',
+        'img'       => 'csm-masthead_232x60.png',
     ],
 
 
@@ -133,6 +149,7 @@ return [
         'title'     => 'Drudge Report > News',
         'url'       => 'https://feeds.feedburner.com/DrudgeReportFeed',
         'menuLabel' => 'Drudge Report : News',
+        'img'       => 'drudge_logo9.gif'
     ],
 
 
