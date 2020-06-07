@@ -24,10 +24,11 @@ class Reader
      *
      * @param string $url
      * @param string $title
+     * @param string $image
      * @param int $limit
      * @return array
      */
-    public function getChannelData($url, $title=null, $limit=null) {
+    public function getChannelData($url, $title=null, $image=null, $limit=null) {
         $data = [];
         $content = null;
 
@@ -51,6 +52,7 @@ class Reader
         if (is_string($content)) {
 
             $data = $this->parseChannelContent($content, $limit);
+            $data[WN_DATA_FEED_IMAGE] = $image;
             if (!empty($title)) {
                 $data[WN_DATA_FEED_TITLE] = $title;
             }

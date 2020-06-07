@@ -42,26 +42,31 @@ return [
         'title'     => 'BuzzFeed > News',
         'url'       => 'https://www.buzzfeednews.com/news.xml',
         'menuLabel' => 'BuzzFeed : News',
+        'img'       => 'bfn-logo-small.png',
     ],
     'buzzfeed-latest' => [
         'title'     => 'BuzzFeed > Latest',
         'url'       => 'https://www.buzzfeed.com/index.xml',
         'menuLabel' => 'BuzzFeed : Latest',
+        'img'       => 'buzzfeed_logo.png',
     ],
     'buzzfeed-world' => [
         'title'     => 'BuzzFeed > World',
         'url'       => 'https://www.buzzfeed.com/world.xml',
         'menuLabel' => 'BuzzFeed : World',
+        'img'       => 'buzzfeed_logo-news.png',
     ],
     'buzzfeed-reader' => [
         'title'     => 'BuzzFeed > Reader',
         'url'       => 'https://www.buzzfeed.com/reader.xml',
         'menuLabel' => 'BuzzFeed : Reader',
+        'img'       => 'buzzfeed_logo-news.png',
     ],
     'buzzfeed-business' => [
         'title'     => 'BuzzFeed > Business',
         'url'       => 'https://www.buzzfeed.com/business.xml',
         'menuLabel' => 'BuzzFeed : Business',
+        'img'       => 'buzzfeed_logo-news.png',
     ],
 
 
@@ -135,26 +140,31 @@ return [
         'title'     => 'FOX News > Latest',
         'url'       => 'http://feeds.foxnews.com/foxnews/latest',
         'menuLabel' => 'FOX News : Latest Headlines',
+        'img'       => 'fox-news-logo-banner.png',
     ],
     'foxnews-national' => [
         'title'     => 'FOX News > U.S.',
         'url'       => 'http://feeds.foxnews.com/foxnews/national',
         'menuLabel' => 'FOX News : U.S.',
+        'img'       => 'fox-news-logo-banner.png',
     ],
     'foxnews-world' => [
         'title'     => 'FOX News > World',
         'url'       => 'http://feeds.foxnews.com/foxnews/world',
         'menuLabel' => 'FOX News : World',
+        'img'       => 'fox-news-logo-banner.png',
     ],
     'foxnews-opinion' => [
         'title'     => 'FOX News > Opinion',
         'url'       => 'http://feeds.foxnews.com/foxnews/opinion',
         'menuLabel' => 'FOX News : Opinion',
+        'img'       => 'fox-news-logo-banner.png',
     ],
     'foxnews-politics' => [
         'title'     => 'FOX News > Politics',
         'url'       => 'http://feeds.foxnews.com/foxnews/politics',
         'menuLabel' => 'FOX News : Politics',
+        'img'       => 'fox-news-logo-banner.png',
     ],
 
 
@@ -189,31 +199,37 @@ return [
         'title'     => 'NYT > Home Page',
         'url'       => 'https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml',
         'menuLabel' => 'New York Times : Home Page',
+        'img'       => 'NYT_logo_rss_250x40.png',
     ],
     'nyt-popular' => [
         'title'     => 'NYT > Most Popular',
         'url'       => 'https://rss.nytimes.com/services/xml/rss/nyt/MostEmailed.xml',
         'menuLabel' => 'New York Times : Most Popular',
+        'img'       => 'NYT_logo_rss_250x40.png',
     ],
     'nyt-world' => [
         'title'     => 'NYT > World',
         'url'       => 'https://rss.nytimes.com/services/xml/rss/nyt/World.xml',
         'menuLabel' => 'New York Times : World',
+        'img'       => 'NYT_logo_rss_250x40.png',
     ],
     'nyt-opinion' => [
         'title'     => 'NYT > Opinion',
         'url'       => 'https://rss.nytimes.com/services/xml/rss/nyt/Opinion.xml',
         'menuLabel' => 'New York Times : Opinion',
+        'img'       => 'NYT_logo_rss_250x40.png',
     ],
     'nyt-politics' => [
         'title'     => 'NYT > U.S. Politics',
         'url'       => 'https://rss.nytimes.com/services/xml/rss/nyt/Politics.xml',
         'menuLabel' => 'New York Times : U.S. Politics',
+        'img'       => 'NYT_logo_rss_250x40.png',
     ],
     'nyt-business' => [
         'title'     => 'NYT > Business',
         'url'       => 'https://rss.nytimes.com/services/xml/rss/nyt/Business.xml',
         'menuLabel' => 'New York Times : Business',
+        'img'       => 'NYT_logo_rss_250x40.png',
     ],
 
 

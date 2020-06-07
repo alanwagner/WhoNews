@@ -45,6 +45,8 @@ const WN_DEFAULT_TARGET = 'same';
 
 const WN_DATA_FEED_TITLE = 'title';
 
+const WN_DATA_FEED_IMAGE = 'image';
+
 const WN_DATA_FEED_ITEMS = 'items';
 
 const WN_DATA_ITEM_GUID = 'guid';

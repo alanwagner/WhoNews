@@ -62,10 +62,24 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
     <div class="wn-tabs clearfix">
         <?php
         foreach($template->feedData as $idx => $feed):
+            $tabClass = 'wn-col wn-tab';
+            if ($idx === 0) {
+                $tabClass .= ' wn-col-left';
+            }
+            if ($idx === count($template->feedData) -1) {
+                $tabClass .= ' wn-col-right';
+            }
         ?>
-            <h2 class="wn-col wn-tab">
-                <?php echo str_replace(' > ', '&nbsp; > &nbsp;', $feed[WN_DATA_FEED_TITLE]); ?>
-            </h2>
+            <?php if (!empty($feed[WN_DATA_FEED_IMAGE])): ?>
+                <h2 class="<?php echo $tabClass; ?> wn-tab-image">
+                    <span class="wn-img-bg" style="background-image: url(img/<?php echo $feed[WN_DATA_FEED_IMAGE]; ?>);"></span>
+            <?php else: ?>
+                <h2 class="<?php echo $tabClass; ?>">
+            <?php endif;?>
+                    <span>
+                        <?php echo str_replace(' > ', '&nbsp; > &nbsp;', $feed[WN_DATA_FEED_TITLE]); ?>
+                    </span>
+                </h2>
         <?php
         endforeach;
         ?>
@@ -79,8 +93,15 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
 
     <?php
     foreach($template->feedData as $idx => $feed):
+        $colClass = 'wn-col wn-links-wrapper';
+        if ($idx === 0) {
+            $colClass .= ' wn-col-left';
+        }
+        if ($idx === count($template->feedData) -1) {
+            $colClass .= ' wn-col-right';
+        }
     ?>
-        <div class="wn-col wn-links-wrapper">
+        <div class="<?php echo $colClass; ?>">
         <?php
         foreach($feed[WN_DATA_FEED_ITEMS] as $item):
             $imgUrl = null;
@@ -90,7 +111,7 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
                 $imgUrl = $item[WN_DATA_ITEM_THUMB_URL];
             }
         ?>
-            <a href="<?php echo $item[WN_DATA_ITEM_GUID] ?>" class="wn-link-block" <?php echo $template->getTarget(); ?>>
+            <a href="<?php echo $item[WN_DATA_ITEM_GUID]; ?>" class="wn-link-block" <?php echo $template->getTarget(); ?>>
                 <?php
                 if (!empty($imgUrl)):
                 ?>

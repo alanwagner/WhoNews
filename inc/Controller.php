@@ -132,12 +132,18 @@ class Controller
 
         foreach ($queryFeeds as $idx => $url) {
             $title = null;
+            $image = null;
             if (in_array($url, array_keys($feedList))) {
                 $title = $feedList[$url]['title'];
-                $url = $feedList[$url]['url'];
+                $feedUrl = $feedList[$url]['url'];
+                if(!empty($feedList[$url]['img'])) {
+                    $image = $feedList[$url]['img'];
+                }
+            } else {
+                $feedUrl = $url;
             }
 
-            $feedData[] = $reader->getChannelData($url, $title, $limit);
+            $feedData[] = $reader->getChannelData($feedUrl, $title, $image, $limit);
         }
 
         return $feedData;
