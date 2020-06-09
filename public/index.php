@@ -53,7 +53,7 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
     <div class="wn-top-header clearfix">
         <h1 class="wn-header-title">Who<span class="wn-header-title-spacer"></span>News</h1>
         <span class="wn-sub-header-text">Pop Your Info Bubble</span>
-        <a title="Settings" class="wn-settings-btn" onclick="toggleSettings()">
+        <a title="Settings" class="wn-settings-btn" onclick="toggleSettings()" href="#">
             <span>Settings</span>
         </a>
     </div>
@@ -73,7 +73,7 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
             }
         ?>
             <?php if (!empty($feed[WN_DATA_FEED_IMAGE])): ?>
-                <h2 class="<?php echo $tabClass; ?> wn-tab-image">
+                <h2 class="<?php echo $tabClass; ?> wn-tab-image" title="<?php echo $feed[WN_DATA_FEED_TITLE]; ?>">
                     <span class="wn-img-bg" style="background-image: url(img/<?php echo $feed[WN_DATA_FEED_IMAGE]; ?>);"></span>
             <?php else: ?>
                 <h2 class="<?php echo $tabClass; ?>">
