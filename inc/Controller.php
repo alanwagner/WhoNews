@@ -34,10 +34,11 @@ class Controller
         //  Unset default values
 
         $defaults = [
-            WN_KEY_SCROLL => WN_DEFAULT_SCROLL,
-            WN_KEY_IMAGES => WN_DEFAULT_IMAGES,
+            WN_KEY_SCROLL      => WN_DEFAULT_SCROLL,
+            WN_KEY_IMAGES      => WN_DEFAULT_IMAGES,
             WN_KEY_DESCRIPTION => WN_DEFAULT_DESCRIPTION,
-            WN_KEY_TARGET => WN_DEFAULT_TARGET,
+            WN_KEY_LIMIT       => WN_DEFAULT_LIMIT,
+            WN_KEY_TARGET      => WN_DEFAULT_TARGET,
         ];
 
         foreach ($defaults as $key => $val) {

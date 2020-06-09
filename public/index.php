@@ -193,8 +193,21 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
 
             <div class="wn-settings-row">
                 <label>
+                    <span class="label_wide">Show :</span>
+                    <select name="<?php echo WN_KEY_LIMIT; ?>" tabindex="4">
+                        <option value=""  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '', true) ? 'selected="selected"' : ''); ?>>All stories</option>
+                        <option value="1" <?php echo ($template->checkQuery(WN_KEY_LIMIT, '1') ? 'selected="selected"' : ''); ?>>Top story</option>
+                        <option value="5"  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '5') ? 'selected="selected"' : ''); ?>>Top 5 stories</option>
+                        <option value="10"  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '10') ? 'selected="selected"' : ''); ?>>Top 10 stories</option>
+                        <option value="20"  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '20') ? 'selected="selected"' : ''); ?>>Top 20 stories</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="wn-settings-row">
+                <label>
                     <span class="label_wide">Open links in :</span>
-                    <select name="<?php echo WN_KEY_TARGET; ?>" tabindex="4">
+                    <select name="<?php echo WN_KEY_TARGET; ?>" tabindex="5">
                         <option value="same" <?php echo ($template->checkQuery(WN_KEY_TARGET, WN_DEFAULT_TARGET, true) ? 'selected="selected"' : ''); ?>>Current tab</option>
                         <option value="new"  <?php echo ($template->checkQuery(WN_KEY_TARGET, 'new') ? 'selected="selected"' : ''); ?>>New tab</option>
                     </select>
@@ -211,7 +224,7 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
                 <div class="wn-settings-row">
                     <label>
                         <span><?php echo ($i+1); ?> :&nbsp;</span>
-                        <select name="<?php echo sprintf('%s[%d]', WN_KEY_FEED, $i); ?>" onchange="toggleCustomInput('wn-input-custom-<?php echo $i; ?>', this.options[this.selectedIndex].value)" tabindex="<?php echo($i+5); ?>">
+                        <select name="<?php echo sprintf('%s[%d]', WN_KEY_FEED, $i); ?>" onchange="toggleCustomInput('wn-input-custom-<?php echo $i; ?>', this.options[this.selectedIndex].value)" tabindex="<?php echo($i+6); ?>">
                             <option value=""></option>
                             <option value="custom" <?php echo ($feed !== null && !isset($feedList[$feed]) ? 'selected="selected"' : '');?>>Custom...</option>
                             <?php
@@ -237,7 +250,7 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
 
 
             <div class="wn-settings-row text-center">
-                <button id="wn-settings-submit-btn" type="submit" class="btn btn-success btn-sm" title="Apply" tabindex="<?php echo(WN_MAX_FEEDS + 5); ?>">Apply</button>
+                <button id="wn-settings-submit-btn" type="submit" class="btn btn-success btn-sm" title="Apply" tabindex="<?php echo(WN_MAX_FEEDS + 6); ?>">Apply</button>
             </div>
 
         </form>

@@ -23,6 +23,8 @@ const WN_KEY_IMAGES = 'images';
 
 const WN_KEY_DESCRIPTION = 'description';
 
+CONST WN_KEY_LIMIT = 'limit';
+
 const WN_KEY_TARGET = 'target';
 
 const WN_KEY_FEED = 'feed';
@@ -37,6 +39,8 @@ const WN_DEFAULT_SCROLL = 'free';
 const WN_DEFAULT_IMAGES = 'small';
 
 const WN_DEFAULT_DESCRIPTION = 'none';
+
+const WN_DEFAULT_LIMIT = '';
 
 const WN_DEFAULT_TARGET = 'same';
 
