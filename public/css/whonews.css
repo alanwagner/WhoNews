@@ -368,14 +368,15 @@ h1.wn-header-title {
 .wn-input-custom {
     display: block;
     padding-top: 10px;
+    padding-left: 2.2rem;
     overflow: hidden;
-    height: 3.5rem;
+    height: 4rem;
     transition: height 0.3s;
 }
 
 #wn-settings-submit-btn {
-	margin-top: 0.6rem;
-	width: 60%;
+    margin-top: 0.6rem;
+    width: 60%;
 }
 
 

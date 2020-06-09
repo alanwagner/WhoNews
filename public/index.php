@@ -226,7 +226,7 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
                         <span><?php echo ($i+1); ?> :&nbsp;</span>
                         <select name="<?php echo sprintf('%s[%d]', WN_KEY_FEED, $i); ?>" onchange="toggleCustomInput('wn-input-custom-<?php echo $i; ?>', this.options[this.selectedIndex].value)" tabindex="<?php echo($i+6); ?>">
                             <option value=""></option>
-                            <option value="custom" <?php echo ($feed !== null && !isset($feedList[$feed]) ? 'selected="selected"' : '');?>>Custom...</option>
+                            <option value="custom" <?php echo ($template->displayCustom($i) ? 'selected="selected"' : '');?>>Custom...</option>
                             <?php
                             foreach ($feedList as $key => $conf):
                             ?>
@@ -239,9 +239,9 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
                         </select>
                     </label>
                     <br />
-                    <label class="wn-input-custom <?php echo ($feed === null || isset($feedList[$feed]) ? 'wn-custom-hidden' : '');?>" id="wn-input-custom-<?php echo $i; ?>">
+                    <label class="wn-input-custom <?php echo (!$template->displayCustom($i) ? 'wn-custom-hidden' : '');?>" id="wn-input-custom-<?php echo $i; ?>">
                         RSS URL :&nbsp;
-                        <input type="text" name="<?php echo sprintf('%s[%d]', WN_KEY_CUSTOM, $i); ?>" size="40" value="<?php echo (!isset($feedList[$feed]) ? $feed : ''); ?>" />
+                        <input type="text" name="<?php echo sprintf('%s[%d]', WN_KEY_CUSTOM, $i); ?>" size="31" value="<?php echo (!isset($feedList[$feed]) ? $feed : ''); ?>" />
                     </label>
                 </div>
             <?php

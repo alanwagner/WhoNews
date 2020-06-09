@@ -140,4 +140,39 @@ class Template
 
         return $target;
     }
+
+    /**
+     * Should we display the inputs for a custom feed element?
+     *
+     * @param int $idx
+     * @return boolean
+     */
+    public function displayCustom($idx)
+    {
+        $feedList = include(__DIR__ . '/feedlist.php');
+
+        //  If feed is filled in, then it's custom only if it's not on the list
+
+        if (isset($this->queryFeeds[$idx])) {
+
+            return !isset($feedList[$this->queryFeeds[$idx]]);
+        }
+
+        //  No feed. Show custom if :
+        //    is last element and
+        //    previous element is also empty and
+        //    there's not already a custom feed in the list
+
+        if ($idx + 1 === WN_MAX_FEEDS && count($this->queryFeeds) < WN_MAX_FEEDS - 1) {
+            for ($i = 0; $i < count($this->queryFeeds); $i++) {
+                if (!isset($feedList[$this->queryFeeds[$i]])) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        return false;
+    }
 }
