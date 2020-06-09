@@ -154,7 +154,7 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
 
 
   <div id="wn-settings-wrapper">
-    <a name="settings"></a>
+    <a name="settings" id="wn-settings-anchor"></a>
     <div id="wn-settings-panel" class="wn-settings-hidden">
         <form id="wn-settings-form" action="" method="get">
             <h3>DISPLAY OPTIONS</h3>
@@ -237,7 +237,7 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
 
 
             <div class="wn-settings-row text-center">
-                <button type="submit" class="btn btn-success btn-sm" title="Apply" tabindex="<?php echo(WN_MAX_FEEDS + 5); ?>">Apply</button>
+                <button id="wn-settings-submit-btn" type="submit" class="btn btn-success btn-sm" title="Apply" tabindex="<?php echo(WN_MAX_FEEDS + 5); ?>">Apply</button>
             </div>
 
         </form>

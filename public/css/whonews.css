@@ -47,7 +47,7 @@ html, body {
     height: 100%;
     margin: 0;
     border: 2px solid #444;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .wn-tablet-inner {
@@ -318,12 +318,17 @@ h1.wn-header-title {
 
 #wn-settings-wrapper {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 0px;
+    right: 0px;
     z-index: 1000;
     width: auto;
     height: auto;
     overflow: visible;
+}
+
+#wn-settings-anchor {
+	position: relative;
+	top: -20rem;
 }
 
 #wn-settings-panel {
@@ -368,12 +373,18 @@ h1.wn-header-title {
     transition: height 0.3s;
 }
 
+#wn-settings-submit-btn {
+	margin-top: 0.6rem;
+	width: 60%;
+}
+
 
 /**  INTERACTIVE EFFECTS  **/
 
 
 #wn-settings-panel.wn-settings-hidden {
-    left: 0;
+    /*  Leave a margin to hide the drop shadow  */
+    left: 15px;
 }
 
 .wn-input-custom.wn-custom-hidden  {
