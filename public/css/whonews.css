@@ -23,6 +23,8 @@
     --tab-row-height: 6rem;
     --tab-row-bg-color: white;
 
+    --settings-panel-width: 40rem;
+
     --links-bg-color: #fffffc;
 }
 
@@ -45,6 +47,7 @@ html, body {
     height: 100%;
     margin: 0;
     border: 2px solid #444;
+    overflow: hidden;
 }
 
 .wn-tablet-inner {
@@ -315,15 +318,26 @@ h1.wn-header-title {
 
 #wn-settings-wrapper {
     position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    width: auto;
+    height: auto;
+    overflow: visible;
+}
+
+#wn-settings-panel {
+    position: absolute;
     top: var(--top-header-height);
-    right: 0px;
+    left: calc( 0rem - var(--settings-panel-width) );
     z-index: 1000;
     background-color: #eee;
     border: 1px solid #999;
     border-top-width: 0;
     box-shadow: -3px 4px 10px 1px #c0c0c0;
-    width: auto;
+    width: var(--settings-panel-width);
     height: auto;
+    transition: left 0.5s ease;
 }
 
 #wn-settings-form {
@@ -345,9 +359,6 @@ h1.wn-header-title {
     width: 100px;
 }
 
-.wn-settings-hidden {
-    display: none;
-}
 
 .wn-input-custom {
     display: block;
@@ -355,6 +366,14 @@ h1.wn-header-title {
     overflow: hidden;
     height: 3.5rem;
     transition: height 0.3s;
+}
+
+
+/**  INTERACTIVE EFFECTS  **/
+
+
+#wn-settings-panel.wn-settings-hidden {
+    left: 0;
 }
 
 .wn-input-custom.wn-custom-hidden  {

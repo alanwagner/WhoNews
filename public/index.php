@@ -52,8 +52,8 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
 
     <div class="wn-top-header clearfix">
         <h1 class="wn-header-title">Who<span class="wn-header-title-spacer"></span>News</h1>
-        <span class="wn-sub-header-text">Pop Your Info Bubble</span>
-        <a title="Settings" class="wn-settings-btn" onclick="toggleSettings()" href="#">
+        <div class="wn-sub-header-text">Pop Your Info Bubble</div>
+        <a title="Settings" class="wn-settings-btn" onclick="toggleSettings()" href="#settings">
             <span>Settings</span>
         </a>
     </div>
@@ -153,7 +153,9 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
   </div><!-- .tablet-inner -->
 
 
-    <div id="wn-settings-wrapper" class="wn-settings-hidden">
+  <div id="wn-settings-wrapper">
+    <a name="settings"></a>
+    <div id="wn-settings-panel" class="wn-settings-hidden">
         <form id="wn-settings-form" action="" method="get">
             <h3>DISPLAY OPTIONS</h3>
 
@@ -239,7 +241,8 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
             </div>
 
         </form>
-    </div><!-- #wn-settings-wrapper -->
+    </div><!-- #wn-settings-panel -->
+  </div><!-- #wn-settings-wrapper -->
 
 
 </div><!-- .tablet-outer -->

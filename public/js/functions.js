@@ -7,7 +7,7 @@
  */
 
 function toggleSettings() {
-  var element = document.getElementById("wn-settings-wrapper");
+  var element = document.getElementById("wn-settings-panel");
   element.classList.toggle("wn-settings-hidden");
 }
 
