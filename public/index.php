@@ -113,7 +113,7 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
                 $imgUrl = $item[WN_DATA_ITEM_THUMB_URL];
             }
         ?>
-            <a href="<?php echo $item[WN_DATA_ITEM_GUID]; ?>" class="wn-link-block" <?php echo $template->getTarget(); ?>>
+            <a href="<?php echo $item[WN_DATA_ITEM_HREF]; ?>" class="wn-link-block" <?php echo $template->getTarget(); ?>>
                 <?php
                 if (!empty($imgUrl)):
                 ?>

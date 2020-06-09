@@ -49,7 +49,11 @@ const WN_DATA_FEED_IMAGE = 'image';
 
 const WN_DATA_FEED_ITEMS = 'items';
 
+const WN_DATA_ITEM_LINK = 'link';
+
 const WN_DATA_ITEM_GUID = 'guid';
+
+const WN_DATA_ITEM_HREF = 'href';
 
 const WN_DATA_ITEM_TITLE = 'title';
 

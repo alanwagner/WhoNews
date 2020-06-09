@@ -84,11 +84,23 @@ class Reader
 
             $itemData = [];
 
+            $link = $item->link;
+            if (!is_string($link)) {
+                $link = $link->__toString();
+            }
+            $itemData[WN_DATA_ITEM_LINK] = strip_tags($link);
+
             $guid = $item->guid;
             if (!is_string($guid)) {
                 $guid = $guid->__toString();
             }
             $itemData[WN_DATA_ITEM_GUID] = strip_tags($guid);
+
+            if (substr($guid, 0, 4) === 'http') {
+                $itemData[WN_DATA_ITEM_HREF] = $guid;
+            } else {
+                $itemData[WN_DATA_ITEM_HREF] = $link;
+            }
 
             $title = $item->title;
             if (!is_string($title)) {
@@ -96,7 +108,7 @@ class Reader
             }
             $itemData[WN_DATA_ITEM_TITLE] = strip_tags($title);
 
-            if (empty($itemData[WN_DATA_ITEM_GUID]) || empty($itemData[WN_DATA_ITEM_TITLE])) {
+            if (empty($itemData[WN_DATA_ITEM_HREF]) || empty($itemData[WN_DATA_ITEM_TITLE])) {
                 continue;
             }
 
