@@ -51,7 +51,10 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
 <div class="<?php echo $template->getWrapperClass(); ?>">
 
     <div class="wn-top-header clearfix">
-        <h1 class="wn-header-title">Who<span class="wn-header-title-spacer"></span>News</h1>
+        <h1 class="wn-header-title">
+            <span class="wn-header-title-img"></span>
+            <span class="wn-header-title-text">WhoNews</span>
+        </h1>
         <div class="wn-sub-header-text">Pop Your Info Bubble</div>
         <a title="Settings" class="wn-settings-btn" onclick="toggleSettings()" href="#settings">
             <span>Settings</span>

@@ -15,7 +15,7 @@
     --top-header-bg-color: #101010;
     --top-header-height: 7rem;
     --top-header-border-height: 7px;
-    --sub-header-text-color: #e4e4e4;
+    --sub-header-text-color: #e0e0e0;
 
     --sub-header-bg-color: #208000;
     --sub-header-height: 9px;
@@ -71,7 +71,7 @@ html, body {
     position: relative;
     background-color: var(--top-header-bg-color);
     color: var(--top-header-text-color);
-    padding: 6px 18px 0;
+    padding: 5px 12px 0;
     height: var(--top-header-height);
     border-top: var(--top-header-border-height) solid var(--sub-header-bg-color);
 }
@@ -79,17 +79,23 @@ html, body {
 h1.wn-header-title {
     position: relative;
     float: left;
-    font-weight: 600;
-    text-align: center;
-    font-size: 310%;
-    margin: 0;
-    padding-top: 1px;
-    color: #eaf068;
+    height: 4.2rem;
+    width: 22rem;
+    margin: 6px 0 0;
+    padding: 0;
+    background-image: linear-gradient(#ffffb0, gold);
 }
 
-.wn-header-title-spacer {
-    display: inline-block;
-    width: 1px;
+.wn-header-title-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-image: url(../img/WhoNews_Transparent.png);
+    background-size: cover;
+}
+
+.wn-header-title-text {
+    display: none;
 }
 
 
@@ -98,7 +104,7 @@ h1.wn-header-title {
     position: relative;
     display: block;
     width: 40%;
-    margin: 4px auto 0;
+    margin: 0 auto;
     text-align: center;
     color: var(--sub-header-text-color);
     font-weight: 300;
