@@ -42,7 +42,7 @@ const WN_DEFAULT_DESCRIPTION = 'none';
 
 const WN_DEFAULT_LIMIT = '';
 
-const WN_DEFAULT_TARGET = 'same';
+const WN_DEFAULT_TARGET = 'new';
 
 
 //  Keys for array of xml feed data

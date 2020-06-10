@@ -134,7 +134,7 @@ class Template
     public function getTarget()
     {
         $target = '';
-        if (isset($this->query[WN_KEY_TARGET]) && $this->query[WN_KEY_TARGET] === 'new') {
+        if (!isset($this->query[WN_KEY_TARGET]) || $this->query[WN_KEY_TARGET] === 'new') {
             $target = ' target="_blank"';
         }
 

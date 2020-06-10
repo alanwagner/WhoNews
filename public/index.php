@@ -210,8 +210,8 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
             <label>
                 <span class="label_wide">Open links in :</span>
                 <select name="<?php echo WN_KEY_TARGET; ?>" tabindex="5">
-                    <option value="same" <?php echo ($template->checkQuery(WN_KEY_TARGET, WN_DEFAULT_TARGET, true) ? 'selected="selected"' : ''); ?>>Current tab</option>
-                    <option value="new"  <?php echo ($template->checkQuery(WN_KEY_TARGET, 'new') ? 'selected="selected"' : ''); ?>>New tab</option>
+                    <option value="new"  <?php echo ($template->checkQuery(WN_KEY_TARGET, WN_DEFAULT_TARGET, true) ? 'selected="selected"' : ''); ?>>New tab</option>
+                    <option value="same" <?php echo ($template->checkQuery(WN_KEY_TARGET, 'same') ? 'selected="selected"' : ''); ?>>Current tab</option>
                 </select>
             </label>
         </div>
