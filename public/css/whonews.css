@@ -77,8 +77,8 @@ html, body {
 }
 
 h1.wn-header-title {
-	position: relative;
-	float: left;
+    position: relative;
+    float: left;
     font-weight: 600;
     text-align: center;
     font-size: 310%;
@@ -95,11 +95,11 @@ h1.wn-header-title {
 
 
 .wn-sub-header-text {
-	position: relative;
-	display: block;
-	width: 40%;
-	margin: 4px auto 0;
-	text-align: center;
+    position: relative;
+    display: block;
+    width: 40%;
+    margin: 4px auto 0;
+    text-align: center;
     color: var(--sub-header-text-color);
     font-weight: 300;
     font-style: italic;
@@ -124,12 +124,12 @@ h1.wn-header-title {
 }
 
 .wn-settings-btn  span {
-	display: none;
+    display: none;
 }
 
 .wn-settings-btn:hover,
 .wn-settings-btn:active {
-	background-color: #313131;
+    background-color: #313131;
 }
 
 
@@ -159,7 +159,7 @@ h1.wn-header-title {
 }
 
 .wn-tab {
-	position: relative;
+    position: relative;
     float: left;
     border-right: 3px solid #444;
     border-left: 3px solid #444;
@@ -184,7 +184,7 @@ h1.wn-header-title {
 
 
 .wn-tab.wn-tab-image {
-	padding: 5px 20px;
+    padding: 5px 20px;
 }
 
 .wn-tab.wn-tab-image  span {
@@ -192,8 +192,8 @@ h1.wn-header-title {
 }
 
 .wn-tab.wn-tab-image  span.wn-img-bg {
-	display: block;
-	position: relative;
+    display: block;
+    position: relative;
     height: 100%;
     width: 100%;
     background-size: contain;
@@ -327,14 +327,16 @@ h1.wn-header-title {
 }
 
 #wn-settings-anchor {
-	position: relative;
-	top: -20rem;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    display: none;
 }
 
 #wn-settings-panel {
     position: absolute;
     top: var(--top-header-height);
-    left: calc( 0rem - var(--settings-panel-width) );
+    right: 0px;
     z-index: 1000;
     background-color: #eee;
     border: 1px solid #999;
@@ -342,7 +344,7 @@ h1.wn-header-title {
     box-shadow: -3px 4px 10px 1px #c0c0c0;
     width: var(--settings-panel-width);
     height: auto;
-    transition: left 0.5s ease;
+    transition: right 0.5s;
 }
 
 #wn-settings-form {
@@ -367,11 +369,21 @@ h1.wn-header-title {
 
 .wn-input-custom {
     display: block;
-    padding-top: 10px;
+    margin-bottom: 5px;
     padding-left: 2.2rem;
     overflow: hidden;
     height: 4rem;
     transition: height 0.3s;
+}
+
+.wn-input-custom  span {
+    position: relative;
+    display: block;
+    padding-top: 10px;
+}
+
+.wn-input-custom  input {
+    width: 22rem;
 }
 
 #wn-settings-submit-btn {
@@ -385,11 +397,10 @@ h1.wn-header-title {
 
 #wn-settings-panel.wn-settings-hidden {
     /*  Leave a margin to hide the drop shadow  */
-    left: 15px;
+    right: calc(-3rem - var(--settings-panel-width));
 }
 
 .wn-input-custom.wn-custom-hidden  {
-    padding: 0;
     height: 0;
 }
 
