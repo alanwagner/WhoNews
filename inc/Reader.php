@@ -24,10 +24,11 @@ class Reader
      *
      * @param string $url
      * @param string $title
+     * @param string $image
      * @param int $limit
      * @return array
      */
-    public function getChannelData($url, $title=null, $limit=null) {
+    public function getChannelData($url, $title=null, $image=null, $limit=null) {
         $data = [];
         $content = null;
 
@@ -51,6 +52,7 @@ class Reader
         if (is_string($content)) {
 
             $data = $this->parseChannelContent($content, $limit);
+            $data[WN_DATA_FEED_IMAGE] = $image;
             if (!empty($title)) {
                 $data[WN_DATA_FEED_TITLE] = $title;
             }
@@ -82,11 +84,23 @@ class Reader
 
             $itemData = [];
 
+            $link = $item->link;
+            if (!is_string($link)) {
+                $link = $link->__toString();
+            }
+            $itemData[WN_DATA_ITEM_LINK] = strip_tags($link);
+
             $guid = $item->guid;
             if (!is_string($guid)) {
                 $guid = $guid->__toString();
             }
             $itemData[WN_DATA_ITEM_GUID] = strip_tags($guid);
+
+            if (substr($guid, 0, 4) === 'http') {
+                $itemData[WN_DATA_ITEM_HREF] = $guid;
+            } else {
+                $itemData[WN_DATA_ITEM_HREF] = $link;
+            }
 
             $title = $item->title;
             if (!is_string($title)) {
@@ -94,7 +108,7 @@ class Reader
             }
             $itemData[WN_DATA_ITEM_TITLE] = strip_tags($title);
 
-            if (empty($itemData[WN_DATA_ITEM_GUID]) || empty($itemData[WN_DATA_ITEM_TITLE])) {
+            if (empty($itemData[WN_DATA_ITEM_HREF]) || empty($itemData[WN_DATA_ITEM_TITLE])) {
                 continue;
             }
 

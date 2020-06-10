@@ -23,6 +23,8 @@ const WN_KEY_IMAGES = 'images';
 
 const WN_KEY_DESCRIPTION = 'description';
 
+CONST WN_KEY_LIMIT = 'limit';
+
 const WN_KEY_TARGET = 'target';
 
 const WN_KEY_FEED = 'feed';
@@ -38,16 +40,24 @@ const WN_DEFAULT_IMAGES = 'small';
 
 const WN_DEFAULT_DESCRIPTION = 'none';
 
-const WN_DEFAULT_TARGET = 'same';
+const WN_DEFAULT_LIMIT = '';
+
+const WN_DEFAULT_TARGET = 'new';
 
 
 //  Keys for array of xml feed data
 
 const WN_DATA_FEED_TITLE = 'title';
 
+const WN_DATA_FEED_IMAGE = 'image';
+
 const WN_DATA_FEED_ITEMS = 'items';
 
+const WN_DATA_ITEM_LINK = 'link';
+
 const WN_DATA_ITEM_GUID = 'guid';
+
+const WN_DATA_ITEM_HREF = 'href';
 
 const WN_DATA_ITEM_TITLE = 'title';
 

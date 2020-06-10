@@ -12,15 +12,18 @@
 
 :root {
     --top-header-text-color: #fffffc;
-    --top-header-bg-color: forestgreen;
-    --top-header-height: 4rem;
+    --top-header-bg-color: #101010;
+    --top-header-height: 7rem;
+    --top-header-border-height: 7px;
+    --sub-header-text-color: #e0e0e0;
 
-    --sub-header-text-color: #fffffc;
-    --sub-header-bg-color: #101010;
-    --sub-header-height: 4rem;
+    --sub-header-bg-color: #208000;
+    --sub-header-height: 9px;
 
-    --tab-row-height: 4rem;
+    --tab-row-height: 6rem;
     --tab-row-bg-color: white;
+
+    --settings-panel-width: 40rem;
 
     --links-bg-color: #fffffc;
 }
@@ -44,6 +47,7 @@ html, body {
     height: 100%;
     margin: 0;
     border: 2px solid #444;
+    overflow-x: hidden;
 }
 
 .wn-tablet-inner {
@@ -66,23 +70,72 @@ html, body {
 .wn-top-header {
     position: relative;
     background-color: var(--top-header-bg-color);
-    font-size: 160%;
-    padding: 8px 8px 0;
+    color: var(--top-header-text-color);
+    padding: 5px 12px 0;
     height: var(--top-header-height);
+    border-top: var(--top-header-border-height) solid var(--sub-header-bg-color);
 }
 
 h1.wn-header-title {
-    color: var(--top-header-text-color);
-    font-weight: 600;
-    text-align: center;
-    font-size: inherit;
-    margin: 0;
+    position: relative;
+    float: left;
+    height: 4.2rem;
+    width: 22rem;
+    margin: 6px 0 0;
     padding: 0;
+    background-image: linear-gradient(#ffffb0, gold);
 }
 
-.wn-header-title-spacer {
-    display: inline-block;
-    width: 1px;
+.wn-header-title-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-image: url(../img/WhoNews_Transparent.png);
+    background-size: cover;
+}
+
+.wn-header-title-text {
+    display: none;
+}
+
+
+
+.wn-sub-header-text {
+    position: relative;
+    display: block;
+    width: 40%;
+    margin: 4px auto;
+    text-align: center;
+    color: var(--sub-header-text-color);
+    font-weight: 300;
+    font-style: italic;
+    font-size: 90%;
+}
+
+.wn-settings-btn {
+    position: absolute;
+    display: block;
+    top: 0;
+    right: 1px;
+    height: calc(var(--top-header-height) - var(--top-header-border-height));
+    width: calc( var(--top-header-height) * 1.05 );
+    background-color: var(--top-header-bg-color);
+    background-image: url(gears-icon-white.png);
+    background-size: 67%;
+    background-position: 60% 50%;
+    background-repeat: no-repeat;
+    border-top: 1px solid var(--top-header-bg-color);
+    border-bottom: 1px solid var(--top-header-bg-color);
+    cursor: pointer;
+}
+
+.wn-settings-btn  span {
+    display: none;
+}
+
+.wn-settings-btn:hover,
+.wn-settings-btn:active {
+    background-color: #313131;
 }
 
 
@@ -94,37 +147,12 @@ h1.wn-header-title {
 
 .wn-sub-header {
     position: relative;
+    display: block;
     background-color: var(--sub-header-bg-color);
     height: var(--sub-header-height);
-    padding: 9px 15px 0;
-    vertical-align: center;
+    padding: 0;
+    border-bottom: 2px solid #004400;
 }
-
-.wn-sub-header-text {
-    color: var(--sub-header-text-color);
-    font-weight: 300;
-    font-style: italic;
-    font-size: 120%;
-}
-
-.wn-settings-btn {
-    position: absolute;
-    display: block;
-    top: 0px;
-    right: 1px;
-    height: var(--sub-header-height);
-    width: calc( var(--sub-header-height) * 1.3 );
-    color: var(--sub-header-text-color);
-    background-color: #404040;
-    background-image: url(gears-icon-white.png);
-    background-size: 67%;
-    background-position: 55% 45%;
-    background-repeat: no-repeat;
-    border-top: 1px solid #000010;
-    border-bottom: 1px solid #000;
-    cursor: pointer;
-}
-
 
 
 
@@ -137,11 +165,11 @@ h1.wn-header-title {
 }
 
 .wn-tab {
+    position: relative;
     float: left;
-    border-right: 1px solid #444;
-    border-left: 1px solid #444;
-    border-bottom: 2px solid gray;
-    border-bottom-color: gray;
+    border-right: 3px solid #444;
+    border-left: 3px solid #444;
+    border-bottom: 3px solid gray;
 
     height: var(--tab-row-height);
     background-color: var(--tab-row-bg-color);
@@ -150,6 +178,33 @@ h1.wn-header-title {
     font-size: inherit;
     margin: 0;
     padding: 10px 0px 0px;
+}
+
+.wn-tab.wn-col-left {
+    border-left-width: 1px;
+}
+
+.wn-tab.wn-col-right {
+    border-right-width: 1px;
+}
+
+
+.wn-tab.wn-tab-image {
+    padding: 7px 20px;
+}
+
+.wn-tab.wn-tab-image  span {
+    display: none;
+}
+
+.wn-tab.wn-tab-image  span.wn-img-bg {
+    display: block;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 
@@ -162,14 +217,22 @@ h1.wn-header-title {
 .wn-links-wrapper {
     position: relative;
     float: left;
-    border-right: 1px solid #444;
-    border-left: 1px solid #444;
+    border-right: 3px solid #444;
+    border-left: 3px solid #444;
     padding: 0;
 
     /*  sync scroll
     height: auto;  */
     height: 100%;
     overflow-y: scroll;
+}
+
+.wn-links-wrapper.wn-col-left {
+    border-left-width: 1px;
+}
+
+.wn-links-wrapper.wn-col-right {
+    border-right-width: 1px;
 }
 
 .wn-link-block {
@@ -261,15 +324,33 @@ h1.wn-header-title {
 
 #wn-settings-wrapper {
     position: absolute;
-    top: calc(var(--top-header-height) + var(--sub-header-height));
+    top: 0px;
+    right: 0px;
+    z-index: 1000;
+    width: auto;
+    height: auto;
+    overflow: visible;
+}
+
+#wn-settings-anchor {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    display: none;
+}
+
+#wn-settings-panel {
+    position: absolute;
+    top: var(--top-header-height);
     right: 0px;
     z-index: 1000;
     background-color: #eee;
     border: 1px solid #999;
     border-top-width: 0;
     box-shadow: -3px 4px 10px 1px #c0c0c0;
-    width: auto;
+    width: var(--settings-panel-width);
     height: auto;
+    transition: right 0.5s;
 }
 
 #wn-settings-form {
@@ -291,20 +372,41 @@ h1.wn-header-title {
     width: 100px;
 }
 
-.wn-settings-hidden {
-    display: none;
-}
 
 .wn-input-custom {
     display: block;
-    padding-top: 10px;
+    margin-bottom: 5px;
+    padding-left: 2.2rem;
     overflow: hidden;
-    height: 3.5rem;
+    height: 4rem;
     transition: height 0.3s;
 }
 
+.wn-input-custom  span {
+    position: relative;
+    display: block;
+    padding-top: 10px;
+}
+
+.wn-input-custom  input {
+    width: 22rem;
+}
+
+#wn-settings-submit-btn {
+    margin-top: 0.6rem;
+    width: 60%;
+}
+
+
+/**  INTERACTIVE EFFECTS  **/
+
+
+#wn-settings-panel.wn-settings-hidden {
+    /*  Leave a margin to hide the drop shadow  */
+    right: calc(-3rem - var(--settings-panel-width));
+}
+
 .wn-input-custom.wn-custom-hidden  {
-    padding: 0;
     height: 0;
 }
 

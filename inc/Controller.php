@@ -34,10 +34,11 @@ class Controller
         //  Unset default values
 
         $defaults = [
-            WN_KEY_SCROLL => WN_DEFAULT_SCROLL,
-            WN_KEY_IMAGES => WN_DEFAULT_IMAGES,
+            WN_KEY_SCROLL      => WN_DEFAULT_SCROLL,
+            WN_KEY_IMAGES      => WN_DEFAULT_IMAGES,
             WN_KEY_DESCRIPTION => WN_DEFAULT_DESCRIPTION,
-            WN_KEY_TARGET => WN_DEFAULT_TARGET,
+            WN_KEY_LIMIT       => WN_DEFAULT_LIMIT,
+            WN_KEY_TARGET      => WN_DEFAULT_TARGET,
         ];
 
         foreach ($defaults as $key => $val) {
@@ -132,12 +133,18 @@ class Controller
 
         foreach ($queryFeeds as $idx => $url) {
             $title = null;
+            $image = null;
             if (in_array($url, array_keys($feedList))) {
                 $title = $feedList[$url]['title'];
-                $url = $feedList[$url]['url'];
+                $feedUrl = $feedList[$url]['url'];
+                if(!empty($feedList[$url]['img'])) {
+                    $image = $feedList[$url]['img'];
+                }
+            } else {
+                $feedUrl = $url;
             }
 
-            $feedData[] = $reader->getChannelData($url, $title, $limit);
+            $feedData[] = $reader->getChannelData($feedUrl, $title, $image, $limit);
         }
 
         return $feedData;

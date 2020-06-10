@@ -39,7 +39,7 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
 <head>
 <meta charset="UTF-8">
 <title><?php echo $template->getPageTitle(); ?></title>
-<meta name="description" content="WhoNews.org is an online newsfeed viewer which allows users to compare multiple news sources by displaying them side-by-side. WhoNews follows no ideology or agenda; it is free, open-source, and does not use cookies or trackers of any kind.">
+<meta name="description" content="WhoNews.org is an online newsfeed viewer which allows users to compare multiple news sources by displaying them side-by-side. WhoNews follows no ideology or agenda; it is free, open-source, and does not use cookies, trackers or ads of any kind.">
 
 <link href="css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
 <link href="css/bootstrap-theme.css" media="screen" rel="stylesheet" type="text/css" />
@@ -50,22 +50,41 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
 
 <div class="<?php echo $template->getWrapperClass(); ?>">
 
-    <div class="wn-top-header">
-        <h1 class="wn-header-title">Who<span class="wn-header-title-spacer"></span>News</h1>
+    <div class="wn-top-header clearfix">
+        <h1 class="wn-header-title">
+            <span class="wn-header-title-img"></span>
+            <span class="wn-header-title-text">WhoNews</span>
+        </h1>
+        <div class="wn-sub-header-text">Pop Your Info Bubble</div>
+        <a title="Settings" class="wn-settings-btn" onclick="toggleSettings()" href="#settings">
+            <span>Settings</span>
+        </a>
     </div>
 
     <div class="wn-sub-header">
-        <span class="wn-sub-header-text">Pop Your Info Bubble</span>
-        <span title="Settings" class="wn-settings-btn" onclick="toggleSettings()">&nbsp;</span>
     </div>
 
     <div class="wn-tabs clearfix">
         <?php
         foreach($template->feedData as $idx => $feed):
+            $tabClass = 'wn-col wn-tab';
+            if ($idx === 0) {
+                $tabClass .= ' wn-col-left';
+            }
+            if ($idx === count($template->feedData) -1) {
+                $tabClass .= ' wn-col-right';
+            }
         ?>
-            <h2 class="wn-col wn-tab">
-                <?php echo str_replace(' > ', '&nbsp; > &nbsp;', $feed[WN_DATA_FEED_TITLE]); ?>
-            </h2>
+            <?php if (!empty($feed[WN_DATA_FEED_IMAGE])): ?>
+                <h2 class="<?php echo $tabClass; ?> wn-tab-image" title="<?php echo $feed[WN_DATA_FEED_TITLE]; ?>">
+                    <span class="wn-img-bg" style="background-image: url(img/<?php echo $feed[WN_DATA_FEED_IMAGE]; ?>);"></span>
+            <?php else: ?>
+                <h2 class="<?php echo $tabClass; ?>">
+            <?php endif;?>
+                    <span>
+                        <?php echo str_replace(' > ', '&nbsp; > &nbsp;', $feed[WN_DATA_FEED_TITLE]); ?>
+                    </span>
+                </h2>
         <?php
         endforeach;
         ?>
@@ -79,8 +98,15 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
 
     <?php
     foreach($template->feedData as $idx => $feed):
+        $colClass = 'wn-col wn-links-wrapper';
+        if ($idx === 0) {
+            $colClass .= ' wn-col-left';
+        }
+        if ($idx === count($template->feedData) -1) {
+            $colClass .= ' wn-col-right';
+        }
     ?>
-        <div class="wn-col wn-links-wrapper">
+        <div class="<?php echo $colClass; ?>">
         <?php
         foreach($feed[WN_DATA_FEED_ITEMS] as $item):
             $imgUrl = null;
@@ -90,7 +116,7 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
                 $imgUrl = $item[WN_DATA_ITEM_THUMB_URL];
             }
         ?>
-            <a href="<?php echo $item[WN_DATA_ITEM_GUID] ?>" class="wn-link-block" <?php echo $template->getTarget(); ?>>
+            <a href="<?php echo $item[WN_DATA_ITEM_HREF]; ?>" class="wn-link-block" <?php echo $template->getTarget(); ?>>
                 <?php
                 if (!empty($imgUrl)):
                 ?>
@@ -130,93 +156,109 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
   </div><!-- .tablet-inner -->
 
 
-    <div id="wn-settings-wrapper" class="wn-settings-hidden">
-        <form id="wn-settings-form" action="" method="get">
-            <h3>DISPLAY OPTIONS</h3>
+  <a name="settings" id="wn-settings-anchor"></a>
+  <div id="wn-settings-panel" class="wn-settings-hidden">
+    <form id="wn-settings-form" action="" method="get">
+        <h3>DISPLAY OPTIONS</h3>
 
+        <div class="wn-settings-row">
+            <label>
+                <span class="label_wide">Scrolling :</span>
+                <select name="<?php echo WN_KEY_SCROLL; ?>" tabindex="1">
+                    <option value="free" <?php echo ($template->checkQuery(WN_KEY_SCROLL, WN_DEFAULT_SCROLL, true) ? 'selected="selected"' : ''); ?>>Free</option>
+                    <option value="sync" <?php echo ($template->checkQuery(WN_KEY_SCROLL, 'sync') ? 'selected="selected"' : ''); ?>>Sync</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="wn-settings-row">
+            <label>
+                <span class="label_wide">Images :</span>
+                <select name="<?php echo WN_KEY_IMAGES; ?>" tabindex="2">
+                    <option value="large" <?php echo ($template->checkQuery(WN_KEY_IMAGES, 'large') ? 'selected="selected"' : ''); ?>>Large</option>
+                    <option value="small" <?php echo ($template->checkQuery(WN_KEY_IMAGES, WN_DEFAULT_IMAGES, true) ? 'selected="selected"' : ''); ?>>Small</option>
+                    <option value="none"  <?php echo ($template->checkQuery(WN_KEY_IMAGES, 'none') ? 'selected="selected"' : ''); ?>>None</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="wn-settings-row">
+            <label>
+                <span class="label_wide">Description :</span>
+                <select name="<?php echo WN_KEY_DESCRIPTION; ?>" tabindex="3">
+                    <option value="full"  <?php echo ($template->checkQuery(WN_KEY_DESCRIPTION, 'full') ? 'selected="selected"' : ''); ?>>Full</option>
+                    <option value="short" <?php echo ($template->checkQuery(WN_KEY_DESCRIPTION, 'short') ? 'selected="selected"' : ''); ?>>Short</option>
+                    <option value="none"  <?php echo ($template->checkQuery(WN_KEY_DESCRIPTION, WN_DEFAULT_DESCRIPTION, true) ? 'selected="selected"' : ''); ?>>None</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="wn-settings-row">
+            <label>
+                <span class="label_wide">Show :</span>
+                <select name="<?php echo WN_KEY_LIMIT; ?>" tabindex="4">
+                    <option value=""  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '', true) ? 'selected="selected"' : ''); ?>>All stories</option>
+                    <option value="20"  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '20') ? 'selected="selected"' : ''); ?>>First 20 stories</option>
+                    <option value="10"  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '10') ? 'selected="selected"' : ''); ?>>First 10 stories</option>
+                    <option value="5"  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '5') ? 'selected="selected"' : ''); ?>>First 5 stories</option>
+                    <option value="1" <?php echo ($template->checkQuery(WN_KEY_LIMIT, '1') ? 'selected="selected"' : ''); ?>>Top story only</option>
+                    </select>
+            </label>
+        </div>
+
+        <div class="wn-settings-row">
+            <label>
+                <span class="label_wide">Open links in :</span>
+                <select name="<?php echo WN_KEY_TARGET; ?>" tabindex="5">
+                    <option value="new"  <?php echo ($template->checkQuery(WN_KEY_TARGET, WN_DEFAULT_TARGET, true) ? 'selected="selected"' : ''); ?>>New tab</option>
+                    <option value="same" <?php echo ($template->checkQuery(WN_KEY_TARGET, 'same') ? 'selected="selected"' : ''); ?>>Current tab</option>
+                </select>
+            </label>
+        </div>
+
+
+        <h3>FEEDS</h3>
+
+        <?php
+        for ($i = 0; $i < WN_MAX_FEEDS; $i++):
+            $feed = isset($template->queryFeeds[$i]) ? $template->queryFeeds[$i] : null;
+        ?>
             <div class="wn-settings-row">
                 <label>
-                    <span class="label_wide">Scrolling :</span>
-                    <select name="<?php echo WN_KEY_SCROLL; ?>" tabindex="1">
-                        <option value="free" <?php echo ($template->checkQuery(WN_KEY_SCROLL, WN_DEFAULT_SCROLL, true) ? 'selected="selected"' : ''); ?>>Free</option>
-                        <option value="sync" <?php echo ($template->checkQuery(WN_KEY_SCROLL, 'sync') ? 'selected="selected"' : ''); ?>>Sync</option>
+                    <span><?php echo ($i+1); ?> :&nbsp;</span>
+                    <select name="<?php echo sprintf('%s[%d]', WN_KEY_FEED, $i); ?>" onchange="toggleCustomInput('wn-input-custom-<?php echo $i; ?>', this.options[this.selectedIndex].value)" tabindex="<?php echo($i+6); ?>">
+                        <option value=""></option>
+                        <option value="custom" <?php echo ($template->displayCustom($i) ? 'selected="selected"' : '');?>>Custom...</option>
+                        <?php
+                        foreach ($feedList as $key => $conf):
+                        ?>
+                            <option value="<?php echo $key; ?>" <?php echo ($feed === $key ? 'selected="selected"' : '');?>>
+                                <?php echo $conf['menuLabel']?>
+                            </option>
+                        <?php
+                        endforeach;
+                        ?>
                     </select>
                 </label>
-            </div>
-
-            <div class="wn-settings-row">
-                <label>
-                    <span class="label_wide">Images :</span>
-                    <select name="<?php echo WN_KEY_IMAGES; ?>" tabindex="2">
-                        <option value="large" <?php echo ($template->checkQuery(WN_KEY_IMAGES, 'large') ? 'selected="selected"' : ''); ?>>Large</option>
-                        <option value="small" <?php echo ($template->checkQuery(WN_KEY_IMAGES, WN_DEFAULT_IMAGES, true) ? 'selected="selected"' : ''); ?>>Small</option>
-                        <option value="none"  <?php echo ($template->checkQuery(WN_KEY_IMAGES, 'none') ? 'selected="selected"' : ''); ?>>None</option>
-                    </select>
-                </label>
-            </div>
-
-            <div class="wn-settings-row">
-                <label>
-                    <span class="label_wide">Description :</span>
-                    <select name="<?php echo WN_KEY_DESCRIPTION; ?>" tabindex="3">
-                        <option value="full"  <?php echo ($template->checkQuery(WN_KEY_DESCRIPTION, 'full') ? 'selected="selected"' : ''); ?>>Full</option>
-                        <option value="short" <?php echo ($template->checkQuery(WN_KEY_DESCRIPTION, 'short') ? 'selected="selected"' : ''); ?>>Short</option>
-                        <option value="none"  <?php echo ($template->checkQuery(WN_KEY_DESCRIPTION, WN_DEFAULT_DESCRIPTION, true) ? 'selected="selected"' : ''); ?>>None</option>
-                    </select>
-                </label>
-            </div>
-
-            <div class="wn-settings-row">
-                <label>
-                    <span class="label_wide">Open links in :</span>
-                    <select name="<?php echo WN_KEY_TARGET; ?>" tabindex="4">
-                        <option value="same" <?php echo ($template->checkQuery(WN_KEY_TARGET, WN_DEFAULT_TARGET, true) ? 'selected="selected"' : ''); ?>>Current tab</option>
-                        <option value="new"  <?php echo ($template->checkQuery(WN_KEY_TARGET, 'new') ? 'selected="selected"' : ''); ?>>New tab</option>
-                    </select>
-                </label>
-            </div>
-
-
-            <h3>FEEDS</h3>
-
-            <?php
-            for ($i = 0; $i < WN_MAX_FEEDS; $i++):
-                $feed = isset($template->queryFeeds[$i]) ? $template->queryFeeds[$i] : null;
-            ?>
-                <div class="wn-settings-row">
-                    <label>
-                        <span><?php echo ($i+1); ?> :&nbsp;</span>
-                        <select name="<?php echo sprintf('%s[%d]', WN_KEY_FEED, $i); ?>" onchange="toggleCustomInput('wn-input-custom-<?php echo $i; ?>', this.options[this.selectedIndex].value)" tabindex="<?php echo($i+5); ?>">
-                            <option value=""></option>
-                            <option value="custom" <?php echo ($feed !== null && !isset($feedList[$feed]) ? 'selected="selected"' : '');?>>Custom...</option>
-                            <?php
-                            foreach ($feedList as $key => $conf):
-                            ?>
-                                <option value="<?php echo $key; ?>" <?php echo ($feed === $key ? 'selected="selected"' : '');?>>
-                                    <?php echo $conf['menuLabel']?>
-                                </option>
-                            <?php
-                            endforeach;
-                            ?>
-                        </select>
-                    </label>
-                    <br />
-                    <label class="wn-input-custom <?php echo ($feed === null || isset($feedList[$feed]) ? 'wn-custom-hidden' : '');?>" id="wn-input-custom-<?php echo $i; ?>">
+                <br />
+                <label class="wn-input-custom <?php echo (!$template->displayCustom($i) ? 'wn-custom-hidden' : '');?>" id="wn-input-custom-<?php echo $i; ?>">
+                    <span>
                         RSS URL :&nbsp;
                         <input type="text" name="<?php echo sprintf('%s[%d]', WN_KEY_CUSTOM, $i); ?>" size="40" value="<?php echo (!isset($feedList[$feed]) ? $feed : ''); ?>" />
-                    </label>
-                </div>
-            <?php
-            endfor;
-            ?>
-
-
-            <div class="wn-settings-row text-center">
-                <button type="submit" class="btn btn-success btn-sm" title="Apply" tabindex="<?php echo(WN_MAX_FEEDS + 5); ?>">Apply</button>
+                    </span>
+                </label>
             </div>
+        <?php
+        endfor;
+        ?>
 
-        </form>
-    </div><!-- #wn-settings-wrapper -->
+
+        <div class="wn-settings-row text-center">
+            <button id="wn-settings-submit-btn" type="submit" class="btn btn-success btn-sm" title="Apply" tabindex="<?php echo(WN_MAX_FEEDS + 6); ?>">Apply</button>
+        </div>
+
+    </form>
+  </div><!-- #wn-settings-panel -->
 
 
 </div><!-- .tablet-outer -->

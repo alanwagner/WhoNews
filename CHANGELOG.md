@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3] - 2020.06.10
+
+Interface Upgrade and Bugfix Release
+
+### Added
+
+- Added logo images and titles to tabs
+- Added 'limit' option to settings
+- Added sliding panel effect
+- Added accessible #settings anchor
+
+### Changed
+
+- Fix: Use 'link' instead of 'guid' for href, when needed
+- Redesigned header
+- Changed default target to 'new'
+- Last feed shows empty 'Custom' field by default
+- Updated meta description
+- Updated Readme
+
+
 ## [1.2] - 2020.06.06
 
 Interface and Tech Upgrade Release
@@ -17,8 +38,8 @@ Interface and Tech Upgrade Release
 - Source / Date as single line at bottom
 - Color on settings button
 - Removed USA Today Opinions feed
-- TECH: Added constants
-- TECH: Refactored functions into classes
+- Tech: Added constants
+- Tech: Refactored functions into classes
 
 
 ## [1.1] - 2020.06.03
