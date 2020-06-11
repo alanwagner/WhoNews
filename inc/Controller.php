@@ -20,6 +20,11 @@ include_once(__DIR__ . '/Reader.php');
  */
 class Controller
 {
+    protected static $defaultQueryFeeds = [
+        'cnn-us',
+        'foxnews-national',
+    ];
+
     /**
      * Generate to shortest possible (canonical) URL, from request query (raw Settings form submission)
      * Returns null if query is already optimal
@@ -103,17 +108,12 @@ class Controller
      */
     public function getQueryFeeds($query)
     {
-        $queryFeeds = [
-            'buzzfeed-news',
-            'nyt-homepage',
-            'foxnews-national',
-        ];
-
         if (isset($query[WN_KEY_FEED])) {
-            $queryFeeds = $query[WN_KEY_FEED];
+
+            return $query[WN_KEY_FEED];
         }
 
-        return $queryFeeds;
+        return self::$defaultQueryFeeds;
     }
 
     /**
