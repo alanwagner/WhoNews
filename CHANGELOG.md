@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.1] - 2020.06.11
+
+Config Change Release
+
+### Changed
+
+- Changed default view to cnn-us / foxnews-national
+
+
 ## [1.3] - 2020.06.10
 
 Interface Upgrade and Bugfix Release
