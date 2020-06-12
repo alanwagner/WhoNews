@@ -136,7 +136,7 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
                     endif;
                     ?>
                     <span class="wn-link-date">
-                        <?php echo $feed[WN_DATA_FEED_TITLE] ?>
+                        <?php echo str_replace(' > ', ' &nbsp;⟩&nbsp; ', $feed[WN_DATA_FEED_TITLE]); ?>
                         <?php if (isset($item[WN_DATA_ITEM_PUB_DATE])): ?>
                             &nbsp;•&nbsp;&nbsp;<?php echo $item[WN_DATA_ITEM_PUB_DATE]; ?>
                         <?php endif; ?>
