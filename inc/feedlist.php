@@ -79,31 +79,31 @@ return [
         'title'     => 'CNN > Top Stories',
         'url'       => 'http://rss.cnn.com/rss/edition.rss',
         'menuLabel' => 'CNN : Top Stories',
-        'img'       => 'cnn.digital.png',
+        'img'       => 'cnn-com-logo.png',
     ],
     'cnn-latest' => [
         'title'     => 'CNN > Most Recent',
         'url'       => 'http://rss.cnn.com/rss/cnn_latest.rss',
         'menuLabel' => 'CNN : Most Recent',
-        'img'       => 'cnn.digital.png',
+        'img'       => 'cnn-com-logo.png',
     ],
     'cnn-us' => [
         'title'     => 'CNN > U.S.',
         'url'       => 'http://rss.cnn.com/rss/cnn_us.rss',
         'menuLabel' => 'CNN : U.S.',
-        'img'       => 'cnn.digital.png',
+        'img'       => 'cnn-com-logo.png',
     ],
     'cnn-world' => [
         'title'     => 'CNN > World',
         'url'       => 'http://rss.cnn.com/rss/cnn_world.rss',
         'menuLabel' => 'CNN : World',
-        'img'       => 'cnn.digital.png',
+        'img'       => 'cnn-com-logo.png',
     ],
     'cnn-money' => [
         'title'     => 'CNN > Money',
         'url'       => 'http://rss.cnn.com/rss/money_news_international.rss',
         'menuLabel' => 'CNN : Money',
-        'img'       => 'cnn.digital.png',
+        'img'       => 'cnn-com-logo.png',
     ],
 
 
