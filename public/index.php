@@ -76,13 +76,13 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
             }
         ?>
             <?php if (!empty($feed[WN_DATA_FEED_IMAGE])): ?>
-                <h2 class="<?php echo $tabClass; ?> wn-tab-image" title="<?php echo $feed[WN_DATA_FEED_TITLE]; ?>">
+                <h2 class="<?php echo $tabClass; ?> wn-tab-image" title="<?php echo $feed[WN_DATA_FEED_LABEL]; ?>">
                     <span class="wn-img-bg" style="background-image: url(img/<?php echo $feed[WN_DATA_FEED_IMAGE]; ?>);"></span>
             <?php else: ?>
                 <h2 class="<?php echo $tabClass; ?>">
             <?php endif;?>
                     <span>
-                        <?php echo str_replace(' > ', '&nbsp; > &nbsp;', $feed[WN_DATA_FEED_TITLE]); ?>
+                        <?php echo $feed[WN_DATA_FEED_LABEL]; ?>
                     </span>
                 </h2>
         <?php
@@ -136,7 +136,7 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
                     endif;
                     ?>
                     <span class="wn-link-date">
-                        <?php echo str_replace(' > ', ' &nbsp;⟩&nbsp; ', $feed[WN_DATA_FEED_TITLE]); ?>
+                        <?php echo $feed[WN_DATA_FEED_TITLE]; ?>
                         <?php if (isset($item[WN_DATA_ITEM_PUB_DATE])): ?>
                             &nbsp;•&nbsp;&nbsp;<?php echo $item[WN_DATA_ITEM_PUB_DATE]; ?>
                         <?php endif; ?>
