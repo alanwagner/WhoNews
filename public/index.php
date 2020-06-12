@@ -56,9 +56,9 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
             <span class="wn-header-title-text">WhoNews</span>
         </h1>
         <div class="wn-sub-header-text">Pop Your Info Bubble</div>
-        <a title="Settings" class="wn-settings-btn" onclick="toggleSettings()" href="#settings">
-            <span>Settings</span>
-        </a>
+        <div id="wn-settings-btn" title="Settings" onclick="toggleSettings()">
+            <a href="#settings">Settings</a>
+        </div>
     </div>
 
     <div class="wn-sub-header">

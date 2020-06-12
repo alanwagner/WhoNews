@@ -112,14 +112,13 @@ h1.wn-header-title {
     font-size: 90%;
 }
 
-.wn-settings-btn {
+#wn-settings-btn {
     position: absolute;
     display: block;
     top: 0;
     right: 1px;
     height: calc(var(--top-header-height) - var(--top-header-border-height));
     width: calc( var(--top-header-height) * 1.05 );
-    background-color: var(--top-header-bg-color);
     background-image: url(gears-icon-white.png);
     background-size: 67%;
     background-position: 60% 50%;
@@ -129,12 +128,12 @@ h1.wn-header-title {
     cursor: pointer;
 }
 
-.wn-settings-btn  span {
+#wn-settings-btn  a {
     display: none;
 }
 
-.wn-settings-btn:hover,
-.wn-settings-btn:active {
+#wn-settings-btn:hover,
+.wn-settings-btn-active {
     background-color: #313131;
 }
 
