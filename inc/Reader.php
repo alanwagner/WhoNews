@@ -171,7 +171,12 @@ class Reader
             ) {
                 $attrs = $item->enclosure->attributes();
                 if (isset($attrs['url'])) {
-                    $itemData[WN_DATA_ITEM_IMAGE_URL] = strval($attrs['url']);
+                    //  trim query string from image url
+                    $url = strval($attrs['url']);
+                    if (strstr($url, '?')) {
+                        $url = substr($url, 0, strpos($url, '?'));
+                    }
+                    $itemData[WN_DATA_ITEM_IMAGE_URL] = $url;
                 }
             }
 
