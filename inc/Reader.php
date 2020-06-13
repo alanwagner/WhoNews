@@ -122,8 +122,14 @@ class Reader
                 $description = $description->__toString();
             }
             if (strstr($description, '<')) {
-                //  Clean tags and embedded links
-                $description = strip_tags(substr($description, 0, strpos($description, '<', 13)));
+
+                //  Clean tags and embedded html
+               if (substr($description, 0, 4) === '<h1>') {
+                   $description = substr($description, 4, strpos($description, '</h1>') - 4);
+
+               } else {
+                   $description = substr($description, 0, strpos($description, '<'));
+               }
             }
             //  Eliminate title if also is beginning of description. May result in empty description.
             if (!empty($description) && strpos($description, $title) === 0) {
@@ -145,16 +151,12 @@ class Reader
                 $attrs = $media->group->content->attributes();
                 $itemData[WN_DATA_ITEM_IMAGE_URL] = strval($attrs['url']);
 
-                //print_r($media->group->content->attributes());
-
             } else if (isset($media->content)) {
 
 
                 //  NYT
                 $attrs = $media->content->attributes();
                 $itemData[WN_DATA_ITEM_IMAGE_URL] = strval($attrs['url']);
-
-                //print_r($media->content->attributes());
             }
 
             if (isset($media->thumbnail)) {
@@ -162,6 +164,34 @@ class Reader
                 //  BuzzFeed has only thumbnail
                 $attrs = $media->thumbnail->attributes();
                 $itemData[WN_DATA_ITEM_THUMB_URL] = strval($attrs['url']);
+            }
+
+            if (
+                empty($itemData[WN_DATA_ITEM_IMAGE_URL])
+                && empty($itemData[WN_DATA_ITEM_THUMB_URL])
+            ) {
+
+                if (isset($item->enclosure)) {
+                    //  HuffPost images
+                    $attrs = $item->enclosure->attributes();
+                    if (isset($attrs['url'])) {
+                        $itemData[WN_DATA_ITEM_IMAGE_URL] = strval($attrs['url']);
+                    }
+                } else {
+                    $content = $item->children('content', 'http://purl.org/rss/1.0/modules/content/');
+                    if (!empty($content->encoded)) {
+                        $htmlContent = $content->encoded->__toString();
+
+                        if (preg_match("/^<img[^>]+src=['\"](http[^'\"]+)['\"]/", $htmlContent, $matches)) {
+                        //  NPR images
+                            $itemData[WN_DATA_ITEM_IMAGE_URL] = $matches[1];
+
+                        } else if (preg_match("/<img[^>]+src=\"(https:\/\/www.gannett-cdn.com[^\"]+)\"/", $htmlContent, $matches)) {
+                            //  USA Today images
+                            $itemData[WN_DATA_ITEM_IMAGE_URL] = $matches[1];
+                        }
+                    }
+                }
             }
 
 

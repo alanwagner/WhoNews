@@ -37,13 +37,13 @@ class Template
      */
     public function getPageTitle()
     {
-        $pageTitle = 'WhoNews :: ';
+        $pageTitle = 'WhoNews | ';
 
         if (isset($this->query[WN_KEY_FEED])) {
             foreach ($this->feedData as $idx => $feed) {
-                $pageTitle .= $feed[WN_DATA_FEED_TITLE];
+                $pageTitle .= $feed[WN_DATA_FEED_LABEL];
                 if ($idx !== count($this->feedData) - 1) {
-                    $pageTitle .= ' • ';
+                    $pageTitle .= ' | ';
                 }
             }
         } else {
