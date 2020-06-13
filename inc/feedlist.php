@@ -259,7 +259,39 @@ return [
         'title'     => 'NPR &nbsp;⟩&nbsp; News',
         'url'       => 'https://feeds.npr.org/1001/rss.xml',
         'menuLabel' => 'NPR : News',
-        'img'       => 'npr_generic_image_300.jpg'
+        'img'       => 'npr_generic_image_300.jpg',
+    ],
+
+
+    'politico-politics' => [
+        'title'     => 'Politico &nbsp;⟩&nbsp; Politics News',
+        'url'       => 'https://rss.politico.com/politics-news.xml',
+        'menuLabel' => 'Politico : Politics',
+        'img'       => 'POLITICO_Logo.jpg',
+    ],
+    'politico-economy' => [
+        'title'     => 'Politico &nbsp;⟩&nbsp; Economy',
+        'url'       => 'https://rss.politico.com/economy.xml',
+        'menuLabel' => 'Politico : Economy',
+        'img'       => 'POLITICO_Logo.jpg',
+    ],
+    'politico-playbook' => [
+        'title'     => 'Politico &nbsp;⟩&nbsp; Playbook',
+        'url'       => 'https://rss.politico.com/playbook.xml',
+        'menuLabel' => 'Politico : Playbook',
+        'img'       => 'POLITICO_Logo.jpg',
+    ],
+    'politico-money' => [
+        'title'     => 'Politico &nbsp;⟩&nbsp; Morning Money',
+        'url'       => 'https://rss.politico.com/morningmoney.xml',
+        'menuLabel' => 'Politico : Morning Money',
+        'img'       => 'POLITICO_Logo.jpg',
+    ],
+    'politico-trade' => [
+        'title'     => 'Politico &nbsp;⟩&nbsp; Morning Trade',
+        'url'       => 'https://rss.politico.com/morningtrade.xml',
+        'menuLabel' => 'Politico : Morning Trade',
+        'img'       => 'POLITICO_Logo.jpg',
     ],
 
 
@@ -293,19 +325,6 @@ return [
         'menuLabel' => 'Reuters : Business',
         'img'       => 'reuters-clear.png',
     ],
-
-/*
-    'politico-top' => [
-        'title'     => 'Politico &nbsp;⟩&nbsp; Top Stories',
-        'url'       => 'https://www.politico.com/rss/politicopicks.xml',
-        'menuLabel' => 'Politico : Top Stories',
-    ],
-    'politico-economy' => [
-        'title'     => 'Politico &nbsp;⟩&nbsp; Economy',
-        'url'       => 'https://www.politico.com/rss/economy.xml',
-        'menuLabel' => 'Politico : Economy',
-    ],
-*/
 
 
     'usatoday-top' => [
