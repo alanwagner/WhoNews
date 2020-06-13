@@ -184,7 +184,7 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
 
         <div class="wn-settings-row">
             <label>
-                <span class="label_wide">Description :</span>
+                <span class="label_wide">Lede :</span>
                 <select name="<?php echo WN_KEY_DESCRIPTION; ?>" tabindex="3">
                     <option value="full"  <?php echo ($template->checkQuery(WN_KEY_DESCRIPTION, 'full') ? 'selected="selected"' : ''); ?>>Full</option>
                     <option value="short" <?php echo ($template->checkQuery(WN_KEY_DESCRIPTION, 'short') ? 'selected="selected"' : ''); ?>>Short</option>
@@ -197,11 +197,11 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
             <label>
                 <span class="label_wide">Show :</span>
                 <select name="<?php echo WN_KEY_LIMIT; ?>" tabindex="4">
-                    <option value=""  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '', true) ? 'selected="selected"' : ''); ?>>All stories</option>
-                    <option value="20"  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '20') ? 'selected="selected"' : ''); ?>>First 20 stories</option>
-                    <option value="10"  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '10') ? 'selected="selected"' : ''); ?>>First 10 stories</option>
-                    <option value="5"  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '5') ? 'selected="selected"' : ''); ?>>First 5 stories</option>
                     <option value="1" <?php echo ($template->checkQuery(WN_KEY_LIMIT, '1') ? 'selected="selected"' : ''); ?>>Top story only</option>
+                    <option value="5"  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '5') ? 'selected="selected"' : ''); ?>>First 5 stories</option>
+                    <option value="10"  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '10') ? 'selected="selected"' : ''); ?>>First 10 stories</option>
+                    <option value="20"  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '20') ? 'selected="selected"' : ''); ?>>First 20 stories</option>
+                    <option value=""  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '', true) ? 'selected="selected"' : ''); ?>>All stories</option>
                     </select>
             </label>
         </div>
