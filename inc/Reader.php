@@ -167,16 +167,23 @@ class Reader
             if (
                 empty($itemData[WN_DATA_ITEM_IMAGE_URL])
                 && empty($itemData[WN_DATA_ITEM_THUMB_URL])
-                && isset($item->enclosure)
             ) {
-                $attrs = $item->enclosure->attributes();
-                if (isset($attrs['url'])) {
-                    //  trim query string from image url
-                    $url = strval($attrs['url']);
-                    if (strstr($url, '?')) {
-                        $url = substr($url, 0, strpos($url, '?'));
+
+                if (isset($item->enclosure)) {
+                    //  HuffPost images
+                    $attrs = $item->enclosure->attributes();
+                    if (isset($attrs['url'])) {
+                        $itemData[WN_DATA_ITEM_IMAGE_URL] = strval($attrs['url']);
                     }
-                    $itemData[WN_DATA_ITEM_IMAGE_URL] = $url;
+                } else {
+                    $content = $item->children('content', 'http://purl.org/rss/1.0/modules/content/');
+                    if (!empty($content->encoded)) {
+                        //  NPR images
+                        $htmlContent = $content->encoded->__toString();
+                        if (preg_match("/<img[^>]+src=['\"](http[^'\"]+)['\"]/i", $htmlContent, $matches)) {
+                            $itemData[WN_DATA_ITEM_IMAGE_URL] = $matches[1];
+                        }
+                    }
                 }
             }
 
