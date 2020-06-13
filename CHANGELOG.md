@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.5] - 2020.06.13
+
+Feed Parsing Upgrade Release
+
+### Changed
+
+- Fixed parsing of HuffPost, NPR, USA Today images
+- Improved cleaning of description
+- Changed separators in page title
+- Improved Reuters tab image
+
+
 ## [1.4] - 2020.06.13
 
 Interface and Feed Upgrade Release
