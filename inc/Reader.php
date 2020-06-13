@@ -151,16 +151,12 @@ class Reader
                 $attrs = $media->group->content->attributes();
                 $itemData[WN_DATA_ITEM_IMAGE_URL] = strval($attrs['url']);
 
-                //print_r($media->group->content->attributes());
-
             } else if (isset($media->content)) {
 
 
                 //  NYT
                 $attrs = $media->content->attributes();
                 $itemData[WN_DATA_ITEM_IMAGE_URL] = strval($attrs['url']);
-
-                //print_r($media->content->attributes());
             }
 
             if (isset($media->thumbnail)) {
