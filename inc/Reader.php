@@ -122,8 +122,14 @@ class Reader
                 $description = $description->__toString();
             }
             if (strstr($description, '<')) {
-                //  Clean tags and embedded links
-                $description = strip_tags(substr($description, 0, strpos($description, '<', 13)));
+
+                //  Clean tags and embedded html
+               if (substr($description, 0, 4) === '<h1>') {
+                   $description = substr($description, 4, strpos($description, '</h1>') - 4);
+
+               } else {
+                   $description = substr($description, 0, strpos($description, '<'));
+               }
             }
             //  Eliminate title if also is beginning of description. May result in empty description.
             if (!empty($description) && strpos($description, $title) === 0) {
