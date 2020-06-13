@@ -266,7 +266,7 @@ return [
     'politico-politics' => [
         'title'     => 'Politico &nbsp;⟩&nbsp; Politics News',
         'url'       => 'https://rss.politico.com/politics-news.xml',
-        'menuLabel' => 'Politico : Politics',
+        'menuLabel' => 'Politico : Politics News',
         'img'       => 'POLITICO_Logo.jpg',
     ],
     'politico-economy' => [
