@@ -55,9 +55,8 @@ html, body {
     height: calc(100% - var(--top-header-height) - var(--sub-header-height) - var(--tab-row-height) );
     background-color: var(--links-bg-color);
 
-    /*  sync scroll
-    overflow-y: scroll; */
-    overflow-y: hidden;
+    /*  Sync scroll  */
+    overflow-y: scroll;
 }
 
 
@@ -220,10 +219,8 @@ h1.wn-header-title {
     border-left: 3px solid #444;
     padding: 0;
 
-    /*  sync scroll
-    height: auto;  */
-    height: 100%;
-    overflow-y: scroll;
+    /*  sync scroll  */
+    height: auto;
 }
 
 .wn-links-wrapper.wn-col-left {
@@ -416,12 +413,13 @@ h1.wn-header-title {
 /*****   DISPLAY SETTINGS   *****/
 
 
-.wn-scroll-sync  .wn-tablet-inner {
-    overflow-y: scroll;
+.wn-scroll-free  .wn-tablet-inner {
+    overflow-y: hidden;
 }
 
-.wn-scroll-sync  .wn-links-wrapper {
-    height: auto;
+.wn-scroll-free  .wn-links-wrapper {
+    height: 100%;
+    overflow-y: scroll;
 }
 
 .wn-images-large  .wn-link-image {

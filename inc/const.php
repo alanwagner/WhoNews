@@ -34,7 +34,7 @@ const WN_KEY_CUSTOM = 'custom';
 
 //  Default values for settings form
 
-const WN_DEFAULT_SCROLL = 'free';
+const WN_DEFAULT_SCROLL = 'sync';
 
 const WN_DEFAULT_IMAGES = 'small';
 

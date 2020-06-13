@@ -163,10 +163,10 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
 
         <div class="wn-settings-row">
             <label>
-                <span class="label_wide">Scrolling :</span>
+                <span class="label_wide">Scroll feeds :</span>
                 <select name="<?php echo WN_KEY_SCROLL; ?>" tabindex="1">
-                    <option value="free" <?php echo ($template->checkQuery(WN_KEY_SCROLL, WN_DEFAULT_SCROLL, true) ? 'selected="selected"' : ''); ?>>Free</option>
-                    <option value="sync" <?php echo ($template->checkQuery(WN_KEY_SCROLL, 'sync') ? 'selected="selected"' : ''); ?>>Sync</option>
+                    <option value="sync" <?php echo ($template->checkQuery(WN_KEY_SCROLL, WN_DEFAULT_SCROLL, true) ? 'selected="selected"' : ''); ?>>Together</option>
+                    <option value="free" <?php echo ($template->checkQuery(WN_KEY_SCROLL, 'free') ? 'selected="selected"' : ''); ?>>Independently</option>
                 </select>
             </label>
         </div>
