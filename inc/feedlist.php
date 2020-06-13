@@ -9,6 +9,7 @@
 
 return [
 
+    //  Feeds have no image data
     'bbc-top' => [
         'title'     => 'BBC &nbsp;⟩&nbsp; Top Stories',
         'url'       => 'http://feeds.bbci.co.uk/news/rss.xml',
@@ -144,7 +145,7 @@ return [
         'img'       => 'csm-masthead_232x60.png',
     ],
 
-
+    //  Feeds have no image or description data
     'drudge-report' => [
         'title'     => 'Drudge Report &nbsp;⟩&nbsp; News',
         'url'       => 'https://feeds.feedburner.com/DrudgeReportFeed',
@@ -275,6 +276,7 @@ return [
         'menuLabel' => 'Politico : Economy',
         'img'       => 'POLITICO_Logo.jpg',
     ],
+    //  These Politico feeds have no image data:
     'politico-playbook' => [
         'title'     => 'Politico &nbsp;⟩&nbsp; Playbook',
         'url'       => 'https://rss.politico.com/playbook.xml',
@@ -295,6 +297,7 @@ return [
     ],
 
 
+    //  Feeds have no image data
     'reuters-top' => [
         'title'     => 'Reuters &nbsp;⟩&nbsp; Top Stories',
         'url'       => 'http://feeds.reuters.com/reuters/topNews',
@@ -359,6 +362,7 @@ return [
     ],
 
 
+    //  Only last feed has image data
     'wsj-world' => [
         'title'     => 'WSJ &nbsp;⟩&nbsp; World',
         'url'       => 'https://feeds.a.dj.com/rss/RSSWorldNews.xml',
