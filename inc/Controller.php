@@ -21,7 +21,7 @@ include_once(__DIR__ . '/Reader.php');
 class Controller
 {
     protected static $defaultQueryFeeds = [
-        'cnn-us',
+        'huffpost-us',
         'foxnews-national',
     ];
 
