@@ -184,9 +184,14 @@ class Reader
                 } else {
                     $content = $item->children('content', 'http://purl.org/rss/1.0/modules/content/');
                     if (!empty($content->encoded)) {
-                        //  NPR images
                         $htmlContent = $content->encoded->__toString();
-                        if (preg_match("/<img[^>]+src=['\"](http[^'\"]+)['\"]/i", $htmlContent, $matches)) {
+
+                        if (preg_match("/^<img[^>]+src=['\"](http[^'\"]+)['\"]/", $htmlContent, $matches)) {
+                        //  NPR images
+                            $itemData[WN_DATA_ITEM_IMAGE_URL] = $matches[1];
+
+                        } else if (preg_match("/<img[^>]+src=\"(https:\/\/www.gannett-cdn.com[^\"]+)\"/", $htmlContent, $matches)) {
+                            //  USA Today images
                             $itemData[WN_DATA_ITEM_IMAGE_URL] = $matches[1];
                         }
                     }
