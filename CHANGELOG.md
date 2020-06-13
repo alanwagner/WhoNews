@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+
+## [1.4] - 2020.06.13
+
+Interface and Feed Upgrade Release
+
+### Added
+
+- Added Politico feeds
+
+### Changed
+
+- Removed anchor click from Settings button
+- Changed article title font size
+- Changed CNN logo
+- Use feed label on tab texts / titles
+- Changed arrow in feed title
+- Changed default scrolling to 'sync'
+- Settings: UI & label changes
+
+
 ## [1.3.1] - 2020.06.11
 
 Config Change Release
