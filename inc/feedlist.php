@@ -145,7 +145,7 @@ return [
         'img'       => 'csm-masthead_232x60.png',
     ],
 
-    //  Feeds have no image or description data
+    //  Feed has no image data, and description is all extraneous html
     'drudge-report' => [
         'title'     => 'Drudge Report &nbsp;⟩&nbsp; News',
         'url'       => 'https://feeds.feedburner.com/DrudgeReportFeed',

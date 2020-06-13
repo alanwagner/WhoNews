@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.5.1] - 2020.06.13
+
+Config Change Release
+
+### Changed
+
+- Changed default view to huffpost-us / foxnews-national
+- Tweaked HuffPost logo
+
+
 ## [1.5] - 2020.06.13
 
 Feed Parsing Upgrade Release
