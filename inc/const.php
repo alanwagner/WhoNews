@@ -34,7 +34,7 @@ const WN_KEY_CUSTOM = 'custom';
 
 //  Default values for settings form
 
-const WN_DEFAULT_SCROLL = 'free';
+const WN_DEFAULT_SCROLL = 'sync';
 
 const WN_DEFAULT_IMAGES = 'small';
 
@@ -48,6 +48,8 @@ const WN_DEFAULT_TARGET = 'new';
 //  Keys for array of xml feed data
 
 const WN_DATA_FEED_TITLE = 'title';
+
+const WN_DATA_FEED_LABEL = 'label';
 
 const WN_DATA_FEED_IMAGE = 'image';
 

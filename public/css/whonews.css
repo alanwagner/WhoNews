@@ -55,9 +55,8 @@ html, body {
     height: calc(100% - var(--top-header-height) - var(--sub-header-height) - var(--tab-row-height) );
     background-color: var(--links-bg-color);
 
-    /*  sync scroll
-    overflow-y: scroll; */
-    overflow-y: hidden;
+    /*  Sync scroll  */
+    overflow-y: scroll;
 }
 
 
@@ -112,14 +111,13 @@ h1.wn-header-title {
     font-size: 90%;
 }
 
-.wn-settings-btn {
+#wn-settings-btn {
     position: absolute;
     display: block;
     top: 0;
     right: 1px;
     height: calc(var(--top-header-height) - var(--top-header-border-height));
     width: calc( var(--top-header-height) * 1.05 );
-    background-color: var(--top-header-bg-color);
     background-image: url(gears-icon-white.png);
     background-size: 67%;
     background-position: 60% 50%;
@@ -129,12 +127,12 @@ h1.wn-header-title {
     cursor: pointer;
 }
 
-.wn-settings-btn  span {
+#wn-settings-btn  a {
     display: none;
 }
 
-.wn-settings-btn:hover,
-.wn-settings-btn:active {
+#wn-settings-btn:hover,
+.wn-settings-btn-active {
     background-color: #313131;
 }
 
@@ -221,10 +219,8 @@ h1.wn-header-title {
     border-left: 3px solid #444;
     padding: 0;
 
-    /*  sync scroll
-    height: auto;  */
-    height: 100%;
-    overflow-y: scroll;
+    /*  sync scroll  */
+    height: auto;
 }
 
 .wn-links-wrapper.wn-col-left {
@@ -286,7 +282,7 @@ h1.wn-header-title {
     width: 100%;
     height: auto;
 
-    font-size: 150%;
+    font-size: 175%;
     line-height: 125%;
     font-weight: 500;
 }
@@ -417,12 +413,13 @@ h1.wn-header-title {
 /*****   DISPLAY SETTINGS   *****/
 
 
-.wn-scroll-sync  .wn-tablet-inner {
-    overflow-y: scroll;
+.wn-scroll-free  .wn-tablet-inner {
+    overflow-y: hidden;
 }
 
-.wn-scroll-sync  .wn-links-wrapper {
-    height: auto;
+.wn-scroll-free  .wn-links-wrapper {
+    height: 100%;
+    overflow-y: scroll;
 }
 
 .wn-images-large  .wn-link-image {

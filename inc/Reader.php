@@ -24,11 +24,12 @@ class Reader
      *
      * @param string $url
      * @param string $title
+     * @param string $label
      * @param string $image
      * @param int $limit
      * @return array
      */
-    public function getChannelData($url, $title=null, $image=null, $limit=null) {
+    public function getChannelData($url, $title=null, $label=null, $image=null, $limit=null) {
         $data = [];
         $content = null;
 
@@ -56,6 +57,9 @@ class Reader
             if (!empty($title)) {
                 $data[WN_DATA_FEED_TITLE] = $title;
             }
+            if (!empty($label)) {
+                $data[WN_DATA_FEED_LABEL] = $label;
+            }
         }
 
         return $data;
@@ -78,6 +82,7 @@ class Reader
         $channel = $xml->channel;
 
         $data[WN_DATA_FEED_TITLE] = $channel->title;
+        $data[WN_DATA_FEED_LABEL] = $channel->title;
         $data[WN_DATA_FEED_ITEMS] = [];
 
         foreach($channel->item as $item) {

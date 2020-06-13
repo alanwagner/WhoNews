@@ -56,9 +56,9 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
             <span class="wn-header-title-text">WhoNews</span>
         </h1>
         <div class="wn-sub-header-text">Pop Your Info Bubble</div>
-        <a title="Settings" class="wn-settings-btn" onclick="toggleSettings()" href="#settings">
-            <span>Settings</span>
-        </a>
+        <div id="wn-settings-btn" title="Settings" onclick="toggleSettings()">
+            <a href="#settings">Settings</a>
+        </div>
     </div>
 
     <div class="wn-sub-header">
@@ -76,13 +76,13 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
             }
         ?>
             <?php if (!empty($feed[WN_DATA_FEED_IMAGE])): ?>
-                <h2 class="<?php echo $tabClass; ?> wn-tab-image" title="<?php echo $feed[WN_DATA_FEED_TITLE]; ?>">
+                <h2 class="<?php echo $tabClass; ?> wn-tab-image" title="<?php echo $feed[WN_DATA_FEED_LABEL]; ?>">
                     <span class="wn-img-bg" style="background-image: url(img/<?php echo $feed[WN_DATA_FEED_IMAGE]; ?>);"></span>
             <?php else: ?>
                 <h2 class="<?php echo $tabClass; ?>">
             <?php endif;?>
                     <span>
-                        <?php echo str_replace(' > ', '&nbsp; > &nbsp;', $feed[WN_DATA_FEED_TITLE]); ?>
+                        <?php echo $feed[WN_DATA_FEED_LABEL]; ?>
                     </span>
                 </h2>
         <?php
@@ -136,7 +136,7 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
                     endif;
                     ?>
                     <span class="wn-link-date">
-                        <?php echo $feed[WN_DATA_FEED_TITLE] ?>
+                        <?php echo $feed[WN_DATA_FEED_TITLE]; ?>
                         <?php if (isset($item[WN_DATA_ITEM_PUB_DATE])): ?>
                             &nbsp;•&nbsp;&nbsp;<?php echo $item[WN_DATA_ITEM_PUB_DATE]; ?>
                         <?php endif; ?>
@@ -163,10 +163,10 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
 
         <div class="wn-settings-row">
             <label>
-                <span class="label_wide">Scrolling :</span>
+                <span class="label_wide">Scroll feeds :</span>
                 <select name="<?php echo WN_KEY_SCROLL; ?>" tabindex="1">
-                    <option value="free" <?php echo ($template->checkQuery(WN_KEY_SCROLL, WN_DEFAULT_SCROLL, true) ? 'selected="selected"' : ''); ?>>Free</option>
-                    <option value="sync" <?php echo ($template->checkQuery(WN_KEY_SCROLL, 'sync') ? 'selected="selected"' : ''); ?>>Sync</option>
+                    <option value="sync" <?php echo ($template->checkQuery(WN_KEY_SCROLL, WN_DEFAULT_SCROLL, true) ? 'selected="selected"' : ''); ?>>Together</option>
+                    <option value="free" <?php echo ($template->checkQuery(WN_KEY_SCROLL, 'free') ? 'selected="selected"' : ''); ?>>Independently</option>
                 </select>
             </label>
         </div>
@@ -184,7 +184,7 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
 
         <div class="wn-settings-row">
             <label>
-                <span class="label_wide">Description :</span>
+                <span class="label_wide">Lede :</span>
                 <select name="<?php echo WN_KEY_DESCRIPTION; ?>" tabindex="3">
                     <option value="full"  <?php echo ($template->checkQuery(WN_KEY_DESCRIPTION, 'full') ? 'selected="selected"' : ''); ?>>Full</option>
                     <option value="short" <?php echo ($template->checkQuery(WN_KEY_DESCRIPTION, 'short') ? 'selected="selected"' : ''); ?>>Short</option>
@@ -197,11 +197,11 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
             <label>
                 <span class="label_wide">Show :</span>
                 <select name="<?php echo WN_KEY_LIMIT; ?>" tabindex="4">
-                    <option value=""  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '', true) ? 'selected="selected"' : ''); ?>>All stories</option>
-                    <option value="20"  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '20') ? 'selected="selected"' : ''); ?>>First 20 stories</option>
-                    <option value="10"  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '10') ? 'selected="selected"' : ''); ?>>First 10 stories</option>
-                    <option value="5"  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '5') ? 'selected="selected"' : ''); ?>>First 5 stories</option>
                     <option value="1" <?php echo ($template->checkQuery(WN_KEY_LIMIT, '1') ? 'selected="selected"' : ''); ?>>Top story only</option>
+                    <option value="5"  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '5') ? 'selected="selected"' : ''); ?>>First 5 stories</option>
+                    <option value="10"  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '10') ? 'selected="selected"' : ''); ?>>First 10 stories</option>
+                    <option value="20"  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '20') ? 'selected="selected"' : ''); ?>>First 20 stories</option>
+                    <option value=""  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '', true) ? 'selected="selected"' : ''); ?>>All stories</option>
                     </select>
             </label>
         </div>
