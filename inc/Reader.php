@@ -164,6 +164,17 @@ class Reader
                 $itemData[WN_DATA_ITEM_THUMB_URL] = strval($attrs['url']);
             }
 
+            if (
+                empty($itemData[WN_DATA_ITEM_IMAGE_URL])
+                && empty($itemData[WN_DATA_ITEM_THUMB_URL])
+                && isset($item->enclosure)
+            ) {
+                $attrs = $item->enclosure->attributes();
+                if (isset($attrs['url'])) {
+                    $itemData[WN_DATA_ITEM_IMAGE_URL] = strval($attrs['url']);
+                }
+            }
+
 
             $data[WN_DATA_FEED_ITEMS][] = $itemData;
 
