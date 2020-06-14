@@ -37,7 +37,7 @@ class Template
      */
     public function getPageTitle()
     {
-        $pageTitle = 'WhoNews | ';
+        $pageTitle = 'WhoNews Beta | ';
 
         if (isset($this->query[WN_KEY_FEED])) {
             foreach ($this->feedData as $idx => $feed) {
