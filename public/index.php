@@ -53,7 +53,7 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
     <div class="wn-top-header clearfix">
         <h1 class="wn-header-title">
             <span class="wn-header-title-img"></span>
-            <span class="wn-header-title-text">WhoNews</span>
+            <span class="wn-header-title-text">WhoNews Beta</span>
         </h1>
         <div class="wn-sub-header-text">Pop Your Info Bubble</div>
         <div id="wn-settings-btn" title="Settings" onclick="toggleSettings()">
