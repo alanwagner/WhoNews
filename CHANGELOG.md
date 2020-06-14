@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.6] - 2020.06.14
+
+**WhoNews Beta** - Public Release
+
+### Changed
+
+- Changed logo and branding to "WhoNews Beta"
+- Changed default view to huffpost-us / csm-usa / foxnews-national
+
+
 ## [1.5.1] - 2020.06.13
 
 Config Change Release
