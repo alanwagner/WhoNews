@@ -187,31 +187,31 @@ return [
 
 
     'huffpost-breaking' => [
-        'title'     => 'HuffPost &nbsp;⟩&nbsp; Breaking',
+        'title'     => 'Huff Post &nbsp;⟩&nbsp; Breaking',
         'url'       => 'https://www.huffpost.com/section/front-page/feed',
         'menuLabel' => 'Huffington Post : Breaking News',
         'img'       => 'huffpost-logo-1.png',
     ],
     'huffpost-us' => [
-        'title'     => 'HuffPost &nbsp;⟩&nbsp; U.S.',
+        'title'     => 'Huff Post &nbsp;⟩&nbsp; U.S.',
         'url'       => 'https://www.huffpost.com/section/us-news/feed',
         'menuLabel' => 'Huffington Post : U.S.',
         'img'       => 'huffpost-logo-1.png',
     ],
     'huffpost-world' => [
-        'title'     => 'HuffPost &nbsp;⟩&nbsp; World',
+        'title'     => 'Huff Post &nbsp;⟩&nbsp; World',
         'url'       => 'https://www.huffpost.com/section/world-news/feed',
         'menuLabel' => 'Huffington Post : World',
         'img'       => 'huffpost-logo-1.png',
     ],
     'huffpost-politics' => [
-        'title'     => 'HuffPost &nbsp;⟩&nbsp; U.S. Politics',
+        'title'     => 'Huff Post &nbsp;⟩&nbsp; U.S. Politics',
         'url'       => 'https://www.huffpost.com/section/politics/feed',
         'menuLabel' => 'Huffington Post : U.S. Politics',
         'img'       => 'huffpost-logo-1.png',
     ],
     'huffpost-business' => [
-        'title'     => 'HuffPost &nbsp;⟩&nbsp; Business',
+        'title'     => 'Huff Post &nbsp;⟩&nbsp; Business',
         'url'       => 'https://www.huffpost.com/section/business/feed',
         'menuLabel' => 'Huffington Post : Business',
         'img'       => 'huffpost-logo-1.png',
