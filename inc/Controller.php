@@ -22,6 +22,7 @@ class Controller
 {
     protected static $defaultQueryFeeds = [
         'huffpost-us',
+        'csm-usa',
         'foxnews-national',
     ];
 
