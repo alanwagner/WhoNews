@@ -48,7 +48,7 @@ WhoNews follows no ideology or agenda; it is free, open-source, and does not use
 </head>
 <body>
 
-<div class="<?php echo $template->getWrapperClass(); ?>">
+<div class="wn-tablet-outer <?php echo $template->getWrapperClass(); ?>">
 
     <div class="wn-top-header clearfix">
         <h1 class="wn-header-title">
@@ -64,42 +64,14 @@ WhoNews follows no ideology or agenda; it is free, open-source, and does not use
     <div class="wn-sub-header">
     </div>
 
-    <div class="wn-tabs clearfix">
-        <?php
-        foreach($template->feedData as $idx => $feed):
-            $tabClass = 'wn-col wn-tab';
-            if ($idx === 0) {
-                $tabClass .= ' wn-col-left';
-            }
-            if ($idx === count($template->feedData) -1) {
-                $tabClass .= ' wn-col-right';
-            }
-        ?>
-            <?php if (!empty($feed[WN_DATA_FEED_IMAGE])): ?>
-                <h2 class="<?php echo $tabClass; ?> wn-tab-image" title="<?php echo $feed[WN_DATA_FEED_LABEL]; ?>">
-                    <span class="wn-img-bg" style="background-image: url(img/<?php echo $feed[WN_DATA_FEED_IMAGE]; ?>);"></span>
-            <?php else: ?>
-                <h2 class="<?php echo $tabClass; ?>">
-            <?php endif;?>
-                    <span>
-                        <?php echo $feed[WN_DATA_FEED_LABEL]; ?>
-                    </span>
-                    <a class="wn-link-rss" href="<?php echo $feed[WN_DATA_FEED_URL]; ?>" title="RSS Link"><span>RSS Link</span></a>
-                </h2>
-        <?php
-        endforeach;
-        ?>
-    </div>
 
-
-
-
-  <div class="wn-tablet-inner clearfix">
+    <div class="wn-tablet-inner clearfix">
 
 
     <?php
     foreach($template->feedData as $idx => $feed):
-        $colClass = 'wn-col wn-links-wrapper';
+
+        $colClass = '';
         if ($idx === 0) {
             $colClass .= ' wn-col-left';
         }
@@ -107,54 +79,81 @@ WhoNews follows no ideology or agenda; it is free, open-source, and does not use
             $colClass .= ' wn-col-right';
         }
     ?>
-        <div class="<?php echo $colClass; ?>">
-        <?php
-        foreach($feed[WN_DATA_FEED_ITEMS] as $item):
-            $imgUrl = null;
-            if (!empty($item[WN_DATA_ITEM_IMAGE_URL])) {
-                $imgUrl = $item[WN_DATA_ITEM_IMAGE_URL];
-            } else if (!empty($item[WN_DATA_ITEM_THUMB_URL])) {
-                $imgUrl = $item[WN_DATA_ITEM_THUMB_URL];
-            }
-        ?>
-            <a href="<?php echo $item[WN_DATA_ITEM_HREF]; ?>" class="wn-link-block" <?php echo $template->getTarget(); ?>>
+        <div class="wn-tab wn-col <?php echo $colClass; ?>" id="wn-tab-<?php echo ($idx + 1); ?>">
+
+        <?php if (!empty($feed[WN_DATA_FEED_IMAGE])): ?>
+          <h2 class="wn-tab-image" title="<?php echo $feed[WN_DATA_FEED_LABEL]; ?>">
+            <span class="wn-img-bg" style="background-image: url(img/<?php echo $feed[WN_DATA_FEED_IMAGE]; ?>);"></span>
+        <?php else: ?>
+          <h2 class="wn-tab-text">
+        <?php endif;?>
+            <span>
+                <?php echo $feed[WN_DATA_FEED_LABEL]; ?>
+            </span>
+          </h2>
+
+          <a class="wn-link-rss" href="<?php echo $feed[WN_DATA_FEED_URL]; ?>" title="RSS Link"><span>RSS Link</span></a>
+        </div><!-- .wn-tab -->
+
+        <div class="wn-links-wrapper wn-col <?php echo $colClass; ?>">
+            <ul>
+            <?php
+            foreach($feed[WN_DATA_FEED_ITEMS] as $item):
+                $imgUrl = null;
+                if (!empty($item[WN_DATA_ITEM_IMAGE_URL])) {
+                    $imgUrl = $item[WN_DATA_ITEM_IMAGE_URL];
+                } else if (!empty($item[WN_DATA_ITEM_THUMB_URL])) {
+                    $imgUrl = $item[WN_DATA_ITEM_THUMB_URL];
+                }
+            ?>
+                <li class="wn-item">
+
                 <?php
                 if (!empty($imgUrl)):
                 ?>
-                <span class="wn-link-image">
-                    <img src="<?php echo $imgUrl ?>" />
-                </span>
+                    <div class="wn-item-image">
+                        <img src="<?php echo $imgUrl ?>" />
+                    </div>
                 <?php
                 endif;
                 ?>
-                <span class="wn-link-text">
-                    <span class="wn-link-title"><?php echo $item[WN_DATA_ITEM_TITLE] ?></span>
+                    <div class="wn-item-text">
+                      <div class="wn-item-title">
+                        <a href="<?php echo $item[WN_DATA_ITEM_HREF]; ?>" class="wn-item-link" <?php echo $template->getTarget(); ?>>
+                          <span><?php echo $item[WN_DATA_ITEM_TITLE] ?></span>
+                        </a>
+                      </div>
+
                     <?php
                     if (!empty($item[WN_DATA_ITEM_DESCRIPTION])):
                     ?>
-                        <span class="wn-link-description"><?php echo $template->formatDescription($item[WN_DATA_ITEM_DESCRIPTION]); ?></span>
+                      <div class="wn-item-description">
+                          <?php echo $template->formatDescription($item[WN_DATA_ITEM_DESCRIPTION]); ?>
+                      </div>
                     <?php
                     endif;
                     ?>
-                    <span class="wn-link-date">
+
+                      <div class="wn-item-date">
                         <?php echo $feed[WN_DATA_FEED_TITLE]; ?>
                         <?php if (isset($item[WN_DATA_ITEM_PUB_DATE])): ?>
                             &nbsp;•&nbsp;&nbsp;<?php echo $item[WN_DATA_ITEM_PUB_DATE]; ?>
                         <?php endif; ?>
-                    </span>
-                </span><!-- .wn-link-text -->
-            </a>
+                      </div>
 
-        <?php
-        endforeach;
-        ?>
+                    </div><!-- .wn-item-text -->
+                </li>
+            <?php
+            endforeach;
+            ?>
+            </ul>
         </div><!-- .wn-links-wrapper -->
 
     <?php
     endforeach;
     ?>
 
-  </div><!-- .tablet-inner -->
+    </div><!-- .tablet-inner -->
 
 
   <a name="settings" id="wn-settings-anchor"></a>

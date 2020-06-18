@@ -60,7 +60,7 @@ class Template
      */
     public function getWrapperClass()
     {
-        $wrapperClass = 'wn-tablet-outer wn-cols-' . count($this->feedData);
+        $wrapperClass = 'wn-cols-' . count($this->feedData);
 
         if (isset($this->query[WN_KEY_SCROLL]) && $this->query[WN_KEY_SCROLL] === 'free') {
             //  Default is scroll-sync
