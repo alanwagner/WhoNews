@@ -127,7 +127,7 @@ class Controller
      */
     public function getFeedData($queryFeeds, $limit = null)
     {
-        $feedList = include(__DIR__ . '/feedlist.php');
+        $feedList = Feeds::$list;
 
         $reader = new Reader();
         $feedData = [];

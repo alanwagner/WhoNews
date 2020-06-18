@@ -149,7 +149,7 @@ class Template
      */
     public function displayCustom($idx)
     {
-        $feedList = include(__DIR__ . '/feedlist.php');
+        $feedList = Feeds::$list;
 
         //  If feed is filled in, then it's custom only if it's not on the list
 
