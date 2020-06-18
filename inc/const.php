@@ -47,6 +47,8 @@ const WN_DEFAULT_TARGET = 'new';
 
 //  Keys for array of xml feed data
 
+const WN_DATA_FEED_URL = 'url';
+
 const WN_DATA_FEED_TITLE = 'title';
 
 const WN_DATA_FEED_LABEL = 'label';
