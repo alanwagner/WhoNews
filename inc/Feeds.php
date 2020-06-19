@@ -294,7 +294,7 @@ class Feeds
 
         'politico-politics' => [
             'title'     => 'Politico &nbsp;⟩&nbsp; Politics News',
-            'url'       => 'https://rss.politico.com/politics-news.xml',
+            'url'       => 'https://rss.politico.com/politics.xml',
             'menuLabel' => 'Politico : Politics News',
             'img'       => 'POLITICO_Logo.jpg',
         ],
