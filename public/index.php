@@ -85,7 +85,7 @@ WhoNews follows no ideology or agenda; it is free, open-source, and does not use
               </div>
               <ul>
                 <li><a class="wn-column-anchor" href="#wn-column-<?php echo $idx; ?>">anchor</a></li>
-                <li><a class="wn-link-rss" href="<?php echo $feed[WN_DATA_FEED_URL]; ?>" title="RSS Link"><span>RSS Link</span></a></li>
+                <li><a class="wn-link-rss" href="<?php echo $feed[WN_DATA_FEED_URL]; ?>" title="RSS Link" <?php echo $template->getTarget(); ?>><span>RSS Link</span></a></li>
               </ul>
             </div><!-- .wn-tab -->
 
