@@ -73,6 +73,7 @@ class Template
                 case 'large':
                     $wrapperClass .= ' wn-images-large';
                     break;
+                //  This case is technically superfluous, since the image tags themselves won't be created
                 case 'none':
                     $wrapperClass .= ' wn-images-hide';
                     break;
@@ -174,5 +175,45 @@ class Template
         }
 
         return false;
+    }
+
+    /**
+     * Get url for item's image, if it has one
+     * Returns false if item does not have an image
+     * Returns null if user settings have images-none
+     *
+     * @param array $item
+     * @return string|false|null
+     */
+    public function getItemImageUrl($item)
+    {
+        if ($this->displayImages() === false) {
+            return null;
+        }
+
+        $imgUrl = false;
+        if (!empty($item[WN_DATA_ITEM_IMAGE_URL])) {
+            $imgUrl = $item[WN_DATA_ITEM_IMAGE_URL];
+        } else if (!empty($item[WN_DATA_ITEM_THUMB_URL])) {
+            $imgUrl = $item[WN_DATA_ITEM_THUMB_URL];
+        }
+
+        return $imgUrl;
+    }
+
+    /**
+     * Should we display images, based on the user's settings?
+     *
+     * @return boolean
+     */
+    public function displayImages()
+    {
+        //  Default is images-small
+        if (isset($this->query[WN_KEY_IMAGES]) && $this->query[WN_KEY_IMAGES] === 'none') {
+
+            return false;
+        }
+
+        return true;
     }
 }

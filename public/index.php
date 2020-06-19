@@ -99,17 +99,11 @@ WhoNews follows no ideology or agenda; it is free, open-source, and does not use
             <ul>
             <?php
             foreach($feed[WN_DATA_FEED_ITEMS] as $item):
-                $imgUrl = null;
-                if (!empty($item[WN_DATA_ITEM_IMAGE_URL])) {
-                    $imgUrl = $item[WN_DATA_ITEM_IMAGE_URL];
-                } else if (!empty($item[WN_DATA_ITEM_THUMB_URL])) {
-                    $imgUrl = $item[WN_DATA_ITEM_THUMB_URL];
-                }
             ?>
                 <li class="wn-item">
 
                 <?php
-                if (!empty($imgUrl)):
+                if ($imgUrl = $template->getItemImageUrl($item)):
                 ?>
                     <div class="wn-item-image">
                         <img src="<?php echo $imgUrl ?>" />

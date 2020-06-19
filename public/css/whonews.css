@@ -481,6 +481,7 @@ h1.wn-header-title {
     margin-right: 0;
 }
 
+/**  This case is technically superfluous, since the image tags themselves won't be created  **/
 .wn-images-hide  .wn-item-image {
     display: none;
 }
