@@ -53,6 +53,7 @@ class Reader
         if (is_string($content)) {
 
             $data = $this->parseChannelContent($content, $limit);
+            $data[WN_DATA_FEED_URL] = $url;
             $data[WN_DATA_FEED_IMAGE] = $image;
             if (!empty($title)) {
                 $data[WN_DATA_FEED_TITLE] = $title;

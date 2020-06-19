@@ -20,12 +20,6 @@ include_once(__DIR__ . '/Reader.php');
  */
 class Controller
 {
-    protected static $defaultQueryFeeds = [
-        'huffpost-us',
-        'csm-usa',
-        'foxnews-national',
-    ];
-
     /**
      * Generate to shortest possible (canonical) URL, from request query (raw Settings form submission)
      * Returns null if query is already optimal
@@ -114,7 +108,7 @@ class Controller
             return $query[WN_KEY_FEED];
         }
 
-        return self::$defaultQueryFeeds;
+        return Feeds::$defaultFeeds;
     }
 
     /**
@@ -127,7 +121,7 @@ class Controller
      */
     public function getFeedData($queryFeeds, $limit = null)
     {
-        $feedList = include(__DIR__ . '/feedlist.php');
+        $feedList = Feeds::$list;
 
         $reader = new Reader();
         $feedData = [];

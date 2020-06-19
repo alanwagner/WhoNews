@@ -60,7 +60,7 @@ class Template
      */
     public function getWrapperClass()
     {
-        $wrapperClass = 'wn-tablet-outer wn-cols-' . count($this->feedData);
+        $wrapperClass = 'wn-cols-' . count($this->feedData);
 
         if (isset($this->query[WN_KEY_SCROLL]) && $this->query[WN_KEY_SCROLL] === 'free') {
             //  Default is scroll-sync
@@ -73,6 +73,7 @@ class Template
                 case 'large':
                     $wrapperClass .= ' wn-images-large';
                     break;
+                //  This case is technically superfluous, since the image tags themselves won't be created
                 case 'none':
                     $wrapperClass .= ' wn-images-hide';
                     break;
@@ -149,7 +150,7 @@ class Template
      */
     public function displayCustom($idx)
     {
-        $feedList = include(__DIR__ . '/feedlist.php');
+        $feedList = Feeds::$list;
 
         //  If feed is filled in, then it's custom only if it's not on the list
 
@@ -174,5 +175,64 @@ class Template
         }
 
         return false;
+    }
+
+    /**
+     * Get column classes for css (wn-col-left, wn-col-right)
+     *
+     * @param int $idx
+     * @return string
+     */
+    public function getColumnClass($idx)
+    {
+        $colClass = '';
+        if ($idx === 0) {
+            $colClass .= ' wn-col-left';
+        }
+        if ($idx === count($this->feedData) -1) {
+            $colClass .= ' wn-col-right';
+        }
+
+        return $colClass;
+    }
+
+    /**
+     * Get url for item's image, if it has one
+     * Returns false if item does not have an image
+     * Returns null if user settings have images-none
+     *
+     * @param array $item
+     * @return string|false|null
+     */
+    public function getItemImageUrl($item)
+    {
+        if ($this->displayImages() === false) {
+            return null;
+        }
+
+        $imgUrl = false;
+        if (!empty($item[WN_DATA_ITEM_IMAGE_URL])) {
+            $imgUrl = $item[WN_DATA_ITEM_IMAGE_URL];
+        } else if (!empty($item[WN_DATA_ITEM_THUMB_URL])) {
+            $imgUrl = $item[WN_DATA_ITEM_THUMB_URL];
+        }
+
+        return $imgUrl;
+    }
+
+    /**
+     * Should we display images, based on the user's settings?
+     *
+     * @return boolean
+     */
+    public function displayImages()
+    {
+        //  Default is images-small
+        if (isset($this->query[WN_KEY_IMAGES]) && $this->query[WN_KEY_IMAGES] === 'none') {
+
+            return false;
+        }
+
+        return true;
     }
 }

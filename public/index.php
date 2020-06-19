@@ -8,13 +8,11 @@
  */
 
 include_once (__DIR__ . '/../inc/const.php');
-
+include_once (__DIR__ . '/../inc/Feeds.php');
 include_once (__DIR__ . '/../inc/Controller.php');
-
 include_once (__DIR__ . '/../inc/Template.php');
 
-
-$feedList = include(__DIR__ . '/../inc/feedlist.php');
+$feedList = Feeds::$list;
 
 $controller = new Controller();
 $template = new Template();
@@ -39,7 +37,9 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
 <head>
 <meta charset="UTF-8">
 <title><?php echo $template->getPageTitle(); ?></title>
-<meta name="description" content="WhoNews.org is an online newsfeed viewer which allows users to compare multiple news sources by displaying them side-by-side. WhoNews follows no ideology or agenda; it is free, open-source, and does not use cookies, trackers or ads of any kind.">
+<meta name="description" content="WhoNews.org is an online newsfeed viewer which allows users to compare multiple news sources by displaying them side-by-side.
+It currently offers <?php echo Feeds::countFeeds(); ?> feeds from <?php echo Feeds::countSources(); ?> sources.
+WhoNews follows no ideology or agenda; it is free, open-source, and does not use cookies, trackers, or ads of any kind.">
 
 <link href="css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
 <link href="css/bootstrap-theme.css" media="screen" rel="stylesheet" type="text/css" />
@@ -48,7 +48,7 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
 </head>
 <body>
 
-<div class="<?php echo $template->getWrapperClass(); ?>">
+<div class="wn-tablet-outer <?php echo $template->getWrapperClass(); ?>">
 
     <div class="wn-top-header clearfix">
         <h1 class="wn-header-title">
@@ -64,96 +64,100 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
     <div class="wn-sub-header">
     </div>
 
-    <div class="wn-tabs clearfix">
+
+    <div class="wn-tablet-inner clearfix">
+
+        <nav class="wn-tabs clearfix">
         <?php
         foreach($template->feedData as $idx => $feed):
-            $tabClass = 'wn-col wn-tab';
-            if ($idx === 0) {
-                $tabClass .= ' wn-col-left';
-            }
-            if ($idx === count($template->feedData) -1) {
-                $tabClass .= ' wn-col-right';
-            }
         ?>
+            <div class="wn-tab wn-col <?php echo $template->getColumnClass($idx); ?>">
+
             <?php if (!empty($feed[WN_DATA_FEED_IMAGE])): ?>
-                <h2 class="<?php echo $tabClass; ?> wn-tab-image" title="<?php echo $feed[WN_DATA_FEED_LABEL]; ?>">
-                    <span class="wn-img-bg" style="background-image: url(img/<?php echo $feed[WN_DATA_FEED_IMAGE]; ?>);"></span>
+              <div class="wn-tab-image" title="<?php echo $feed[WN_DATA_FEED_LABEL]; ?>">
+                <span class="wn-img-bg" style="background-image: url(img/<?php echo $feed[WN_DATA_FEED_IMAGE]; ?>);"></span>
             <?php else: ?>
-                <h2 class="<?php echo $tabClass; ?>">
+              <div class="wn-tab-text">
             <?php endif;?>
-                    <span>
-                        <?php echo $feed[WN_DATA_FEED_LABEL]; ?>
-                    </span>
-                </h2>
+                <span>
+                    <?php echo $feed[WN_DATA_FEED_LABEL]; ?>
+                </span>
+              </div>
+              <ul>
+                <li><a class="wn-column-anchor" href="#wn-column-<?php echo $idx; ?>">anchor</a></li>
+                <li><a class="wn-link-rss" href="<?php echo $feed[WN_DATA_FEED_URL]; ?>" title="RSS Link" <?php echo $template->getTarget(); ?>><span>RSS Link</span></a></li>
+              </ul>
+            </div><!-- .wn-tab -->
+
         <?php
         endforeach;
         ?>
-    </div>
-
-
-
-
-  <div class="wn-tablet-inner clearfix">
-
+        </nav>
 
     <?php
     foreach($template->feedData as $idx => $feed):
-        $colClass = 'wn-col wn-links-wrapper';
-        if ($idx === 0) {
-            $colClass .= ' wn-col-left';
-        }
-        if ($idx === count($template->feedData) -1) {
-            $colClass .= ' wn-col-right';
-        }
     ?>
-        <div class="<?php echo $colClass; ?>">
-        <?php
-        foreach($feed[WN_DATA_FEED_ITEMS] as $item):
-            $imgUrl = null;
-            if (!empty($item[WN_DATA_ITEM_IMAGE_URL])) {
-                $imgUrl = $item[WN_DATA_ITEM_IMAGE_URL];
-            } else if (!empty($item[WN_DATA_ITEM_THUMB_URL])) {
-                $imgUrl = $item[WN_DATA_ITEM_THUMB_URL];
-            }
-        ?>
-            <a href="<?php echo $item[WN_DATA_ITEM_HREF]; ?>" class="wn-link-block" <?php echo $template->getTarget(); ?>>
+
+        <div class="wn-links-wrapper wn-col <?php echo $template->getColumnClass($idx); ?>">
+
+            <h2 class="wn-column-title">
+                <a name="wn-column-<?php echo $idx; ?>">
+                    <?php echo $feed[WN_DATA_FEED_LABEL]; ?>
+                </a>
+            </h2>
+
+            <ul>
+            <?php
+            foreach($feed[WN_DATA_FEED_ITEMS] as $item):
+            ?>
+                <li class="wn-item">
+
                 <?php
-                if (!empty($imgUrl)):
+                if ($imgUrl = $template->getItemImageUrl($item)):
                 ?>
-                <span class="wn-link-image">
-                    <img src="<?php echo $imgUrl ?>" />
-                </span>
+                    <div class="wn-item-image">
+                        <img src="<?php echo $imgUrl ?>" />
+                    </div>
                 <?php
                 endif;
                 ?>
-                <span class="wn-link-text">
-                    <span class="wn-link-title"><?php echo $item[WN_DATA_ITEM_TITLE] ?></span>
+                    <div class="wn-item-text">
+                      <div class="wn-item-title">
+                        <a href="<?php echo $item[WN_DATA_ITEM_HREF]; ?>" class="wn-item-link" <?php echo $template->getTarget(); ?>>
+                          <span><?php echo $item[WN_DATA_ITEM_TITLE] ?></span>
+                        </a>
+                      </div>
+
                     <?php
                     if (!empty($item[WN_DATA_ITEM_DESCRIPTION])):
                     ?>
-                        <span class="wn-link-description"><?php echo $template->formatDescription($item[WN_DATA_ITEM_DESCRIPTION]); ?></span>
+                      <div class="wn-item-description">
+                          <?php echo $template->formatDescription($item[WN_DATA_ITEM_DESCRIPTION]); ?>
+                      </div>
                     <?php
                     endif;
                     ?>
-                    <span class="wn-link-date">
+
+                      <div class="wn-item-date">
                         <?php echo $feed[WN_DATA_FEED_TITLE]; ?>
                         <?php if (isset($item[WN_DATA_ITEM_PUB_DATE])): ?>
                             &nbsp;•&nbsp;&nbsp;<?php echo $item[WN_DATA_ITEM_PUB_DATE]; ?>
                         <?php endif; ?>
-                    </span>
-                </span><!-- .wn-link-text -->
-            </a>
+                      </div>
 
-        <?php
-        endforeach;
-        ?>
+                    </div><!-- .wn-item-text -->
+                </li>
+            <?php
+            endforeach;
+            ?>
+            </ul>
         </div><!-- .wn-links-wrapper -->
 
     <?php
     endforeach;
     ?>
 
-  </div><!-- .tablet-inner -->
+    </div><!-- .tablet-inner -->
 
 
   <a name="settings" id="wn-settings-anchor"></a>

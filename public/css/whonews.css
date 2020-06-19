@@ -21,7 +21,6 @@
     --sub-header-height: 9px;
 
     --tab-row-height: 6rem;
-    --tab-row-bg-color: white;
 
     --settings-panel-width: 40rem;
 
@@ -47,12 +46,13 @@ html, body {
     height: 100%;
     margin: 0;
     border: 2px solid #444;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .wn-tablet-inner {
-    position: relative;
-    height: calc(100% - var(--top-header-height) - var(--sub-header-height) - var(--tab-row-height) );
+/*  MUST NOT HAVE POSITION, FOR TAB PLACEMENT TO WORK  */
+/*    position: relative;  */
+    height: calc(100% - var(--top-header-height) - var(--sub-header-height) );
     background-color: var(--links-bg-color);
 
     /*  Sync scroll  */
@@ -155,47 +155,90 @@ h1.wn-header-title {
 
 
 
-/*****   TABS   *****/
+
+/*****   COLUMNS   *****/
 
 
-.wn-tabs {
-    font-size: 120%;
-}
-
-.wn-tab {
-    position: relative;
-    float: left;
+.wn-col {
+    width: 100%;
     border-right: 3px solid #444;
     border-left: 3px solid #444;
-    border-bottom: 3px solid gray;
-
-    height: var(--tab-row-height);
-    background-color: var(--tab-row-bg-color);
-    text-align: center;
-    font-weight: 600;
-    font-size: inherit;
-    margin: 0;
-    padding: 10px 0px 0px;
 }
 
-.wn-tab.wn-col-left {
+.wn-col.wn-col-left {
     border-left-width: 1px;
 }
 
-.wn-tab.wn-col-right {
+.wn-col.wn-col-right {
     border-right-width: 1px;
 }
 
 
-.wn-tab.wn-tab-image {
-    padding: 7px 20px;
+.wn-cols-2  .wn-col {
+    width: 50%;
 }
 
-.wn-tab.wn-tab-image  span {
-    display: none;
+.wn-cols-3  .wn-col {
+    width: 33.33333%;
 }
 
-.wn-tab.wn-tab-image  span.wn-img-bg {
+.wn-cols-4  .wn-col {
+    width: 25%;
+}
+
+.wn-cols-5  .wn-col {
+    width: 20%;
+}
+
+
+
+
+
+/*****   TABS   *****/
+
+.wn-tabs {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+	z-index: 100;
+	width: 100%;
+    height: var(--tab-row-height);
+    background-color: var(--links-bg-color);
+}
+
+
+.wn-tab {
+    position: relative;
+    float: left;
+    height: var(--tab-row-height);
+    border-bottom: 3px solid gray;
+    margin: 0;
+    padding: 0 20px;
+}
+
+.wn-tab  .wn-tab-text {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    background-color: var(--links-bg-color);
+    padding: 10px 0;
+    margin: 0;
+    text-align: center;
+    font-weight: 600;
+    font-size: 150%;
+    line-height: 2rem;
+}
+
+.wn-tab  .wn-tab-image {
+	position: relative;
+    height: 100%;
+    width: 100%;
+    background-color: var(--links-bg-color);
+    padding: 7px 0;
+    margin: 0;
+}
+
+.wn-tab  .wn-tab-image  span.wn-img-bg {
     display: block;
     position: relative;
     height: 100%;
@@ -206,32 +249,77 @@ h1.wn-header-title {
 }
 
 
+.wn-tab  ul {
+/*  MUST NOT HAVE POSITION, FOR RSS LINK PLACEMENT  */
+/*    position: relative;  */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    height: 0;
+    line-height: 0;
+}
+
+.wn-tab  ul  li {
+/*  MUST NOT HAVE POSITION, FOR RSS LINK PLACEMENT  */
+/*    position: relative;  */
+    padding: 0;
+    margin: 0;
+    height: 0;
+    line-height: 0;
+}
+
+
+.wn-tab  a.wn-link-rss {
+    display: block;
+    position: absolute;
+    left: 3px;
+    bottom: 3px;
+    height: 12px;
+    width: 12px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url(rss.png);
+}
+
+.wn-tab  .wn-tab-image  span,
+.wn-tab  .wn-link-rss  span,
+.wn-tab  .wn-column-anchor {
+    display: none;
+}
 
 
 
-/*****   LINKS   *****/
+
+
+/*****   ITEMS LIST   *****/
 
 
 .wn-links-wrapper {
     position: relative;
     float: left;
-    border-right: 3px solid #444;
-    border-left: 3px solid #444;
     padding: 0;
 
     /*  sync scroll  */
     height: auto;
 }
 
-.wn-links-wrapper.wn-col-left {
-    border-left-width: 1px;
+
+.wn-links-wrapper  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-.wn-links-wrapper.wn-col-right {
-    border-right-width: 1px;
+.wn-column-title {
+	display: none;
 }
 
-.wn-link-block {
+
+/**  ITEM BLOCK  **/
+
+
+.wn-item {
     position: relative;
     display: block;
     width: 100%;
@@ -243,14 +331,12 @@ h1.wn-header-title {
     cursor: pointer;
 }
 
-.wn-link-block:hover,
-.wn-link-block:active {
-    text-decoration: none;
-    color: #111;
+.wn-item:hover,
+.wn-item:active {
     background-color: #f8ffff;
 }
 
-.wn-link-image {
+.wn-item-image {
     position: relative;
     display: block;
     height: auto;
@@ -263,21 +349,23 @@ h1.wn-header-title {
     margin-right: 1.5rem;
 }
 
-.wn-link-image  img {
+.wn-item-image  img {
     position: relative;
     width: 100%;
     height: auto;
 }
 
-.wn-link-text {
-    position: relative;
+.wn-item-text {
+/*  MUST NOT HAVE POSITION, FOR LINK TO COVER BLOCK  */
+/*    position: relative;  */
     display: block;
     width: 100%;
     height: auto;
 }
 
-.wn-link-title {
-    position: relative;
+.wn-item-title {
+/*  MUST NOT HAVE POSITION, FOR LINK TO COVER BLOCK  */
+/*    position: relative;  */
     display: block;
     width: 100%;
     height: auto;
@@ -287,7 +375,24 @@ h1.wn-header-title {
     font-weight: 500;
 }
 
-.wn-link-date {
+.wn-item-title  a,
+.wn-item-title  a:hover,
+.wn-item-title  a:active {
+    text-decoration: none;
+    color: #111;
+}
+
+.wn-item-title  a:before {
+    content:'';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 5;
+}
+
+.wn-item-date {
     position: relative;
     display: block;
     clear: left;
@@ -300,7 +405,7 @@ h1.wn-header-title {
     color: #585858;
 }
 
-.wn-link-description {
+.wn-item-description {
     position: relative;
     display: none;
     clear: left;
@@ -418,49 +523,25 @@ h1.wn-header-title {
 }
 
 .wn-scroll-free  .wn-links-wrapper {
-    height: 100%;
+    height: calc( 100% - var(--tab-row-height) );
     overflow-y: scroll;
 }
 
-.wn-images-large  .wn-link-image {
+.wn-images-large  .wn-item-image {
     width: 100%;
     float: none;
     margin-bottom: 1rem;
     margin-right: 0;
 }
 
-.wn-images-hide  .wn-link-image {
+/**  This case is technically superfluous, since the image tags themselves won't be created  **/
+.wn-images-hide  .wn-item-image {
     display: none;
 }
 
-.wn-description-full  .wn-link-description,
-.wn-description-short  .wn-link-description {
+.wn-description-full  .wn-item-description,
+.wn-description-short  .wn-item-description {
     display: block;
 }
 
-
-
-
-
-/*****   COLUMN WIDTHS   *****/
-
-.wn-col {
-    width: 100%;
-}
-
-.wn-cols-2  .wn-col {
-    width: 50%;
-}
-
-.wn-cols-3  .wn-col {
-    width: 33.33333%;
-}
-
-.wn-cols-4  .wn-col {
-    width: 25%;
-}
-
-.wn-cols-5  .wn-col {
-    width: 20%;
-}
 
