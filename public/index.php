@@ -67,35 +67,45 @@ WhoNews follows no ideology or agenda; it is free, open-source, and does not use
 
     <div class="wn-tablet-inner clearfix">
 
+        <nav class="wn-tabs clearfix">
+        <?php
+        foreach($template->feedData as $idx => $feed):
+        ?>
+            <div class="wn-tab wn-col <?php echo $template->getColumnClass($idx); ?>">
+
+            <?php if (!empty($feed[WN_DATA_FEED_IMAGE])): ?>
+              <div class="wn-tab-image" title="<?php echo $feed[WN_DATA_FEED_LABEL]; ?>">
+                <span class="wn-img-bg" style="background-image: url(img/<?php echo $feed[WN_DATA_FEED_IMAGE]; ?>);"></span>
+            <?php else: ?>
+              <div class="wn-tab-text">
+            <?php endif;?>
+                <span>
+                    <?php echo $feed[WN_DATA_FEED_LABEL]; ?>
+                </span>
+              </div>
+              <ul>
+                <li><a class="wn-column-anchor" href="#wn-column-<?php echo $idx; ?>">anchor</a></li>
+                <li><a class="wn-link-rss" href="<?php echo $feed[WN_DATA_FEED_URL]; ?>" title="RSS Link"><span>RSS Link</span></a></li>
+              </ul>
+            </div><!-- .wn-tab -->
+
+        <?php
+        endforeach;
+        ?>
+        </nav>
 
     <?php
     foreach($template->feedData as $idx => $feed):
-
-        $colClass = '';
-        if ($idx === 0) {
-            $colClass .= ' wn-col-left';
-        }
-        if ($idx === count($template->feedData) -1) {
-            $colClass .= ' wn-col-right';
-        }
     ?>
-        <div class="wn-tab wn-col <?php echo $colClass; ?>" id="wn-tab-<?php echo ($idx + 1); ?>">
 
-        <?php if (!empty($feed[WN_DATA_FEED_IMAGE])): ?>
-          <h2 class="wn-tab-image" title="<?php echo $feed[WN_DATA_FEED_LABEL]; ?>">
-            <span class="wn-img-bg" style="background-image: url(img/<?php echo $feed[WN_DATA_FEED_IMAGE]; ?>);"></span>
-        <?php else: ?>
-          <h2 class="wn-tab-text">
-        <?php endif;?>
-            <span>
-                <?php echo $feed[WN_DATA_FEED_LABEL]; ?>
-            </span>
-          </h2>
+        <div class="wn-links-wrapper wn-col <?php echo $template->getColumnClass($idx); ?>">
 
-          <a class="wn-link-rss" href="<?php echo $feed[WN_DATA_FEED_URL]; ?>" title="RSS Link"><span>RSS Link</span></a>
-        </div><!-- .wn-tab -->
+            <h2 class="wn-column-title">
+                <a name="wn-column-<?php echo $idx; ?>">
+                    <?php echo $feed[WN_DATA_FEED_LABEL]; ?>
+                </a>
+            </h2>
 
-        <div class="wn-links-wrapper wn-col <?php echo $colClass; ?>">
             <ul>
             <?php
             foreach($feed[WN_DATA_FEED_ITEMS] as $item):

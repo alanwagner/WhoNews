@@ -178,6 +178,25 @@ class Template
     }
 
     /**
+     * Get column classes for css (wn-col-left, wn-col-right)
+     *
+     * @param int $idx
+     * @return string
+     */
+    public function getColumnClass($idx)
+    {
+        $colClass = '';
+        if ($idx === 0) {
+            $colClass .= ' wn-col-left';
+        }
+        if ($idx === count($this->feedData) -1) {
+            $colClass .= ' wn-col-right';
+        }
+
+        return $colClass;
+    }
+
+    /**
      * Get url for item's image, if it has one
      * Returns false if item does not have an image
      * Returns null if user settings have images-none
