@@ -37,6 +37,16 @@ class Feeds
      */
     public static $list = [
 
+
+        //  Feed has no image data
+        'aljazeera-english' => [
+            'title'     => 'Al Jazeera &nbsp;⟩&nbsp; English',
+            'url'       => 'https://www.aljazeera.com/xml/rss/all.xml',
+            'menuLabel' => 'Al Jazeera : English',
+            'img'       => 'aljazeera_banner_large.jpg',
+        ],
+
+
         //  Feeds have no image data
         'bbc-top' => [
             'title'     => 'BBC &nbsp;⟩&nbsp; Top Stories',
@@ -325,6 +335,8 @@ class Feeds
         ],
 
 
+/**  REUTERS FEEDS NOT WORKING  **/
+/*
         //  Feeds have no image data
         'reuters-top' => [
             'title'     => 'Reuters &nbsp;⟩&nbsp; Top Stories',
@@ -356,7 +368,7 @@ class Feeds
             'menuLabel' => 'Reuters : Business',
             'img'       => 'reuters-clear.png',
         ],
-
+*/
 
         'usatoday-top' => [
             'title'     => 'USA Today &nbsp;⟩&nbsp; Top Stories',
