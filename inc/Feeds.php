@@ -19,6 +19,22 @@
  */
 class Feeds
 {
+    /**
+     * The default feeds to display, if none are indicated in the url
+     *
+     * @var array
+     */
+    public static $defaultFeeds = [
+        'huffpost-us',
+        'csm-usa',
+        'foxnews-national',
+    ];
+
+    /**
+     * The full list of feeds and their individual data
+     *
+     * @var array
+     */
     public static $list = [
 
         //  Feeds have no image data
