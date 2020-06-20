@@ -34,6 +34,7 @@ class Controller
         //  Unset default values
 
         $defaults = [
+            WN_KEY_FILTER      => '',
             WN_KEY_SCROLL      => WN_DEFAULT_SCROLL,
             WN_KEY_IMAGES      => WN_DEFAULT_IMAGES,
             WN_KEY_DESCRIPTION => WN_DEFAULT_DESCRIPTION,
