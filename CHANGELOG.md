@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.8] - 2020.06.20
+
+Functionality Upgrade Release
+
+### Added
+
+- Added keyword filter to user Settings
+
+### Changed
+
+- Tech: Refactored Reader methods
+
+
 ## [1.7] - 2020.06.19
 
 **Public Beta** - Interface, Accessibility, and Feeds Upgrade Release
