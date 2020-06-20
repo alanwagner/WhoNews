@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.8.1] - 2020.06.20
+
+Functionality Upgrade Release
+
+### Added
+
+- Added ability to search multiple keywords
+
+### Changed
+
+- Changed order of elements in Settings form
+
+
 ## [1.8] - 2020.06.20
 
 Functionality Upgrade Release
