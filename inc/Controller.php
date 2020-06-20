@@ -34,6 +34,7 @@ class Controller
         //  Unset default values
 
         $defaults = [
+            WN_KEY_FILTER      => '',
             WN_KEY_SCROLL      => WN_DEFAULT_SCROLL,
             WN_KEY_IMAGES      => WN_DEFAULT_IMAGES,
             WN_KEY_DESCRIPTION => WN_DEFAULT_DESCRIPTION,
@@ -117,9 +118,10 @@ class Controller
      *
      * @param array $queryFeeds
      * @param int|null $limit
+     * @param string|null $filter
      * @return array
      */
-    public function getFeedData($queryFeeds, $limit = null)
+    public function getFeedData($queryFeeds, $limit = null, $filter = null)
     {
         $feedList = Feeds::$list;
 
@@ -141,7 +143,20 @@ class Controller
                 $feedUrl = $url;
             }
 
-            $feedData[] = $reader->getChannelData($feedUrl, $title, $label, $image, $limit);
+            $data = $reader->getChannelData($feedUrl, $limit, $filter);
+
+            $data[WN_DATA_FEED_URL] = $feedUrl;
+            $data[WN_DATA_FEED_IMAGE] = $image;
+
+            //  Override the feed's own title, if not a custom feed
+            if (!empty($title)) {
+                $data[WN_DATA_FEED_TITLE] = $title;
+            }
+            if (!empty($label)) {
+                $data[WN_DATA_FEED_LABEL] = $label;
+            }
+
+            $feedData[] = $data;
         }
 
         return $feedData;

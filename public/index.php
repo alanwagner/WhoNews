@@ -27,8 +27,10 @@ if ($url !== null) {
 $template->query = $_GET;
 $template->queryFeeds = $controller->getQueryFeeds($_GET);
 
-$limit = isset($_GET['limit']) ? $_GET['limit'] : null;
-$template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
+$limit = isset($_GET[WN_KEY_LIMIT]) ? $_GET[WN_KEY_LIMIT] : null;
+$filter = isset($_GET[WN_KEY_FILTER]) ? $_GET[WN_KEY_FILTER] : null;
+
+$template->feedData = $controller->getFeedData($template->queryFeeds, $limit, $filter);
 
 
 ?>
@@ -37,8 +39,8 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
 <head>
 <meta charset="UTF-8">
 <title><?php echo $template->getPageTitle(); ?></title>
-<meta name="description" content="WhoNews.org is an online newsfeed viewer which allows users to compare multiple news sources by displaying them side-by-side.
-It currently offers <?php echo Feeds::countFeeds(); ?> feeds from <?php echo Feeds::countSources(); ?> sources.
+<meta name="description" content="WhoNews.org is an online newsfeed viewer which allows users to compare multiple news sources by displaying them side-by-side. 
+It currently offers <?php echo Feeds::countFeeds(); ?> feeds from <?php echo Feeds::countSources(); ?> sources. 
 WhoNews follows no ideology or agenda; it is free, open-source, and does not use cookies, trackers, or ads of any kind.">
 
 <link href="css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
@@ -71,7 +73,7 @@ WhoNews follows no ideology or agenda; it is free, open-source, and does not use
         <?php
         foreach($template->feedData as $idx => $feed):
         ?>
-            <div class="wn-tab wn-col <?php echo $template->getColumnClass($idx); ?>">
+            <div class="wn-tab wn-col wn-col-border <?php echo $template->getColumnClass($idx); ?>">
 
             <?php if (!empty($feed[WN_DATA_FEED_IMAGE])): ?>
               <div class="wn-tab-image" title="<?php echo $feed[WN_DATA_FEED_LABEL]; ?>">
@@ -98,7 +100,7 @@ WhoNews follows no ideology or agenda; it is free, open-source, and does not use
     foreach($template->feedData as $idx => $feed):
     ?>
 
-        <div class="wn-links-wrapper wn-col <?php echo $template->getColumnClass($idx); ?>">
+        <div class="wn-links-wrapper wn-col">
 
             <h2 class="wn-column-title">
                 <a name="wn-column-<?php echo $idx; ?>">
@@ -106,7 +108,7 @@ WhoNews follows no ideology or agenda; it is free, open-source, and does not use
                 </a>
             </h2>
 
-            <ul>
+            <ul class="wn-col-border <?php echo $template->getColumnClass($idx); ?>">
             <?php
             foreach($feed[WN_DATA_FEED_ITEMS] as $item):
             ?>
@@ -167,6 +169,13 @@ WhoNews follows no ideology or agenda; it is free, open-source, and does not use
 
         <div class="wn-settings-row">
             <label>
+                <span class="label_wide">Filter stories :</span>
+                <input type=text name="<?php echo WN_KEY_FILTER; ?>" value="<?php echo $template->getFilterString(); ?>" tabindex="1" placeholder="Enter keyword" />
+            </label>
+        </div>
+
+        <div class="wn-settings-row">
+            <label>
                 <span class="label_wide">Scroll feeds :</span>
                 <select name="<?php echo WN_KEY_SCROLL; ?>" tabindex="1">
                     <option value="sync" <?php echo ($template->checkQuery(WN_KEY_SCROLL, WN_DEFAULT_SCROLL, true) ? 'selected="selected"' : ''); ?>>Together</option>
@@ -178,7 +187,7 @@ WhoNews follows no ideology or agenda; it is free, open-source, and does not use
         <div class="wn-settings-row">
             <label>
                 <span class="label_wide">Images :</span>
-                <select name="<?php echo WN_KEY_IMAGES; ?>" tabindex="2">
+                <select name="<?php echo WN_KEY_IMAGES; ?>" tabindex="1">
                     <option value="large" <?php echo ($template->checkQuery(WN_KEY_IMAGES, 'large') ? 'selected="selected"' : ''); ?>>Large</option>
                     <option value="small" <?php echo ($template->checkQuery(WN_KEY_IMAGES, WN_DEFAULT_IMAGES, true) ? 'selected="selected"' : ''); ?>>Small</option>
                     <option value="none"  <?php echo ($template->checkQuery(WN_KEY_IMAGES, 'none') ? 'selected="selected"' : ''); ?>>None</option>
@@ -189,7 +198,7 @@ WhoNews follows no ideology or agenda; it is free, open-source, and does not use
         <div class="wn-settings-row">
             <label>
                 <span class="label_wide">Lede :</span>
-                <select name="<?php echo WN_KEY_DESCRIPTION; ?>" tabindex="3">
+                <select name="<?php echo WN_KEY_DESCRIPTION; ?>" tabindex="1">
                     <option value="full"  <?php echo ($template->checkQuery(WN_KEY_DESCRIPTION, 'full') ? 'selected="selected"' : ''); ?>>Full</option>
                     <option value="short" <?php echo ($template->checkQuery(WN_KEY_DESCRIPTION, 'short') ? 'selected="selected"' : ''); ?>>Short</option>
                     <option value="none"  <?php echo ($template->checkQuery(WN_KEY_DESCRIPTION, WN_DEFAULT_DESCRIPTION, true) ? 'selected="selected"' : ''); ?>>None</option>
@@ -200,7 +209,7 @@ WhoNews follows no ideology or agenda; it is free, open-source, and does not use
         <div class="wn-settings-row">
             <label>
                 <span class="label_wide">Show :</span>
-                <select name="<?php echo WN_KEY_LIMIT; ?>" tabindex="4">
+                <select name="<?php echo WN_KEY_LIMIT; ?>" tabindex="1">
                     <option value="1" <?php echo ($template->checkQuery(WN_KEY_LIMIT, '1') ? 'selected="selected"' : ''); ?>>Top story only</option>
                     <option value="5"  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '5') ? 'selected="selected"' : ''); ?>>First 5 stories</option>
                     <option value="10"  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '10') ? 'selected="selected"' : ''); ?>>First 10 stories</option>
@@ -213,7 +222,7 @@ WhoNews follows no ideology or agenda; it is free, open-source, and does not use
         <div class="wn-settings-row">
             <label>
                 <span class="label_wide">Open links in :</span>
-                <select name="<?php echo WN_KEY_TARGET; ?>" tabindex="5">
+                <select name="<?php echo WN_KEY_TARGET; ?>" tabindex="1">
                     <option value="new"  <?php echo ($template->checkQuery(WN_KEY_TARGET, WN_DEFAULT_TARGET, true) ? 'selected="selected"' : ''); ?>>New tab</option>
                     <option value="same" <?php echo ($template->checkQuery(WN_KEY_TARGET, 'same') ? 'selected="selected"' : ''); ?>>Current tab</option>
                 </select>
@@ -230,7 +239,7 @@ WhoNews follows no ideology or agenda; it is free, open-source, and does not use
             <div class="wn-settings-row">
                 <label>
                     <span><?php echo ($i+1); ?> :&nbsp;</span>
-                    <select name="<?php echo sprintf('%s[%d]', WN_KEY_FEED, $i); ?>" onchange="toggleCustomInput('wn-input-custom-<?php echo $i; ?>', this.options[this.selectedIndex].value)" tabindex="<?php echo($i+6); ?>">
+                    <select name="<?php echo sprintf('%s[%d]', WN_KEY_FEED, $i); ?>" onchange="toggleCustomInput('wn-input-custom-<?php echo $i; ?>', this.options[this.selectedIndex].value)" tabindex="2">
                         <option value=""></option>
                         <option value="custom" <?php echo ($template->displayCustom($i) ? 'selected="selected"' : '');?>>Custom...</option>
                         <?php
@@ -258,7 +267,7 @@ WhoNews follows no ideology or agenda; it is free, open-source, and does not use
 
 
         <div class="wn-settings-row text-center">
-            <button id="wn-settings-submit-btn" type="submit" class="btn btn-success btn-sm" title="Apply" tabindex="<?php echo(WN_MAX_FEEDS + 6); ?>">Apply</button>
+            <button id="wn-settings-submit-btn" type="submit" class="btn btn-success btn-sm" title="Apply" tabindex="3">Apply</button>
         </div>
 
     </form>

@@ -235,4 +235,19 @@ class Template
 
         return true;
     }
+
+    /**
+     * Get form-safe filter string
+     *
+     * @return string
+     */
+    public function getFilterString()
+    {
+        $filter = '';
+        if (isset($this->query[WN_KEY_FILTER])) {
+            $filter = htmlspecialchars($this->query[WN_KEY_FILTER], ENT_QUOTES);
+        }
+
+        return $filter;
+    }
 }

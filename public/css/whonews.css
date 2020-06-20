@@ -159,20 +159,23 @@ h1.wn-header-title {
 /*****   COLUMNS   *****/
 
 
-.wn-col {
-    width: 100%;
+.wn-col-border {
     border-right: 3px solid #444;
     border-left: 3px solid #444;
 }
 
-.wn-col.wn-col-left {
+.wn-col-border.wn-col-left {
     border-left-width: 1px;
 }
 
-.wn-col.wn-col-right {
+.wn-col-border.wn-col-right {
     border-right-width: 1px;
 }
 
+
+.wn-col {
+    width: 100%;
+}
 
 .wn-cols-2  .wn-col {
     width: 50%;
@@ -299,6 +302,7 @@ h1.wn-header-title {
     position: relative;
     float: left;
     padding: 0;
+    min-height: 10px;
 
     /*  sync scroll  */
     height: auto;
@@ -423,16 +427,6 @@ h1.wn-header-title {
 /*****   SETTINGS FORM   *****/
 
 
-#wn-settings-wrapper {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    z-index: 1000;
-    width: auto;
-    height: auto;
-    overflow: visible;
-}
-
 #wn-settings-anchor {
     position: absolute;
     top: 0px;
@@ -451,6 +445,8 @@ h1.wn-header-title {
     box-shadow: -3px 4px 10px 1px #c0c0c0;
     width: var(--settings-panel-width);
     height: auto;
+    max-height: calc(100% - var(--top-header-height) - var(--sub-header-height) );
+    overflow-y: scroll;
     transition: right 0.5s;
 }
 
