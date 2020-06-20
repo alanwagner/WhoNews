@@ -170,7 +170,7 @@ WhoNews follows no ideology or agenda; it is free, open-source, and does not use
         <div class="wn-settings-row">
             <label>
                 <span class="label_wide">Filter stories :</span>
-                <input type=text name="<?php echo WN_KEY_FILTER; ?>" value="<?php echo $template->getFilterString(); ?>" tabindex="1" placeholder="Enter keyword" />
+                <input type=text name="<?php echo WN_KEY_FILTER; ?>" value="<?php echo $template->getFilterString(); ?>" tabindex="1" placeholder="Enter keywords" />
             </label>
         </div>
 
@@ -181,6 +181,19 @@ WhoNews follows no ideology or agenda; it is free, open-source, and does not use
                     <option value="sync" <?php echo ($template->checkQuery(WN_KEY_SCROLL, WN_DEFAULT_SCROLL, true) ? 'selected="selected"' : ''); ?>>Together</option>
                     <option value="free" <?php echo ($template->checkQuery(WN_KEY_SCROLL, 'free') ? 'selected="selected"' : ''); ?>>Independently</option>
                 </select>
+            </label>
+        </div>
+
+        <div class="wn-settings-row">
+            <label>
+                <span class="label_wide">Show :</span>
+                <select name="<?php echo WN_KEY_LIMIT; ?>" tabindex="1">
+                    <option value="1" <?php echo ($template->checkQuery(WN_KEY_LIMIT, '1') ? 'selected="selected"' : ''); ?>>Top story only</option>
+                    <option value="5"  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '5') ? 'selected="selected"' : ''); ?>>First 5 stories</option>
+                    <option value="10"  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '10') ? 'selected="selected"' : ''); ?>>First 10 stories</option>
+                    <option value="20"  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '20') ? 'selected="selected"' : ''); ?>>First 20 stories</option>
+                    <option value=""  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '', true) ? 'selected="selected"' : ''); ?>>All stories</option>
+                    </select>
             </label>
         </div>
 
@@ -203,19 +216,6 @@ WhoNews follows no ideology or agenda; it is free, open-source, and does not use
                     <option value="short" <?php echo ($template->checkQuery(WN_KEY_DESCRIPTION, 'short') ? 'selected="selected"' : ''); ?>>Short</option>
                     <option value="none"  <?php echo ($template->checkQuery(WN_KEY_DESCRIPTION, WN_DEFAULT_DESCRIPTION, true) ? 'selected="selected"' : ''); ?>>None</option>
                 </select>
-            </label>
-        </div>
-
-        <div class="wn-settings-row">
-            <label>
-                <span class="label_wide">Show :</span>
-                <select name="<?php echo WN_KEY_LIMIT; ?>" tabindex="1">
-                    <option value="1" <?php echo ($template->checkQuery(WN_KEY_LIMIT, '1') ? 'selected="selected"' : ''); ?>>Top story only</option>
-                    <option value="5"  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '5') ? 'selected="selected"' : ''); ?>>First 5 stories</option>
-                    <option value="10"  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '10') ? 'selected="selected"' : ''); ?>>First 10 stories</option>
-                    <option value="20"  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '20') ? 'selected="selected"' : ''); ?>>First 20 stories</option>
-                    <option value=""  <?php echo ($template->checkQuery(WN_KEY_LIMIT, '', true) ? 'selected="selected"' : ''); ?>>All stories</option>
-                    </select>
             </label>
         </div>
 

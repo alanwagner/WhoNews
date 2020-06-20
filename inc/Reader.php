@@ -131,7 +131,9 @@ class Reader
 
 
             if ($filter !== null) {
-                $regex = sprintf('/%s/i', str_replace('/', '\/', $filter));
+                $filters = explode(' ', $filter);
+                $filters = join('|', array_filter($filters));
+                $regex = sprintf('/%s/i', str_replace('/', '\/', $filters));
                 if (preg_match($regex, $itemData[WN_DATA_ITEM_TITLE]) !== 1
                     && preg_match($regex, $itemData[WN_DATA_ITEM_DESCRIPTION]) !== 1
                 ) {
