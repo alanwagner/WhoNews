@@ -427,16 +427,6 @@ h1.wn-header-title {
 /*****   SETTINGS FORM   *****/
 
 
-#wn-settings-wrapper {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    z-index: 1000;
-    width: auto;
-    height: auto;
-    overflow: visible;
-}
-
 #wn-settings-anchor {
     position: absolute;
     top: 0px;
@@ -455,6 +445,8 @@ h1.wn-header-title {
     box-shadow: -3px 4px 10px 1px #c0c0c0;
     width: var(--settings-panel-width);
     height: auto;
+    max-height: calc(100% - var(--top-header-height) - var(--sub-header-height) );
+    overflow-y: scroll;
     transition: right 0.5s;
 }
 
