@@ -23,13 +23,11 @@ class Reader
      * Read XML feed data from url and return parsed as php array
      *
      * @param string $url
-     * @param string $title
-     * @param string $label
-     * @param string $image
      * @param int $limit
+     * @param string $filter
      * @return array
      */
-    public function getChannelData($url, $title=null, $label=null, $image=null, $limit=null) {
+    public function getChannelData($url, $limit = null, $filter = null) {
         $data = [];
         $content = null;
 
@@ -52,15 +50,7 @@ class Reader
 
         if (is_string($content)) {
 
-            $data = $this->parseChannelContent($content, $limit);
-            $data[WN_DATA_FEED_URL] = $url;
-            $data[WN_DATA_FEED_IMAGE] = $image;
-            if (!empty($title)) {
-                $data[WN_DATA_FEED_TITLE] = $title;
-            }
-            if (!empty($label)) {
-                $data[WN_DATA_FEED_LABEL] = $label;
-            }
+            $data = $this->parseChannelContent($content, $limit, $filter);
         }
 
         return $data;
@@ -75,9 +65,10 @@ class Reader
      *
      * @param string $content
      * @param int $limit
+     * @param string $filter
      * @return array
      */
-    protected function parseChannelContent($content, $limit=null)
+    protected function parseChannelContent($content, $limit = null, $filter = null)
     {
         $xml=simplexml_load_string($content);
         $channel = $xml->channel;
@@ -137,6 +128,17 @@ class Reader
                 $description = str_replace($title, '', $description);
             }
             $itemData[WN_DATA_ITEM_DESCRIPTION] = $description;
+
+
+            if ($filter !== null) {
+                $regex = sprintf('/%s/i', str_replace('/', '\/', $filter));
+                if (preg_match($regex, $itemData[WN_DATA_ITEM_TITLE]) !== 1
+                    && preg_match($regex, $itemData[WN_DATA_ITEM_DESCRIPTION]) !== 1
+                ) {
+                    continue;
+                }
+            }
+
 
             $pubTime = strtotime($item->pubDate);
             if ($pubTime > 1000000000) {

@@ -117,9 +117,10 @@ class Controller
      *
      * @param array $queryFeeds
      * @param int|null $limit
+     * @param string|null $filter
      * @return array
      */
-    public function getFeedData($queryFeeds, $limit = null)
+    public function getFeedData($queryFeeds, $limit = null, $filter = null)
     {
         $feedList = Feeds::$list;
 
@@ -141,7 +142,20 @@ class Controller
                 $feedUrl = $url;
             }
 
-            $feedData[] = $reader->getChannelData($feedUrl, $title, $label, $image, $limit);
+            $data = $reader->getChannelData($feedUrl, $limit, $filter);
+
+            $data[WN_DATA_FEED_URL] = $feedUrl;
+            $data[WN_DATA_FEED_IMAGE] = $image;
+
+            //  Override the feed's own title, if not a custom feed
+            if (!empty($title)) {
+                $data[WN_DATA_FEED_TITLE] = $title;
+            }
+            if (!empty($label)) {
+                $data[WN_DATA_FEED_LABEL] = $label;
+            }
+
+            $feedData[] = $data;
         }
 
         return $feedData;

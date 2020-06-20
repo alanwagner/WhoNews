@@ -27,8 +27,10 @@ if ($url !== null) {
 $template->query = $_GET;
 $template->queryFeeds = $controller->getQueryFeeds($_GET);
 
-$limit = isset($_GET['limit']) ? $_GET['limit'] : null;
-$template->feedData = $controller->getFeedData($template->queryFeeds, $limit);
+$limit = isset($_GET[WN_KEY_LIMIT]) ? $_GET[WN_KEY_LIMIT] : null;
+$filter = isset($_GET[WN_KEY_FILTER]) ? $_GET[WN_KEY_FILTER] : null;
+
+$template->feedData = $controller->getFeedData($template->queryFeeds, $limit, $filter);
 
 
 ?>

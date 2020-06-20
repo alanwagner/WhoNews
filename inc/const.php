@@ -17,6 +17,8 @@ const WN_MAX_FEEDS = 5;
 
 //  Keys for settings form & url
 
+const WN_KEY_FILTER = 'filter';
+
 const WN_KEY_SCROLL = 'scroll';
 
 const WN_KEY_IMAGES = 'images';
