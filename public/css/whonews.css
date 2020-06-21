@@ -76,11 +76,12 @@ html, body {
 }
 
 h1.wn-header-title {
-    position: relative;
-    float: left;
+    position: absolute;
+    top: 11px;
+    left: 12px;
     height: 4.2rem;
     width: 32rem;
-    margin: 6px 0 0;
+    margin: 0;
     padding: 0;
     background-image: linear-gradient(#ffffb0, gold);
 }
