@@ -294,10 +294,14 @@ h1.wn-header-title {
     bottom: 3px;
     height: 12px;
     width: 12px;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
-    background-position: center center;
+    background-position: center top;
     background-image: url(rss.png);
+}
+
+.wn-tab  a.wn-link-rss:hover {
+    background-position: center bottom;
 }
 
 .wn-tab  .wn-tab-image  span,
