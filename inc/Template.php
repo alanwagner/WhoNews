@@ -41,7 +41,7 @@ class Template
 
         if (isset($this->query[WN_KEY_FEED])) {
             foreach ($this->feedData as $idx => $feed) {
-                $pageTitle .= $feed[WN_DATA_FEED_LABEL];
+                $pageTitle .= self::formatFeedLabel($feed);
                 if ($idx !== count($this->feedData) - 1) {
                     $pageTitle .= ' | ';
                 }
@@ -115,7 +115,7 @@ class Template
     /**
      * Format description
      *
-     * @param $descr
+     * @param string $descr
      * @return string
      */
     public function formatDescription($descr)
@@ -156,17 +156,17 @@ class Template
 
         if (isset($this->queryFeeds[$idx])) {
 
-            return !isset($feedList[$this->queryFeeds[$idx]]);
+            return Feeds::isCustomFeed($this->queryFeeds[$idx]);
         }
 
         //  No feed. Show custom if :
-        //    is last element and
-        //    previous element is also empty and
-        //    there's not already a custom feed in the list
+        //    is last element and previous element is also empty
+        //    and there's not already a custom feed in the list
 
         if ($idx + 1 === WN_MAX_FEEDS && count($this->queryFeeds) < WN_MAX_FEEDS - 1) {
+
             for ($i = 0; $i < count($this->queryFeeds); $i++) {
-                if (!isset($feedList[$this->queryFeeds[$i]])) {
+                if (Feeds::isCustomFeed($this->queryFeeds[$i])) {
                     return false;
                 }
             }
@@ -237,7 +237,7 @@ class Template
     }
 
     /**
-     * Get form-safe filter string
+     * Get html-safe filter string
      *
      * @return string
      */
@@ -245,9 +245,41 @@ class Template
     {
         $filter = '';
         if (isset($this->query[WN_KEY_FILTER])) {
-            $filter = htmlspecialchars($this->query[WN_KEY_FILTER], ENT_QUOTES);
+            $filter = htmlspecialchars(trim($this->query[WN_KEY_FILTER]), ENT_QUOTES);
         }
 
         return $filter;
+    }
+
+    /**
+     * Get formatted feed label from feed data
+     *
+     * @param array $feed
+     * @return string
+     */
+    public static function formatFeedLabel($feed)
+    {
+        $label = $feed[Feeds::SOURCE_LABEL];
+        if ($feed[Feeds::FEED_NAME] !== null) {
+            $label .= ' : ' . $feed[Feeds::FEED_NAME];
+        }
+
+        return $label;
+    }
+
+    /**
+     * Get formatted feed title from feed data
+     *
+     * @param array $feed
+     * @return string
+     */
+    public static function formatFeedTitle($feed)
+    {
+        $label = $feed[Feeds::SOURCE_TITLE];
+        if ($feed[Feeds::FEED_NAME] !== null) {
+            $label .= ' &nbsp;⟩&nbsp; ' . $feed[Feeds::FEED_NAME];
+        }
+
+        return $label;
     }
 }

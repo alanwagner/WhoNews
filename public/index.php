@@ -12,8 +12,6 @@ include_once (__DIR__ . '/../inc/Feeds.php');
 include_once (__DIR__ . '/../inc/Controller.php');
 include_once (__DIR__ . '/../inc/Template.php');
 
-$feedList = Feeds::$list;
-
 $controller = new Controller();
 $template = new Template();
 
@@ -58,6 +56,14 @@ WhoNews follows no ideology or agenda; it is free, open-source, and does not use
             <span class="wn-header-title-text">WhoNews Beta</span>
         </h1>
         <div class="wn-sub-header-text">Pop Your Info Bubble</div>
+    <?php
+    $filterString = $template->getFilterString();
+    if (!empty($filterString)):
+    ?>
+        <div class="wn-keywords"><span class="wn-keywords-label">Keyword<?php echo strstr($filterString, ' ') ? 's' : ''; ?>: </span><?php echo $filterString; ?></div>
+    <?php
+    endif;
+    ?>
         <div id="wn-settings-btn" title="Settings" onclick="toggleSettings()">
             <a href="#settings">Settings</a>
         </div>
@@ -75,19 +81,19 @@ WhoNews follows no ideology or agenda; it is free, open-source, and does not use
         ?>
             <div class="wn-tab wn-col wn-col-border <?php echo $template->getColumnClass($idx); ?>">
 
-            <?php if (!empty($feed[WN_DATA_FEED_IMAGE])): ?>
-              <div class="wn-tab-image" title="<?php echo $feed[WN_DATA_FEED_LABEL]; ?>">
-                <span class="wn-img-bg" style="background-image: url(img/<?php echo $feed[WN_DATA_FEED_IMAGE]; ?>);"></span>
+            <?php if (!empty($feed[Feeds::SOURCE_IMAGE])): ?>
+              <div class="wn-tab-image" title="<?php echo Template::formatFeedLabel($feed); ?>">
+                <span class="wn-img-bg" style="background-image: url(img/<?php echo $feed[Feeds::SOURCE_IMAGE]; ?>);"></span>
             <?php else: ?>
               <div class="wn-tab-text">
             <?php endif;?>
                 <span>
-                    <?php echo $feed[WN_DATA_FEED_LABEL]; ?>
+                    <?php echo Template::formatFeedLabel($feed); ?>
                 </span>
               </div>
               <ul>
                 <li><a class="wn-column-anchor" href="#wn-column-<?php echo $idx; ?>">anchor</a></li>
-                <li><a class="wn-link-rss" href="<?php echo $feed[WN_DATA_FEED_URL]; ?>" title="RSS Link" <?php echo $template->getTarget(); ?>><span>RSS Link</span></a></li>
+                <li><a class="wn-link-rss" href="<?php echo $feed[Feeds::FEED_URL]; ?>" title="RSS Link" <?php echo $template->getTarget(); ?>><span>RSS Link</span></a></li>
               </ul>
             </div><!-- .wn-tab -->
 
@@ -104,7 +110,7 @@ WhoNews follows no ideology or agenda; it is free, open-source, and does not use
 
             <h2 class="wn-column-title">
                 <a name="wn-column-<?php echo $idx; ?>">
-                    <?php echo $feed[WN_DATA_FEED_LABEL]; ?>
+                    <?php echo Template::formatFeedLabel($feed); ?>
                 </a>
             </h2>
 
@@ -141,7 +147,7 @@ WhoNews follows no ideology or agenda; it is free, open-source, and does not use
                     ?>
 
                       <div class="wn-item-date">
-                        <?php echo $feed[WN_DATA_FEED_TITLE]; ?>
+                        <?php echo Template::formatFeedTitle($feed); ?>
                         <?php if (isset($item[WN_DATA_ITEM_PUB_DATE])): ?>
                             &nbsp;•&nbsp;&nbsp;<?php echo $item[WN_DATA_ITEM_PUB_DATE]; ?>
                         <?php endif; ?>
@@ -241,12 +247,12 @@ WhoNews follows no ideology or agenda; it is free, open-source, and does not use
                     <span><?php echo ($i+1); ?> :&nbsp;</span>
                     <select name="<?php echo sprintf('%s[%d]', WN_KEY_FEED, $i); ?>" onchange="toggleCustomInput('wn-input-custom-<?php echo $i; ?>', this.options[this.selectedIndex].value)" tabindex="2">
                         <option value=""></option>
-                        <option value="custom" <?php echo ($template->displayCustom($i) ? 'selected="selected"' : '');?>>Custom...</option>
+                        <option value="custom" <?php echo ($template->displayCustom($i) === true ? 'selected="selected"' : '');?>>Custom...</option>
                         <?php
-                        foreach ($feedList as $key => $conf):
+                        foreach (Feeds::getAllFeeds() as $key => $conf):
                         ?>
                             <option value="<?php echo $key; ?>" <?php echo ($feed === $key ? 'selected="selected"' : '');?>>
-                                <?php echo $conf['menuLabel']?>
+                                <?php echo Template::formatFeedLabel($conf); ?>
                             </option>
                         <?php
                         endforeach;
@@ -254,10 +260,10 @@ WhoNews follows no ideology or agenda; it is free, open-source, and does not use
                     </select>
                 </label>
                 <br />
-                <label class="wn-input-custom <?php echo (!$template->displayCustom($i) ? 'wn-custom-hidden' : '');?>" id="wn-input-custom-<?php echo $i; ?>">
+                <label class="wn-input-custom <?php echo ($template->displayCustom($i) === false ? 'wn-custom-hidden' : '');?>" id="wn-input-custom-<?php echo $i; ?>">
                     <span>
                         RSS URL :&nbsp;
-                        <input type="text" name="<?php echo sprintf('%s[%d]', WN_KEY_CUSTOM, $i); ?>" size="40" value="<?php echo (!isset($feedList[$feed]) ? $feed : ''); ?>" />
+                        <input type="text" name="<?php echo sprintf('%s[%d]', WN_KEY_CUSTOM, $i); ?>" size="40" value="<?php echo (Feeds::isCustomFeed($feed) ? $feed : ''); ?>" />
                     </span>
                 </label>
             </div>

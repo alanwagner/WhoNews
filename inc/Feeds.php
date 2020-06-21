@@ -19,6 +19,21 @@
  */
 class Feeds
 {
+    /** @var string **/
+    const SOURCE_TITLE = 'title';
+
+    /** @var string **/
+    const SOURCE_LABEL = 'label';
+
+    /** @var string **/
+    const SOURCE_IMAGE = 'img';
+
+    /** @var string **/
+    const FEED_URL = 'url';
+
+    /** @var string **/
+    const FEED_NAME = 'name';
+
     /**
      * The default feeds to display, if none are indicated in the url
      *
@@ -39,421 +54,445 @@ class Feeds
 
 
         //  Feed has no image data
-        'aljazeera-english' => [
-            'title'     => 'Al Jazeera &nbsp;⟩&nbsp; English',
-            'url'       => 'https://www.aljazeera.com/xml/rss/all.xml',
-            'menuLabel' => 'Al Jazeera : English',
+        'aljazeera' => [
+            'title'     => 'Al Jazeera',
+            'label'     => 'Al Jazeera',
             'img'       => 'aljazeera_banner_large.jpg',
+            'feeds'     => [
+                'english' => [
+                    'name' => 'English',
+                    'url'  => 'https://www.aljazeera.com/xml/rss/all.xml',
+                ],
+            ],
         ],
 
 
         //  Feeds have no image data
-        'bbc-top' => [
-            'title'     => 'BBC &nbsp;⟩&nbsp; Top Stories',
-            'url'       => 'http://feeds.bbci.co.uk/news/rss.xml',
-            'menuLabel' => 'BBC : Top Stories',
+        'bbc' => [
+            'title'     => 'BBC',
+            'label'     => 'BBC',
             'img'       => 'bbc_banner.png',
-        ],
-        'bbc-us' => [
-            'title'     => 'BBC &nbsp;⟩&nbsp; U.S. &amp; Canada',
-            'url'       => 'http://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml',
-            'menuLabel' => 'BBC : U.S. &amp; Canada',
-            'img'       => 'bbc_banner.png',
-        ],
-        'bbc-world' => [
-            'title'     => 'BBC &nbsp;⟩&nbsp; World',
-            'url'       => 'http://feeds.bbci.co.uk/news/world/rss.xml',
-            'menuLabel' => 'BBC : World',
-            'img'       => 'bbc_banner.png',
-        ],
-        'bbc-business' => [
-            'title'     => 'BBC &nbsp;⟩&nbsp; Business',
-            'url'       => 'http://feeds.bbci.co.uk/news/business/rss.xml',
-            'menuLabel' => 'BBC : Business',
-            'img'       => 'bbc_banner.png',
+            'feeds' => [
+	            'top' => [
+                    'name' => 'Top Stories',
+                    'url'  => 'http://feeds.bbci.co.uk/news/rss.xml',
+                ],
+                'us' => [
+                    'name' => 'U.S. &amp; Canada',
+                    'url' => 'http://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml',
+                ],
+                'world' => [
+                    'name' => 'World',
+                    'url'  => 'http://feeds.bbci.co.uk/news/world/rss.xml',
+                ],
+                'business' => [
+                    'name' => 'Business',
+                    'url'  => 'http://feeds.bbci.co.uk/news/business/rss.xml',
+                ],
+            ],
         ],
 
 
-        'breitbart-news' => [
-            'title'     => 'Breitbart &nbsp;⟩&nbsp; News',
-            'url'       => 'http://feeds.feedburner.com/breitbart',
-            'menuLabel' => 'Breitbart : News',
+        'breitbart' => [
+            'title'     => 'Breitbart',
+            'label'     => 'Breitbart',
             'img'       => 'bb_horizontal-p-800.png',
+            'feeds' => [
+                'news' => [
+                    'name' => 'News',
+                    'url'  => 'http://feeds.feedburner.com/breitbart',
+                ],
+            ],
         ],
 
 
-        'buzzfeed-news' => [
-            'title'     => 'BuzzFeed &nbsp;⟩&nbsp; News',
-            'url'       => 'https://www.buzzfeednews.com/news.xml',
-            'menuLabel' => 'BuzzFeed : News',
-            'img'       => 'bfn-logo-small.png',
-        ],
-        'buzzfeed-latest' => [
-            'title'     => 'BuzzFeed &nbsp;⟩&nbsp; Latest',
-            'url'       => 'https://www.buzzfeed.com/index.xml',
-            'menuLabel' => 'BuzzFeed : Latest',
-            'img'       => 'buzzfeed_logo.png',
-        ],
-        'buzzfeed-world' => [
-            'title'     => 'BuzzFeed &nbsp;⟩&nbsp; World',
-            'url'       => 'https://www.buzzfeed.com/world.xml',
-            'menuLabel' => 'BuzzFeed : World',
+        'buzzfeed' => [
+            'title'     => 'BuzzFeed',
+            'label'     => 'BuzzFeed',
             'img'       => 'buzzfeed_logo-news.png',
-        ],
-        'buzzfeed-reader' => [
-            'title'     => 'BuzzFeed &nbsp;⟩&nbsp; Reader',
-            'url'       => 'https://www.buzzfeed.com/reader.xml',
-            'menuLabel' => 'BuzzFeed : Reader',
-            'img'       => 'buzzfeed_logo-news.png',
-        ],
-        'buzzfeed-business' => [
-            'title'     => 'BuzzFeed &nbsp;⟩&nbsp; Business',
-            'url'       => 'https://www.buzzfeed.com/business.xml',
-            'menuLabel' => 'BuzzFeed : Business',
-            'img'       => 'buzzfeed_logo-news.png',
-        ],
-
-
-        'cnn-top' => [
-            'title'     => 'CNN &nbsp;⟩&nbsp; Top Stories',
-            'url'       => 'http://rss.cnn.com/rss/edition.rss',
-            'menuLabel' => 'CNN : Top Stories',
-            'img'       => 'cnn-com-logo.png',
-        ],
-        'cnn-latest' => [
-            'title'     => 'CNN &nbsp;⟩&nbsp; Most Recent',
-            'url'       => 'http://rss.cnn.com/rss/cnn_latest.rss',
-            'menuLabel' => 'CNN : Most Recent',
-            'img'       => 'cnn-com-logo.png',
-        ],
-        'cnn-us' => [
-            'title'     => 'CNN &nbsp;⟩&nbsp; U.S.',
-            'url'       => 'http://rss.cnn.com/rss/cnn_us.rss',
-            'menuLabel' => 'CNN : U.S.',
-            'img'       => 'cnn-com-logo.png',
-        ],
-        'cnn-world' => [
-            'title'     => 'CNN &nbsp;⟩&nbsp; World',
-            'url'       => 'http://rss.cnn.com/rss/cnn_world.rss',
-            'menuLabel' => 'CNN : World',
-            'img'       => 'cnn-com-logo.png',
-        ],
-        'cnn-money' => [
-            'title'     => 'CNN &nbsp;⟩&nbsp; Money',
-            'url'       => 'http://rss.cnn.com/rss/money_news_international.rss',
-            'menuLabel' => 'CNN : Money',
-            'img'       => 'cnn-com-logo.png',
+            'feeds' => [
+                'news' => [
+                    'name' => 'News',
+                    'url'  => 'https://www.buzzfeednews.com/news.xml',
+                    'img'  => 'bfn-logo-small.png',
+                ],
+                'latest' => [
+                    'name' => 'Latest',
+                    'url'  => 'https://www.buzzfeed.com/index.xml',
+                    'img'  => 'buzzfeed_logo.png',
+                ],
+                'world' => [
+                    'name' => 'World',
+                    'url'  => 'https://www.buzzfeed.com/world.xml',
+                ],
+                'reader' => [
+                    'name' => 'Reader',
+                    'url'  => 'https://www.buzzfeed.com/reader.xml',
+                ],
+                'business' => [
+                    'name' => 'Business',
+                    'url'  => 'https://www.buzzfeed.com/business.xml',
+                ],
+            ],
         ],
 
 
-        'csm-all' => [
-            'title'     => 'CS Monitor &nbsp;⟩&nbsp; All Stories',
-            'url'       => 'https://rss.csmonitor.com/feeds/all',
-            'menuLabel' => 'Christian Science Monitor : All Stories',
-            'img'       => 'csm-masthead_232x60.png',
+        'cnn' => [
+            'title'     => 'CNN',
+            'label'     => 'CNN',
+            'img'       => 'cnn-com-logo.png',
+            'feeds' => [
+                'top' => [
+                    'name' => 'Top Stories',
+                    'url'  => 'http://rss.cnn.com/rss/edition.rss',
+                ],
+                'latest' => [
+                    'name' => 'Most Recent',
+                    'url'  => 'http://rss.cnn.com/rss/cnn_latest.rss',
+                ],
+                'us' => [
+                    'name' => 'U.S.',
+                    'url'  => 'http://rss.cnn.com/rss/cnn_us.rss',
+                ],
+                'world' => [
+                    'name' => 'World',
+                    'url'  => 'http://rss.cnn.com/rss/cnn_world.rss',
+                ],
+                'money' => [
+                    'name' => 'Money',
+                    'url'  => 'http://rss.cnn.com/rss/money_news_international.rss',
+                ],
+            ],
         ],
-        'csm-usa' => [
-            'title'     => 'CS Monitor &nbsp;⟩&nbsp; U.S.',
-            'url'       => 'https://rss.csmonitor.com/feeds/usa',
-            'menuLabel' => 'Christian Science Monitor : U.S.',
+
+
+        'csm' => [
+            'title'     => 'CS Monitor',
+            'label'     => 'Christian Science Monitor',
             'img'       => 'csm-masthead_232x60.png',
-        ],
-        'csm-world' => [
-            'title'     => 'CS Monitor &nbsp;⟩&nbsp; World',
-            'url'       => 'https://rss.csmonitor.com/feeds/world',
-            'menuLabel' => 'Christian Science Monitor : World',
-            'img'       => 'csm-masthead_232x60.png',
-        ],
-        'csm-commentary' => [
-            'title'     => 'CS Monitor &nbsp;⟩&nbsp; Commentary',
-            'url'       => 'https://rss.csmonitor.com/feeds/commentary',
-            'menuLabel' => 'Christian Science Monitor : Commentary',
-            'img'       => 'csm-masthead_232x60.png',
-        ],
-        'csm-politics' => [
-            'title'     => 'CS Monitor &nbsp;⟩&nbsp; Politics',
-            'url'       => 'https://rss.csmonitor.com/feeds/politics',
-            'menuLabel' => 'Christian Science Monitor : Politics',
-            'img'       => 'csm-masthead_232x60.png',
-        ],
-        'csm-business' => [
-            'title'     => 'CS Monitor &nbsp;⟩&nbsp; Business',
-            'url'       => 'https://rss.csmonitor.com/feeds/wam',
-            'menuLabel' => 'Christian Science Monitor : Business',
-            'img'       => 'csm-masthead_232x60.png',
+            'feeds' => [
+                'all' => [
+                    'name' => 'All Stories',
+                    'url'  => 'https://rss.csmonitor.com/feeds/all',
+                ],
+                'usa' => [
+                    'name' => 'U.S.',
+                    'url'  => 'https://rss.csmonitor.com/feeds/usa',
+                ],
+                'world' => [
+                    'name' => 'World',
+                    'url'  => 'https://rss.csmonitor.com/feeds/world',
+                ],
+                'commentary' => [
+                    'name' => 'Commentary',
+                    'url'  => 'https://rss.csmonitor.com/feeds/commentary',
+                ],
+                'politics' => [
+                    'name' => 'Politics',
+                    'url'  => 'https://rss.csmonitor.com/feeds/politics',
+                ],
+                'business' => [
+                    'name' => 'Business',
+                    'url'  => 'https://rss.csmonitor.com/feeds/wam',
+                ],
+            ],
         ],
 
         //  Feed has no image data, and description is all extraneous html
-        'drudge-report' => [
-            'title'     => 'Drudge Report &nbsp;⟩&nbsp; News',
-            'url'       => 'https://feeds.feedburner.com/DrudgeReportFeed',
-            'menuLabel' => 'Drudge Report : News',
-            'img'       => 'drudge_logo9.gif'
+        'drudgereport' => [
+            'title'     => 'Drudge Report',
+            'label'     => 'Drudge Report',
+            'img'       => 'drudge_logo9.gif',
+            'feeds' => [
+                'news' => [
+                    'name' => 'News',
+                    'url'  => 'https://feeds.feedburner.com/DrudgeReportFeed',
+                ],
+            ],
         ],
 
 
-        'foxnews-latest' => [
-            'title'     => 'FOX News &nbsp;⟩&nbsp; Latest',
-            'url'       => 'http://feeds.foxnews.com/foxnews/latest',
-            'menuLabel' => 'FOX News : Latest Headlines',
+        'foxnews' => [
+            'title'     => 'FOX News',
+            'label'     => 'FOX News',
             'img'       => 'fox-news-logo-banner.png',
-        ],
-        'foxnews-national' => [
-            'title'     => 'FOX News &nbsp;⟩&nbsp; U.S.',
-            'url'       => 'http://feeds.foxnews.com/foxnews/national',
-            'menuLabel' => 'FOX News : U.S.',
-            'img'       => 'fox-news-logo-banner.png',
-        ],
-        'foxnews-world' => [
-            'title'     => 'FOX News &nbsp;⟩&nbsp; World',
-            'url'       => 'http://feeds.foxnews.com/foxnews/world',
-            'menuLabel' => 'FOX News : World',
-            'img'       => 'fox-news-logo-banner.png',
-        ],
-        'foxnews-opinion' => [
-            'title'     => 'FOX News &nbsp;⟩&nbsp; Opinion',
-            'url'       => 'http://feeds.foxnews.com/foxnews/opinion',
-            'menuLabel' => 'FOX News : Opinion',
-            'img'       => 'fox-news-logo-banner.png',
-        ],
-        'foxnews-politics' => [
-            'title'     => 'FOX News &nbsp;⟩&nbsp; Politics',
-            'url'       => 'http://feeds.foxnews.com/foxnews/politics',
-            'menuLabel' => 'FOX News : Politics',
-            'img'       => 'fox-news-logo-banner.png',
+            'feeds' => [
+                'latest' => [
+                    'name' => 'Latest',
+                    'url'  => 'http://feeds.foxnews.com/foxnews/latest',
+                ],
+                'national' => [
+                    'name' => 'U.S.',
+                    'url'  => 'http://feeds.foxnews.com/foxnews/national',
+                ],
+                'world' => [
+                    'name' => 'World',
+                    'url'  => 'http://feeds.foxnews.com/foxnews/world',
+                ],
+                'opinion' => [
+                    'name' => 'Opinion',
+                    'url'  => 'http://feeds.foxnews.com/foxnews/opinion',
+                ],
+                'politics' => [
+                    'name' => 'Politics',
+                    'url'  => 'http://feeds.foxnews.com/foxnews/politics',
+                ],
+            ],
         ],
 
 
-        'huffpost-breaking' => [
-            'title'     => 'Huff Post &nbsp;⟩&nbsp; Breaking',
-            'url'       => 'https://www.huffpost.com/section/front-page/feed',
-            'menuLabel' => 'Huffington Post : Breaking News',
+        'huffpost' => [
+            'title'     => 'Huff Post',
+            'label'     => 'Huffington Post',
             'img'       => 'huffpost-logo-1.png',
-        ],
-        'huffpost-us' => [
-            'title'     => 'Huff Post &nbsp;⟩&nbsp; U.S.',
-            'url'       => 'https://www.huffpost.com/section/us-news/feed',
-            'menuLabel' => 'Huffington Post : U.S.',
-            'img'       => 'huffpost-logo-1.png',
-        ],
-        'huffpost-world' => [
-            'title'     => 'Huff Post &nbsp;⟩&nbsp; World',
-            'url'       => 'https://www.huffpost.com/section/world-news/feed',
-            'menuLabel' => 'Huffington Post : World',
-            'img'       => 'huffpost-logo-1.png',
-        ],
-        'huffpost-politics' => [
-            'title'     => 'Huff Post &nbsp;⟩&nbsp; U.S. Politics',
-            'url'       => 'https://www.huffpost.com/section/politics/feed',
-            'menuLabel' => 'Huffington Post : U.S. Politics',
-            'img'       => 'huffpost-logo-1.png',
-        ],
-        'huffpost-business' => [
-            'title'     => 'Huff Post &nbsp;⟩&nbsp; Business',
-            'url'       => 'https://www.huffpost.com/section/business/feed',
-            'menuLabel' => 'Huffington Post : Business',
-            'img'       => 'huffpost-logo-1.png',
+            'feeds' => [
+                'breaking' => [
+                    'name' => 'Breaking',
+                    'url'  => 'https://www.huffpost.com/section/front-page/feed',
+                ],
+                'us' => [
+                    'name' => 'U.S.',
+                    'url'  => 'https://www.huffpost.com/section/us-news/feed',
+                ],
+                'world' => [
+                    'name' => 'World',
+                    'url'  => 'https://www.huffpost.com/section/world-news/feed',
+                ],
+                'politics' => [
+                    'name' => 'U.S. Politics',
+                    'url'  => 'https://www.huffpost.com/section/politics/feed',
+                ],
+                'business' => [
+                    'name' => 'Business',
+                    'url'  => 'https://www.huffpost.com/section/business/feed',
+                ],
+            ],
         ],
 
 
-        'nyt-homepage' => [
-            'title'     => 'NYT &nbsp;⟩&nbsp; Home Page',
-            'url'       => 'https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml',
-            'menuLabel' => 'New York Times : Home Page',
+        'nyt' => [
+            'title' => 'NYT',
+            'label'     => 'New York Times',
             'img'       => 'nyt.jpg',
-        ],
-        'nyt-popular' => [
-            'title'     => 'NYT &nbsp;⟩&nbsp; Most Popular',
-            'url'       => 'https://rss.nytimes.com/services/xml/rss/nyt/MostEmailed.xml',
-            'menuLabel' => 'New York Times : Most Popular',
-            'img'       => 'nyt.jpg',
-        ],
-        'nyt-world' => [
-            'title'     => 'NYT &nbsp;⟩&nbsp; World',
-            'url'       => 'https://rss.nytimes.com/services/xml/rss/nyt/World.xml',
-            'menuLabel' => 'New York Times : World',
-            'img'       => 'nyt.jpg',
-        ],
-        'nyt-opinion' => [
-            'title'     => 'NYT &nbsp;⟩&nbsp; Opinion',
-            'url'       => 'https://rss.nytimes.com/services/xml/rss/nyt/Opinion.xml',
-            'menuLabel' => 'New York Times : Opinion',
-            'img'       => 'nyt.jpg',
-        ],
-        'nyt-politics' => [
-            'title'     => 'NYT &nbsp;⟩&nbsp; U.S. Politics',
-            'url'       => 'https://rss.nytimes.com/services/xml/rss/nyt/Politics.xml',
-            'menuLabel' => 'New York Times : U.S. Politics',
-            'img'       => 'nyt.jpg',
-        ],
-        'nyt-business' => [
-            'title'     => 'NYT &nbsp;⟩&nbsp; Business',
-            'url'       => 'https://rss.nytimes.com/services/xml/rss/nyt/Business.xml',
-            'menuLabel' => 'New York Times : Business',
-            'img'       => 'nyt.jpg',
+            'feeds' => [
+                'homepage' => [
+                    'name' => 'Home Page',
+                    'url'  => 'https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml',
+                ],
+                'nyt-popular' => [
+                    'name' => 'Most Popular',
+                    'url'  => 'https://rss.nytimes.com/services/xml/rss/nyt/MostEmailed.xml',
+                ],
+                'nyt-world' => [
+                    'name' => 'World',
+                    'url'  => 'https://rss.nytimes.com/services/xml/rss/nyt/World.xml',
+                ],
+                'nyt-opinion' => [
+                    'name' => 'Opinion',
+                    'url'  => 'https://rss.nytimes.com/services/xml/rss/nyt/Opinion.xml',
+                ],
+                'nyt-politics' => [
+                    'name' => 'U.S. Politics',
+                    'url'  => 'https://rss.nytimes.com/services/xml/rss/nyt/Politics.xml',
+                ],
+                'nyt-business' => [
+                    'name' => 'Business',
+                    'url'  => 'https://rss.nytimes.com/services/xml/rss/nyt/Business.xml',
+                ],
+            ],
         ],
 
 
-        'npr-news' => [
-            'title'     => 'NPR &nbsp;⟩&nbsp; News',
-            'url'       => 'https://feeds.npr.org/1001/rss.xml',
-            'menuLabel' => 'NPR : News',
+        'npr' => [
+            'title'     => 'NPR',
+            'label'     => 'NPR',
             'img'       => 'npr_generic_image_300.jpg',
+            'feeds' => [
+                'news' => [
+                    'name' => 'News',
+                    'url'  => 'https://feeds.npr.org/1001/rss.xml',
+                ],
+            ],
         ],
 
 
-        'politico-politics' => [
-            'title'     => 'Politico &nbsp;⟩&nbsp; Politics News',
-            'url'       => 'https://rss.politico.com/politics.xml',
-            'menuLabel' => 'Politico : Politics News',
+        'politico' => [
+            'title'     => 'Politico',
+            'label'     => 'Politico',
             'img'       => 'POLITICO_Logo.jpg',
-        ],
-        'politico-economy' => [
-            'title'     => 'Politico &nbsp;⟩&nbsp; Economy',
-            'url'       => 'https://rss.politico.com/economy.xml',
-            'menuLabel' => 'Politico : Economy',
-            'img'       => 'POLITICO_Logo.jpg',
-        ],
-        //  These Politico feeds have no image data:
-        'politico-playbook' => [
-            'title'     => 'Politico &nbsp;⟩&nbsp; Playbook',
-            'url'       => 'https://rss.politico.com/playbook.xml',
-            'menuLabel' => 'Politico : Playbook',
-            'img'       => 'POLITICO_Logo.jpg',
-        ],
-        'politico-money' => [
-            'title'     => 'Politico &nbsp;⟩&nbsp; Morning Money',
-            'url'       => 'https://rss.politico.com/morningmoney.xml',
-            'menuLabel' => 'Politico : Morning Money',
-            'img'       => 'POLITICO_Logo.jpg',
-        ],
-        'politico-trade' => [
-            'title'     => 'Politico &nbsp;⟩&nbsp; Morning Trade',
-            'url'       => 'https://rss.politico.com/morningtrade.xml',
-            'menuLabel' => 'Politico : Morning Trade',
-            'img'       => 'POLITICO_Logo.jpg',
+            'feeds' => [
+                'politics' => [
+                    'name' => 'Politics News',
+                    'url'  => 'https://rss.politico.com/politics.xml',
+                ],
+                'economy' => [
+                    'name' => 'Economy',
+                    'url'  => 'https://rss.politico.com/economy.xml',
+                ],
+                //  These Politico feeds have no image data:
+                'playbook' => [
+                    'name' => 'Playbook',
+                    'url'  => 'https://rss.politico.com/playbook.xml',
+                ],
+                'money' => [
+                    'name' => 'Morning Money',
+                    'url'  => 'https://rss.politico.com/morningmoney.xml',
+                ],
+                'trade' => [
+                    'name' => 'Morning Trade',
+                    'url'  => 'https://rss.politico.com/morningtrade.xml',
+                ],
+            ],
         ],
 
 
-/**  REUTERS FEEDS NOT WORKING  **/
-/*
-        //  Feeds have no image data
-        'reuters-top' => [
-            'title'     => 'Reuters &nbsp;⟩&nbsp; Top Stories',
-            'url'       => 'http://feeds.reuters.com/reuters/topNews',
-            'menuLabel' => 'Reuters : Top Stories',
-            'img'       => 'reuters-clear.png',
-        ],
-        'reuters-us' => [
-            'title'     => 'Reuters &nbsp;⟩&nbsp; U.S.',
-            'url'       => 'http://feeds.reuters.com/reuters/domesticNews',
-            'menuLabel' => 'Reuters : U.S.',
-            'img'       => 'reuters-clear.png',
-        ],
-        'reuters-world' => [
-            'title'     => 'Reuters &nbsp;⟩&nbsp; World',
-            'url'       => 'http://feeds.reuters.com/reuters/worldNews',
-            'menuLabel' => 'Reuters : World',
-            'img'       => 'reuters-clear.png',
-        ],
-        'reuters-politics' => [
-            'title'     => 'Reuters &nbsp;⟩&nbsp; U.S. Politics',
-            'url'       => 'http://feeds.reuters.com/reuters/politicsNews',
-            'menuLabel' => 'Reuters : U.S. Politics',
-            'img'       => 'reuters-clear.png',
-        ],
-        'reuters-business' => [
-            'title'     => 'Reuters &nbsp;⟩&nbsp; Business',
-            'url'       => 'http://feeds.reuters.com/reuters/businessNews',
-            'menuLabel' => 'Reuters : Business',
-            'img'       => 'reuters-clear.png',
-        ],
-*/
-
-        'usatoday-top' => [
-            'title'     => 'USA Today &nbsp;⟩&nbsp; Top Stories',
-            'url'       => 'http://rssfeeds.usatoday.com/usatoday-NewsTopStories',
-            'menuLabel' => 'USA Today : Top Stories',
+        'usatoday' => [
+            'title'     => 'USA Today',
+            'label'     => 'USA Today',
             'img'       => 'usa-today.png',
-        ],
-        'usatoday-us' => [
-            'title'     => 'USA Today &nbsp;⟩&nbsp; U.S.',
-            'url'       => 'http://rssfeeds.usatoday.com/UsatodaycomNation-TopStories',
-            'menuLabel' => 'USA Today : U.S.',
-            'img'       => 'usa-today.png',
-        ],
-        'usatoday-world' => [
-            'title'     => 'USA Today &nbsp;⟩&nbsp; World',
-            'url'       => 'http://rssfeeds.usatoday.com/UsatodaycomWorld-TopStories',
-            'menuLabel' => 'USA Today : World',
-            'img'       => 'usa-today.png',
-        ],
-        'usatoday-politics' => [
-            'title'     => 'USA Today &nbsp;⟩&nbsp; Politics',
-            'url'       => 'http://rssfeeds.usatoday.com/UsatodaycomWashington-TopStories',
-            'menuLabel' => 'USA Today : Politics',
-            'img'       => 'usa-today.png',
-        ],
-        'usatoday-money' => [
-            'title'     => 'USA Today &nbsp;⟩&nbsp; Money',
-            'url'       => 'http://rssfeeds.usatoday.com/UsatodaycomMoney-TopStories',
-            'menuLabel' => 'USA Today : Money',
-            'img'       => 'usa-today.png',
+            'feeds' => [
+                'top' => [
+                    'name' => 'Top Stories',
+                    'url'  => 'http://rssfeeds.usatoday.com/usatoday-NewsTopStories',
+                ],
+                'us' => [
+                    'name' => 'U.S.',
+                    'url'  => 'http://rssfeeds.usatoday.com/UsatodaycomNation-TopStories',
+                ],
+                'world' => [
+                    'name' => 'World',
+                    'url'  => 'http://rssfeeds.usatoday.com/UsatodaycomWorld-TopStories',
+                ],
+                'politics' => [
+                    'name' => 'Politics',
+                    'url'  => 'http://rssfeeds.usatoday.com/UsatodaycomWashington-TopStories',
+                ],
+                'money' => [
+                    'name' => 'Money',
+                    'url'  => 'http://rssfeeds.usatoday.com/UsatodaycomMoney-TopStories',
+                ],
+            ],
         ],
 
 
         //  Only last feed has image data
-        'wsj-world' => [
-            'title'     => 'WSJ &nbsp;⟩&nbsp; World',
-            'url'       => 'https://feeds.a.dj.com/rss/RSSWorldNews.xml',
-            'menuLabel' => 'Wall Street Journal : World',
+        'wsj' => [
+            'title'     => 'WSJ',
+            'label'     => 'Wall Street Journal',
             'img'       => 'wsj_header2-870x276.jpg',
-        ],
-        'wsj-opinion' => [
-            'title'     => 'WSJ &nbsp;⟩&nbsp; Opinion',
-            'url'       => 'https://feeds.a.dj.com/rss/RSSOpinion.xml',
-            'menuLabel' => 'Wall Street Journal : Opinion',
-            'img'       => 'wsj_header2-870x276.jpg',
-        ],
-        'wsj-business' => [
-            'title'     => 'WSJ &nbsp;⟩&nbsp; U.S. Business',
-            'url'       => 'https://feeds.a.dj.com/rss/WSJcomUSBusiness.xml',
-            'menuLabel' => 'Wall Street Journal : U.S. Business',
-            'img'       => 'wsj_header2-870x276.jpg',
+            'feeds' => [
+                'world' => [
+                    'name' => 'World',
+                    'url'  => 'https://feeds.a.dj.com/rss/RSSWorldNews.xml',
+                ],
+                'opinion' => [
+                    'name' => 'Opinion',
+                    'url'  => 'https://feeds.a.dj.com/rss/RSSOpinion.xml',
+                ],
+                'business' => [
+                    'name' => 'U.S. Business',
+                    'url'  => 'https://feeds.a.dj.com/rss/WSJcomUSBusiness.xml',
+                ],
+            ],
         ],
 
 
-        'wapo-national' => [
-            'title'     => 'WaPo &nbsp;⟩&nbsp; U.S.',
-            'url'       => 'http://feeds.washingtonpost.com/rss/national',
-            'menuLabel' => 'Washington Post : U.S.',
+        'wapo' => [
+            'title'     => 'WaPo',
+            'label'     => 'Washington Post',
             'img'       => 'wapo.png',
-        ],
-        'wapo-world' => [
-            'title'     => 'WaPo &nbsp;⟩&nbsp; World',
-            'url'       => 'http://feeds.washingtonpost.com/rss/world',
-            'menuLabel' => 'Washington Post : World',
-            'img'       => 'wapo.png',
-        ],
-        'wapo-opinion' => [
-            'title'     => 'WaPo &nbsp;⟩&nbsp; Opinions',
-            'url'       => 'http://feeds.washingtonpost.com/rss/opinions',
-            'menuLabel' => 'Washington Post : Opinions',
-            'img'       => 'wapo.png',
-        ],
-        'wapo-politics' => [
-            'title'     => 'WaPo &nbsp;⟩&nbsp; Politics',
-            'url'       => 'http://feeds.washingtonpost.com/rss/politics',
-            'menuLabel' => 'Washington Post : Politics',
-            'img'       => 'wapo.png',
-        ],
-        'wapo-business' => [
-            'title'     => 'WaPo &nbsp;⟩&nbsp; Business',
-            'url'       => 'http://feeds.washingtonpost.com/rss/business',
-            'menuLabel' => 'Washington Post : Business',
-            'img'       => 'wapo.png',
+            'feeds' => [
+                'national' => [
+                    'name' => 'U.S.',
+                    'url'  => 'http://feeds.washingtonpost.com/rss/national',
+                ],
+                'world' => [
+                    'name' => 'World',
+                    'url'  => 'http://feeds.washingtonpost.com/rss/world',
+                ],
+                'opinion' => [
+                    'name' => 'Opinions',
+                    'url'  => 'http://feeds.washingtonpost.com/rss/opinions',
+                ],
+                'politics' => [
+                    'name' => 'Politics',
+                    'url'  => 'http://feeds.washingtonpost.com/rss/politics',
+                ],
+                'business' => [
+                    'name' => 'Business',
+                    'url'  => 'http://feeds.washingtonpost.com/rss/business',
+                ],
+            ],
         ],
     ];
+
+    /**
+     * Is this feed an unconfigured custom feed, based on its key / url?
+     *
+     * @param string $key
+     * @return boolean
+     */
+    public static function isCustomFeed($key)
+    {
+        if (
+            preg_match('/^([a-z]+)-([a-z]+)$/', $key, $matches) === 1
+            && isset(self::$list[$matches[1]]['feeds'][$matches[2]])
+        ) {
+        	return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Get config for a given feed
+     * Returns null if feed not found
+     *
+     * @param string $key
+     * @return array|null
+     */
+    public static function getFeedConfig($key)
+    {
+        $config = null;
+
+        if (
+            preg_match('/^([a-z]+)-([a-z]+)$/', $key, $matches) === 1
+            && isset(self::$list[$matches[1]]['feeds'][$matches[2]])
+        ) {
+            $source = self::$list[$matches[1]];
+            $feed = $source['feeds'][$matches[2]];
+            $config = [
+                'title' => $source['title'],
+                'label' => $source['label'],
+                'img'   => $source['img'],
+                'name'  => $feed['name'],
+                'url'   => $feed['url'],
+            ];
+            if (isset($feed['img'])) {
+                $config['img'] = $feed['img'];
+            }
+        }
+
+        return $config;
+    }
+
+    /**
+     * Get config data for all feeds
+     *
+     * @return array
+     */
+    public static function getAllFeeds()
+    {
+        $feeds = [];
+        foreach (self::$list as $source => $conf) {
+            foreach ($conf['feeds'] as $feed => $data) {
+                $key = $source . '-' . $feed;
+                $feeds[$key] = self::getFeedConfig($key);
+            }
+        }
+
+        return $feeds;
+    }
 
     /**
      * Get the number of feeds
@@ -462,7 +501,12 @@ class Feeds
      */
     public static function countFeeds()
     {
-        return count(self::$list);
+        $count = 0;
+        array_walk(self::$list, function($val,$key) use(&$count) {
+        	$count += count($val['feeds']);
+        });
+
+        return $count;
     }
 
     /**
@@ -472,14 +516,6 @@ class Feeds
      */
     public static function countSources()
     {
-        $sources = [];
-        foreach (self::$list as $key => $data) {
-            $source = substr($key, 0, strpos($key, '-'));
-            if (!in_array($source, $sources)) {
-                $sources[] = $source;
-            }
-        }
-
-        return count($sources);
+        return count(self::$list);
     }
 }

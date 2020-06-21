@@ -73,9 +73,16 @@ class Reader
         $xml=simplexml_load_string($content);
         $channel = $xml->channel;
 
-        $data[WN_DATA_FEED_TITLE] = $channel->title;
-        $data[WN_DATA_FEED_LABEL] = $channel->title;
+        $data[Feeds::SOURCE_TITLE] = $channel->title;
+        $data[Feeds::SOURCE_LABEL] = $channel->title;
         $data[WN_DATA_FEED_ITEMS] = [];
+
+        $filterRegex = null;
+        if ($filter !== null) {
+            $filters = explode(' ', $filter);
+            $filters = join('|', array_filter($filters));
+            $filterRegex = sprintf('/%s/i', str_replace('/', '\/', $filters));
+        }
 
         foreach($channel->item as $item) {
 
@@ -130,12 +137,9 @@ class Reader
             $itemData[WN_DATA_ITEM_DESCRIPTION] = $description;
 
 
-            if ($filter !== null) {
-                $filters = explode(' ', $filter);
-                $filters = join('|', array_filter($filters));
-                $regex = sprintf('/%s/i', str_replace('/', '\/', $filters));
-                if (preg_match($regex, $itemData[WN_DATA_ITEM_TITLE]) !== 1
-                    && preg_match($regex, $itemData[WN_DATA_ITEM_DESCRIPTION]) !== 1
+            if ($filterRegex !== null) {
+                if (preg_match($filterRegex, $itemData[WN_DATA_ITEM_TITLE]) !== 1
+                    && preg_match($filterRegex, $itemData[WN_DATA_ITEM_DESCRIPTION]) !== 1
                 ) {
                     continue;
                 }

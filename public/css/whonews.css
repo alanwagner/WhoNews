@@ -76,11 +76,12 @@ html, body {
 }
 
 h1.wn-header-title {
-    position: relative;
-    float: left;
+    position: absolute;
+    top: 11px;
+    left: 12px;
     height: 4.2rem;
     width: 32rem;
-    margin: 6px 0 0;
+    margin: 0;
     padding: 0;
     background-image: linear-gradient(#ffffb0, gold);
 }
@@ -102,8 +103,7 @@ h1.wn-header-title {
 .wn-sub-header-text {
     position: relative;
     display: block;
-    width: 40%;
-    margin: 4px auto;
+    margin: 4px auto 0;
     text-align: center;
     color: var(--sub-header-text-color);
     font-weight: 300;
@@ -111,16 +111,31 @@ h1.wn-header-title {
     font-size: 90%;
 }
 
+
+.wn-keywords {
+	position: relative;
+	float: right;
+	margin-right: calc( var(--top-header-height) * 0.96);
+	font-size: 135%;
+	color: #eee;
+	text-align: right;
+}
+
+.wn-keywords-label {
+	color: #a8a8a8;
+}
+
+
 #wn-settings-btn {
     position: absolute;
     display: block;
     top: 0;
     right: 1px;
     height: calc(var(--top-header-height) - var(--top-header-border-height));
-    width: calc( var(--top-header-height) * 1.05 );
+    width: var(--top-header-height);
     background-image: url(gears-icon-white.png);
-    background-size: 67%;
-    background-position: 60% 50%;
+    background-size: 76%;
+    background-position: 60% 54%;
     background-repeat: no-repeat;
     border-top: 1px solid var(--top-header-bg-color);
     border-bottom: 1px solid var(--top-header-bg-color);
@@ -279,10 +294,14 @@ h1.wn-header-title {
     bottom: 3px;
     height: 12px;
     width: 12px;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
-    background-position: center center;
+    background-position: center top;
     background-image: url(rss.png);
+}
+
+.wn-tab  a.wn-link-rss:hover {
+    background-position: center bottom;
 }
 
 .wn-tab  .wn-tab-image  span,

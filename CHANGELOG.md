@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.9] - 2020.06.21
+
+Interface and Tech Upgrade Release
+
+### Added
+
+- Display keywords in header
+- Added hover effect on RSS link icon
+
+### Changed
+
+- Fixed positioning of sub-title at small widths
+- Tech: Refactored list in Feeds class, added static methods
+- Tech: Added formatting methods to Template class
+
+
 ## [1.8.1] - 2020.06.20
 
 Functionality Upgrade Release
