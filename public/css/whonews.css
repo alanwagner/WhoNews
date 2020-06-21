@@ -115,9 +115,8 @@ h1.wn-header-title {
 .wn-keywords {
 	position: relative;
 	float: right;
-	top: -0.2rem;
-	margin-right: var(--top-header-height);
-	font-size: 140%;
+	margin-right: calc( var(--top-header-height) * 0.93);
+	font-size: 135%;
 	color: #eee;
 	text-align: right;
 }
@@ -133,10 +132,10 @@ h1.wn-header-title {
     top: 0;
     right: 1px;
     height: calc(var(--top-header-height) - var(--top-header-border-height));
-    width: calc( var(--top-header-height) * 1.05 );
+    width: var(--top-header-height);
     background-image: url(gears-icon-white.png);
-    background-size: 67%;
-    background-position: 60% 50%;
+    background-size: 76%;
+    background-position: 60% 54%;
     background-repeat: no-repeat;
     border-top: 1px solid var(--top-header-bg-color);
     border-bottom: 1px solid var(--top-header-bg-color);
