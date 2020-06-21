@@ -115,7 +115,8 @@ h1.wn-header-title {
 .wn-keywords {
 	position: relative;
 	float: right;
-	margin-right: calc( var(--top-header-height) * 1.03 );
+	top: -0.4rem;
+	margin-right: var(--top-header-height);
 	font-size: 140%;
 	color: #eee;
 	text-align: right;
