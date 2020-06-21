@@ -62,7 +62,7 @@ WhoNews follows no ideology or agenda; it is free, open-source, and does not use
     $filterString = $template->getFilterString();
     if (!empty($filterString)):
     ?>
-        <div class="wn-keywords">Keyword<?php echo strstr($filterString, ' ') ? 's' : ''; ?>:&nbsp;'<?php echo $filterString; ?>'</div>
+        <div class="wn-keywords"><span class="wn-keywords-label">Keyword<?php echo strstr($filterString, ' ') ? 's' : ''; ?>: </span>'<?php echo $filterString; ?>'</div>
     <?php
     endif;
     ?>

@@ -122,6 +122,10 @@ h1.wn-header-title {
 	text-align: right;
 }
 
+.wn-keywords-label {
+	color: #a8a8a8;
+}
+
 
 #wn-settings-btn {
     position: absolute;
