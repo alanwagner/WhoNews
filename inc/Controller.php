@@ -34,7 +34,7 @@ class Controller
         //  Unset default values
 
         $defaults = [
-            WN_KEY_FILTER      => '',
+            WN_KEY_FILTER      => WN_DEFAULT_FILTER,
             WN_KEY_SCROLL      => WN_DEFAULT_SCROLL,
             WN_KEY_IMAGES      => WN_DEFAULT_IMAGES,
             WN_KEY_DESCRIPTION => WN_DEFAULT_DESCRIPTION,
@@ -123,37 +123,31 @@ class Controller
      */
     public function getFeedData($queryFeeds, $limit = null, $filter = null)
     {
-        $feedList = Feeds::$list;
-
         $reader = new Reader();
         $feedData = [];
 
         foreach ($queryFeeds as $idx => $url) {
-            $title = null;
-            $label = null;
-            $image = null;
-            if (in_array($url, array_keys($feedList))) {
-                $title = $feedList[$url]['title'];
-                $label = $feedList[$url]['menuLabel'];
-                $feedUrl = $feedList[$url]['url'];
-                if(!empty($feedList[$url]['img'])) {
-                    $image = $feedList[$url]['img'];
-                }
+
+            $config = Feeds::getFeedConfig($url);
+            if ($config !== null) {
+                $feedUrl = $config[Feeds::FEED_URL];
             } else {
                 $feedUrl = $url;
             }
 
             $data = $reader->getChannelData($feedUrl, $limit, $filter);
 
-            $data[WN_DATA_FEED_URL] = $feedUrl;
-            $data[WN_DATA_FEED_IMAGE] = $image;
+            $data[Feeds::FEED_URL] = $feedUrl;
 
-            //  Override the feed's own title, if not a custom feed
-            if (!empty($title)) {
-                $data[WN_DATA_FEED_TITLE] = $title;
-            }
-            if (!empty($label)) {
-                $data[WN_DATA_FEED_LABEL] = $label;
+            //  Override the feed's own settings, if not a custom feed
+            if ($config !== null) {
+                $data[Feeds::SOURCE_TITLE] = $config[Feeds::SOURCE_TITLE];
+                $data[Feeds::SOURCE_LABEL] = $config[Feeds::SOURCE_LABEL];
+                $data[Feeds::SOURCE_IMAGE] = $config[Feeds::SOURCE_IMAGE];
+                $data[Feeds::FEED_NAME]    = $config[Feeds::FEED_NAME];
+            } else {
+                $data[Feeds::SOURCE_IMAGE] = null;
+                $data[Feeds::FEED_NAME]    = null;
             }
 
             $feedData[] = $data;

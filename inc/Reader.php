@@ -73,8 +73,8 @@ class Reader
         $xml=simplexml_load_string($content);
         $channel = $xml->channel;
 
-        $data[WN_DATA_FEED_TITLE] = $channel->title;
-        $data[WN_DATA_FEED_LABEL] = $channel->title;
+        $data[Feeds::SOURCE_TITLE] = $channel->title;
+        $data[Feeds::SOURCE_LABEL] = $channel->title;
         $data[WN_DATA_FEED_ITEMS] = [];
 
         $filterRegex = null;
