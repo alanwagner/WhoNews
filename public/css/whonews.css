@@ -103,14 +103,24 @@ h1.wn-header-title {
 .wn-sub-header-text {
     position: relative;
     display: block;
-    width: 40%;
-    margin: 4px auto;
+    margin: 4px auto 0;
     text-align: center;
     color: var(--sub-header-text-color);
     font-weight: 300;
     font-style: italic;
     font-size: 90%;
 }
+
+
+.wn-keywords {
+	position: relative;
+	float: right;
+	margin-right: calc( var(--top-header-height) * 1.03 );
+	font-size: 140%;
+	color: #eee;
+	text-align: right;
+}
+
 
 #wn-settings-btn {
     position: absolute;

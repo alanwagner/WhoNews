@@ -237,7 +237,7 @@ class Template
     }
 
     /**
-     * Get form-safe filter string
+     * Get html-safe filter string
      *
      * @return string
      */
@@ -245,7 +245,7 @@ class Template
     {
         $filter = '';
         if (isset($this->query[WN_KEY_FILTER])) {
-            $filter = htmlspecialchars($this->query[WN_KEY_FILTER], ENT_QUOTES);
+            $filter = htmlspecialchars(trim($this->query[WN_KEY_FILTER]), ENT_QUOTES);
         }
 
         return $filter;

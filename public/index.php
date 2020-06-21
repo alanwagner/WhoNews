@@ -58,6 +58,14 @@ WhoNews follows no ideology or agenda; it is free, open-source, and does not use
             <span class="wn-header-title-text">WhoNews Beta</span>
         </h1>
         <div class="wn-sub-header-text">Pop Your Info Bubble</div>
+    <?php
+    $filterString = $template->getFilterString();
+    if (!empty($filterString)):
+    ?>
+        <div class="wn-keywords">Keyword<?php echo strstr($filterString, ' ') ? 's' : ''; ?>:&nbsp;'<?php echo $filterString; ?>'</div>
+    <?php
+    endif;
+    ?>
         <div id="wn-settings-btn" title="Settings" onclick="toggleSettings()">
             <a href="#settings">Settings</a>
         </div>
