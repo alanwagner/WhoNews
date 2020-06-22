@@ -501,12 +501,7 @@ class Feeds
      */
     public static function countFeeds()
     {
-        $count = 0;
-        array_walk(self::$list, function($val,$key) use(&$count) {
-        	$count += count($val['feeds']);
-        });
-
-        return $count;
+        return substr_count(json_encode(self::$list), '"url":');
     }
 
     /**
