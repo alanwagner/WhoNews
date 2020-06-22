@@ -279,23 +279,23 @@ class Feeds
                     'name' => 'Home Page',
                     'url'  => 'https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml',
                 ],
-                'nyt-popular' => [
+                'popular' => [
                     'name' => 'Most Popular',
                     'url'  => 'https://rss.nytimes.com/services/xml/rss/nyt/MostEmailed.xml',
                 ],
-                'nyt-world' => [
+                'world' => [
                     'name' => 'World',
                     'url'  => 'https://rss.nytimes.com/services/xml/rss/nyt/World.xml',
                 ],
-                'nyt-opinion' => [
+                'opinion' => [
                     'name' => 'Opinion',
                     'url'  => 'https://rss.nytimes.com/services/xml/rss/nyt/Opinion.xml',
                 ],
-                'nyt-politics' => [
+                'politics' => [
                     'name' => 'U.S. Politics',
                     'url'  => 'https://rss.nytimes.com/services/xml/rss/nyt/Politics.xml',
                 ],
-                'nyt-business' => [
+                'business' => [
                     'name' => 'Business',
                     'url'  => 'https://rss.nytimes.com/services/xml/rss/nyt/Business.xml',
                 ],
@@ -501,12 +501,7 @@ class Feeds
      */
     public static function countFeeds()
     {
-        $count = 0;
-        array_walk(self::$list, function($val,$key) use(&$count) {
-        	$count += count($val['feeds']);
-        });
-
-        return $count;
+        return substr_count(json_encode(self::$list), '"url":');
     }
 
     /**
