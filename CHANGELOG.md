@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.9.2] - 2020.06.23
+
+Config Change Release
+
+### Changed
+
+- Changed default view to huffpost-breaking / nyt-homepage / foxnews-latest
+
+
 ## [1.9.1] - 2020.06.22
 
 Bugfix Release
