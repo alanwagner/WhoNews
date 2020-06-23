@@ -40,9 +40,9 @@ class Feeds
      * @var array
      */
     public static $defaultFeeds = [
-        'huffpost-us',
-        'csm-usa',
-        'foxnews-national',
+        'huffpost-breaking',
+        'nyt-homepage',
+        'foxnews-latest',
     ];
 
     /**
