@@ -67,7 +67,6 @@ class Feeds
         ],
 
 
-        //  Feeds have no image data
         'bbc' => [
             'title'     => 'BBC',
             'label'     => 'BBC',
@@ -75,24 +74,24 @@ class Feeds
             'feeds' => [
 	            'top' => [
                     'name' => 'Top Stories',
-                    'url'  => 'http://feeds.bbci.co.uk/news/rss.xml',
+                    'url'  => 'https://feeds.bbci.co.uk/news/rss.xml',
                 ],
                 'us' => [
                     'name' => 'U.S. &amp; Canada',
-                    'url' => 'http://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml',
+                    'url' => 'https://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml',
                 ],
                 'world' => [
                     'name' => 'World',
-                    'url'  => 'http://feeds.bbci.co.uk/news/world/rss.xml',
+                    'url'  => 'https://feeds.bbci.co.uk/news/world/rss.xml',
                 ],
                 'business' => [
                     'name' => 'Business',
-                    'url'  => 'http://feeds.bbci.co.uk/news/business/rss.xml',
+                    'url'  => 'https://feeds.bbci.co.uk/news/business/rss.xml',
                 ],
             ],
         ],
 
-
+        //  Feed has no image data
         'breitbart' => [
             'title'     => 'Breitbart',
             'label'     => 'Breitbart',
@@ -137,6 +136,9 @@ class Feeds
         ],
 
 
+/*
+ * Can't find any up to date
+ * 
         'cnn' => [
             'title'     => 'CNN',
             'label'     => 'CNN',
@@ -144,7 +146,7 @@ class Feeds
             'feeds' => [
                 'top' => [
                     'name' => 'Top Stories',
-                    'url'  => 'http://rss.cnn.com/rss/edition.rss',
+                    'url'  => 'http://rss.cnn.com/rss/cnn_topstories.rss',
                 ],
                 'latest' => [
                     'name' => 'Most Recent',
@@ -164,8 +166,9 @@ class Feeds
                 ],
             ],
         ],
+*/
 
-
+        //  Feeds have no image data
         'csm' => [
             'title'     => 'CS Monitor',
             'label'     => 'Christian Science Monitor',
@@ -241,30 +244,23 @@ class Feeds
         ],
 
 
+        //  Feeds have no image data
         'huffpost' => [
             'title'     => 'Huff Post',
             'label'     => 'Huffington Post',
             'img'       => 'huffpost-logo-1.png',
             'feeds' => [
-                'breaking' => [
-                    'name' => 'Breaking',
-                    'url'  => 'https://www.huffpost.com/section/front-page/feed',
-                ],
                 'us' => [
                     'name' => 'U.S.',
-                    'url'  => 'https://www.huffpost.com/section/us-news/feed',
+                    'url'  => 'https://chaski.huffpost.com/us/auto/vertical/us-news',
                 ],
                 'world' => [
                     'name' => 'World',
-                    'url'  => 'https://www.huffpost.com/section/world-news/feed',
+                    'url'  => 'https://chaski.huffpost.com/us/auto/vertical/world-news',
                 ],
                 'politics' => [
                     'name' => 'U.S. Politics',
-                    'url'  => 'https://www.huffpost.com/section/politics/feed',
-                ],
-                'business' => [
-                    'name' => 'Business',
-                    'url'  => 'https://www.huffpost.com/section/business/feed',
+                    'url'  => 'https://chaski.huffpost.com/us/auto/vertical/politics',
                 ],
             ],
         ],
@@ -315,7 +311,7 @@ class Feeds
             ],
         ],
 
-
+        //  Some feeds have no image data
         'politico' => [
             'title'     => 'Politico',
             'label'     => 'Politico',
@@ -323,7 +319,7 @@ class Feeds
             'feeds' => [
                 'politics' => [
                     'name' => 'Politics News',
-                    'url'  => 'https://rss.politico.com/politics.xml',
+                    'url'  => 'https://rss.politico.com/politics-news.xml',
                 ],
                 'economy' => [
                     'name' => 'Economy',
@@ -341,35 +337,6 @@ class Feeds
                 'trade' => [
                     'name' => 'Morning Trade',
                     'url'  => 'https://rss.politico.com/morningtrade.xml',
-                ],
-            ],
-        ],
-
-
-        'usatoday' => [
-            'title'     => 'USA Today',
-            'label'     => 'USA Today',
-            'img'       => 'usa-today.png',
-            'feeds' => [
-                'top' => [
-                    'name' => 'Top Stories',
-                    'url'  => 'http://rssfeeds.usatoday.com/usatoday-NewsTopStories',
-                ],
-                'us' => [
-                    'name' => 'U.S.',
-                    'url'  => 'http://rssfeeds.usatoday.com/UsatodaycomNation-TopStories',
-                ],
-                'world' => [
-                    'name' => 'World',
-                    'url'  => 'http://rssfeeds.usatoday.com/UsatodaycomWorld-TopStories',
-                ],
-                'politics' => [
-                    'name' => 'Politics',
-                    'url'  => 'http://rssfeeds.usatoday.com/UsatodaycomWashington-TopStories',
-                ],
-                'money' => [
-                    'name' => 'Money',
-                    'url'  => 'http://rssfeeds.usatoday.com/UsatodaycomMoney-TopStories',
                 ],
             ],
         ],
@@ -396,7 +363,7 @@ class Feeds
             ],
         ],
 
-
+        //  Feeds have no image data
         'wapo' => [
             'title'     => 'WaPo',
             'label'     => 'Washington Post',
