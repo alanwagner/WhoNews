@@ -40,7 +40,7 @@ class Feeds
      * @var array
      */
     public static $defaultFeeds = [
-        'huffpost-breaking',
+        'npr-news',
         'nyt-homepage',
         'foxnews-latest',
     ];
@@ -219,23 +219,23 @@ class Feeds
             'feeds' => [
                 'latest' => [
                     'name' => 'Latest',
-                    'url'  => 'http://feeds.foxnews.com/foxnews/latest',
+                    'url'  => 'https://moxie.foxnews.com/google-publisher/latest.xml',
                 ],
                 'national' => [
                     'name' => 'U.S.',
-                    'url'  => 'http://feeds.foxnews.com/foxnews/national',
+                    'url'  => 'https://moxie.foxnews.com/google-publisher/us.xml',
                 ],
                 'world' => [
                     'name' => 'World',
-                    'url'  => 'http://feeds.foxnews.com/foxnews/world',
+                    'url'  => 'https://moxie.foxnews.com/google-publisher/world.xml',
                 ],
                 'opinion' => [
                     'name' => 'Opinion',
-                    'url'  => 'http://feeds.foxnews.com/foxnews/opinion',
+                    'url'  => 'https://moxie.foxnews.com/google-publisher/opinion.xml',
                 ],
                 'politics' => [
                     'name' => 'Politics',
-                    'url'  => 'http://feeds.foxnews.com/foxnews/politics',
+                    'url'  => 'https://moxie.foxnews.com/google-publisher/politics.xml',
                 ],
             ],
         ],
@@ -404,23 +404,23 @@ class Feeds
             'feeds' => [
                 'national' => [
                     'name' => 'U.S.',
-                    'url'  => 'http://feeds.washingtonpost.com/rss/national',
+                    'url'  => 'https://feeds.washingtonpost.com/rss/national',
                 ],
                 'world' => [
                     'name' => 'World',
-                    'url'  => 'http://feeds.washingtonpost.com/rss/world',
+                    'url'  => 'https://feeds.washingtonpost.com/rss/world',
                 ],
                 'opinion' => [
                     'name' => 'Opinions',
-                    'url'  => 'http://feeds.washingtonpost.com/rss/opinions',
+                    'url'  => 'https://feeds.washingtonpost.com/rss/opinions',
                 ],
                 'politics' => [
                     'name' => 'Politics',
-                    'url'  => 'http://feeds.washingtonpost.com/rss/politics',
+                    'url'  => 'https://feeds.washingtonpost.com/rss/politics',
                 ],
                 'business' => [
                     'name' => 'Business',
-                    'url'  => 'http://feeds.washingtonpost.com/rss/business',
+                    'url'  => 'https://feeds.washingtonpost.com/rss/business',
                 ],
             ],
         ],
