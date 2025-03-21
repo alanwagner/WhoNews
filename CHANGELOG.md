@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.11.1] - 2025.03.22
+
+Bugfix Release
+
+### Changed
+
+- Removed BuzzFeed feeds
+
+
 ## [1.11] - 2025.03.22
 
 Performance Upgrade Release

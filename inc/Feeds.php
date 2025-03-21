@@ -105,37 +105,6 @@ class Feeds
         ],
 
 
-        'buzzfeed' => [
-            'title'     => 'BuzzFeed',
-            'label'     => 'BuzzFeed',
-            'img'       => 'buzzfeed_logo-news.png',
-            'feeds' => [
-                'news' => [
-                    'name' => 'News',
-                    'url'  => 'https://www.buzzfeednews.com/news.xml',
-                    'img'  => 'bfn-logo-small.png',
-                ],
-                'latest' => [
-                    'name' => 'Latest',
-                    'url'  => 'https://www.buzzfeed.com/index.xml',
-                    'img'  => 'buzzfeed_logo.png',
-                ],
-                'world' => [
-                    'name' => 'World',
-                    'url'  => 'https://www.buzzfeed.com/world.xml',
-                ],
-                'reader' => [
-                    'name' => 'Reader',
-                    'url'  => 'https://www.buzzfeed.com/reader.xml',
-                ],
-                'business' => [
-                    'name' => 'Business',
-                    'url'  => 'https://www.buzzfeed.com/business.xml',
-                ],
-            ],
-        ],
-
-
         //  Feeds have no image data
         'csm' => [
             'title'     => 'CS Monitor',
