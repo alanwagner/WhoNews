@@ -136,38 +136,6 @@ class Feeds
         ],
 
 
-/*
- * Can't find any up to date
- * 
-        'cnn' => [
-            'title'     => 'CNN',
-            'label'     => 'CNN',
-            'img'       => 'cnn-com-logo.png',
-            'feeds' => [
-                'top' => [
-                    'name' => 'Top Stories',
-                    'url'  => 'http://rss.cnn.com/rss/cnn_topstories.rss',
-                ],
-                'latest' => [
-                    'name' => 'Most Recent',
-                    'url'  => 'http://rss.cnn.com/rss/cnn_latest.rss',
-                ],
-                'us' => [
-                    'name' => 'U.S.',
-                    'url'  => 'http://rss.cnn.com/rss/cnn_us.rss',
-                ],
-                'world' => [
-                    'name' => 'World',
-                    'url'  => 'http://rss.cnn.com/rss/cnn_world.rss',
-                ],
-                'money' => [
-                    'name' => 'Money',
-                    'url'  => 'http://rss.cnn.com/rss/money_news_international.rss',
-                ],
-            ],
-        ],
-*/
-
         //  Feeds have no image data
         'csm' => [
             'title'     => 'CS Monitor',
@@ -337,6 +305,39 @@ class Feeds
                 'trade' => [
                     'name' => 'Morning Trade',
                     'url'  => 'https://rss.politico.com/morningtrade.xml',
+                ],
+            ],
+        ],
+
+
+        'theguardian' => [
+            'title'     => 'The Guardian',
+            'label'     => 'The Guardian',
+            'img'       => 'guardian-logo-rss.png',
+            'feeds' => [
+                'international' => [
+                    'name' => 'International Edition',
+                    'url'  => 'https://www.theguardian.com/international/rss',
+                ],
+                'world' => [
+                    'name' => 'World News',
+                    'url'  => 'https://www.theguardian.com/world/rss',
+                ],
+                'usedition' => [
+                    'name' => 'U.S. Edition',
+                    'url'  => 'https://www.theguardian.com/us/rss',
+                ],
+                'usnews' => [
+                    'name' => 'U.S. News',
+                    'url'  => 'https://www.theguardian.com/us-news/rss',
+                ],
+                'opinion' => [
+                    'name' => 'U.S. Opinion',
+                    'url'  => 'https://www.theguardian.com/us/commentisfree/rss',
+                ],
+                'business' => [
+                    'name' => 'U.S. Business',
+                    'url'  => 'https://www.theguardian.com/us/business/rss',
                 ],
             ],
         ],

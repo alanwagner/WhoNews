@@ -125,7 +125,8 @@ class Reader
                 //  Clean tags and embedded html
                if (substr($description, 0, 4) === '<h1>') {
                    $description = substr($description, 4, strpos($description, '</h1>') - 4);
-
+               } elseif (substr($description, 0, 3) === '<p>') {
+                   $description = substr($description, 3, strpos($description, '</p>') - 3);
                } else {
                    $description = substr($description, 0, strpos($description, '<'));
                }
