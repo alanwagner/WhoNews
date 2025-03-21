@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.9.5] - 2025.03.21
+
+Bugfix and Config Change Release
+
+### Changed
+
+- Added feeds for The Guardian
+- Fixed description parsing for Breitbart (and The Guardian)
+
+
+## [1.9.4] - 2025.03.19
+
+Bugfix Release
+
+### Changed
+
+- Updated feed URLs for BBC, HuffPost, Politico
+- Deleted feeds for CNN, USA Today
+
+
+## [1.9.3] - 2025.03.19
+
+Bugfix and Config Change Release
+
+### Changed
+
+- Changed default view to npr-news / nyt-homepage / foxnews-latest
+- Updated feed URLs for Fox News and WaPo
+
+
 ## [1.9.2] - 2020.06.23
 
 Config Change Release
