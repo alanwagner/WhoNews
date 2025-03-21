@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.10] - 2025.03.21
+
+Performance Upgrade Release
+
+### Changed
+
+- Load feeds asynchronously
+- Updated image for The Guardian
+
+
 ## [1.9.5] - 2025.03.21
 
 Bugfix and Config Change Release

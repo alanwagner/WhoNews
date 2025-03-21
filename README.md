@@ -10,7 +10,7 @@ The *WhoNews* project is:
   - Collaborative
   - Non-partisan
 
-The public web version of *WhoNews* (v 1.9.5) does not use any cookies, trackers, or external scripts.
+The public web version of *WhoNews* (v 1.10) does not use any cookies, trackers, or external scripts.
 See https://WhoNews.org 
 
 *WhoNews* exists in its current form purely as a personal project created by Alan Gerard Wagner (see https://alanwagner.org).
