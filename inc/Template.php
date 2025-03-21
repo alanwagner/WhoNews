@@ -116,10 +116,9 @@ class Template
      * Format description
      *
      * @param string $descr
-     * @param bool $escape
      * @return string
      */
-    public function formatDescription($descr, $escape = false)
+    public function formatDescription($descr)
     {
         if (isset($this->query[WN_KEY_DESCRIPTION]) &&
                 $this->query[WN_KEY_DESCRIPTION] === 'short' &&
@@ -129,28 +128,19 @@ class Template
         $descr = str_replace(chr(194) . chr(160), ' ', $descr);
         $descr = preg_replace("/[\r\n]+/", ' ', $descr);
 
-        if ($escape === true) {
-            $descr = self::escape($descr);
-        }
-
         return $descr;
     }
 
     /**
      * Get target for links, based on key in query
      *
-     * @param bool $escape
      * @return string
      */
-    public function getTarget($escape = false)
+    public function getTarget()
     {
         $target = '';
         if (!isset($this->query[WN_KEY_TARGET]) || $this->query[WN_KEY_TARGET] === 'new') {
-            $target = ' target="_blank"';
-        }
-
-        if ($escape === true) {
-            $target = self::escape($target);
+            $target = '_blank';
         }
 
         return $target;
@@ -269,18 +259,13 @@ class Template
      * Get formatted feed label from feed data
      *
      * @param array $feed
-     * @param bool $escape
      * @return string
      */
-    public static function formatFeedLabel($feed, $escape = false)
+    public static function formatFeedLabel($feed)
     {
         $label = $feed[Feeds::SOURCE_LABEL];
         if ($feed[Feeds::FEED_NAME] !== null) {
             $label .= ' : ' . $feed[Feeds::FEED_NAME];
-        }
-
-        if ($escape === true) {
-            $label = self::escape($label);
         }
 
         return $label;
@@ -290,31 +275,15 @@ class Template
      * Get formatted feed title from feed data
      *
      * @param array $feed
-     * @param bool $escape
      * @return string
      */
-    public static function formatFeedTitle($feed, $escape = false)
+    public static function formatFeedTitle($feed)
     {
         $label = $feed[Feeds::SOURCE_TITLE];
         if ($feed[Feeds::FEED_NAME] !== null) {
             $label .= ' &nbsp;⟩&nbsp; ' . $feed[Feeds::FEED_NAME];
         }
 
-        if ($escape === true) {
-            $label = self::escape($label);
-        }
-
         return $label;
-    }
-
-    /**
-     * Escape double quotes for JSON output
-     *
-     * @param string $data
-     * @return string
-     */
-    public static function escape($data)
-    {
-        return str_replace('"', '\"', $data);
     }
 }
