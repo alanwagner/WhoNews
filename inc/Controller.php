@@ -106,6 +106,10 @@ class Controller
     {
         if (isset($query[WN_KEY_FEED])) {
 
+            if (is_string($query[WN_KEY_FEED])) {
+                return [$query[WN_KEY_FEED]];
+            }
+
             return $query[WN_KEY_FEED];
         }
 
