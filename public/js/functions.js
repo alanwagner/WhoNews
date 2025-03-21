@@ -21,3 +21,32 @@ function toggleCustomInput(id, selected) {
 	  element.classList.add("wn-custom-hidden");
   }
 }
+
+function loadFeed(url, idx) {
+  fetch(url)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Request failed');
+    }
+    return response.json();
+  })
+  .then(data => {
+    const { tabHtml, columnHtml } = data;
+    document.querySelector('#wn-tab-' + idx).innerHTML = tabHtml;
+    document.querySelector('#wn-col-' + idx).innerHTML = columnHtml;
+    updatePageTitle();
+  })
+  .catch(error => {
+    console.error('An error occurred:', error);
+    // Handle the error appropriately
+  });
+}
+
+function updatePageTitle() {
+    let title = 'WhoNews Beta ';
+    const labels = document.querySelectorAll('.wn-tab-label');
+    [...labels].map((elt) => {
+       title += ' | ' + elt.innerHTML;
+    });
+    document.querySelector('title').innerHTML = title;
+}

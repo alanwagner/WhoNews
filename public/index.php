@@ -25,12 +25,6 @@ if ($url !== null) {
 $template->query = $_GET;
 $template->queryFeeds = $controller->getQueryFeeds($_GET);
 
-$limit = isset($_GET[WN_KEY_LIMIT]) ? $_GET[WN_KEY_LIMIT] : null;
-$filter = isset($_GET[WN_KEY_FILTER]) ? $_GET[WN_KEY_FILTER] : null;
-
-$template->feedData = $controller->getFeedData($template->queryFeeds, $limit, $filter);
-
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -39,7 +33,8 @@ $template->feedData = $controller->getFeedData($template->queryFeeds, $limit, $f
 <title><?php echo $template->getPageTitle(); ?></title>
 <meta name="description" content="WhoNews.org is an online newsfeed viewer which allows users to compare multiple news sources by displaying them side-by-side. 
 It currently offers <?php echo Feeds::countFeeds(); ?> feeds from <?php echo Feeds::countSources(); ?> sources. 
-WhoNews follows no ideology or agenda; it is free, open-source, and does not use cookies, trackers, or ads of any kind.">
+WhoNews follows no ideology or agenda; it is free, open-source, and does not use cookies, trackers, or ads of any kind.
+WhoNews exists in its current form purely as a personal project created by Alan Gerard Wagner (see alanwagner.org).">
 
 <link href="css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
 <link href="css/bootstrap-theme.css" media="screen" rel="stylesheet" type="text/css" />
@@ -77,24 +72,9 @@ WhoNews follows no ideology or agenda; it is free, open-source, and does not use
 
         <nav class="wn-tabs clearfix">
         <?php
-        foreach($template->feedData as $idx => $feed):
+        foreach($template->queryFeeds as $idx => $feed):
         ?>
-            <div class="wn-tab wn-col wn-col-border <?php echo $template->getColumnClass($idx); ?>">
-
-            <?php if (!empty($feed[Feeds::SOURCE_IMAGE])): ?>
-              <div class="wn-tab-image" title="<?php echo Template::formatFeedLabel($feed); ?>">
-                <span class="wn-img-bg" style="background-image: url(img/<?php echo $feed[Feeds::SOURCE_IMAGE]; ?>);"></span>
-            <?php else: ?>
-              <div class="wn-tab-text">
-            <?php endif;?>
-                <span>
-                    <?php echo Template::formatFeedLabel($feed); ?>
-                </span>
-              </div>
-              <ul>
-                <li><a class="wn-column-anchor" href="#wn-column-<?php echo $idx; ?>">anchor</a></li>
-                <li><a class="wn-link-rss" href="<?php echo $feed[Feeds::FEED_URL]; ?>" title="RSS Link" <?php echo $template->getTarget(); ?>><span>RSS Link</span></a></li>
-              </ul>
+            <div id="wn-tab-<?php echo $idx ?>" class="wn-tab wn-col wn-col-border <?php echo $template->getColumnClass($idx); ?>">
             </div><!-- .wn-tab -->
 
         <?php
@@ -103,61 +83,12 @@ WhoNews follows no ideology or agenda; it is free, open-source, and does not use
         </nav>
 
     <?php
-    foreach($template->feedData as $idx => $feed):
+    foreach($template->queryFeeds as $idx => $feed):
     ?>
 
         <div class="wn-links-wrapper wn-col">
 
-            <h2 class="wn-column-title">
-                <a name="wn-column-<?php echo $idx; ?>">
-                    <?php echo Template::formatFeedLabel($feed); ?>
-                </a>
-            </h2>
-
-            <ul class="wn-col-border <?php echo $template->getColumnClass($idx); ?>">
-            <?php
-            foreach($feed[WN_DATA_FEED_ITEMS] as $item):
-            ?>
-                <li class="wn-item">
-
-                <?php
-                if ($imgUrl = $template->getItemImageUrl($item)):
-                ?>
-                    <div class="wn-item-image">
-                        <img src="<?php echo $imgUrl ?>" />
-                    </div>
-                <?php
-                endif;
-                ?>
-                    <div class="wn-item-text">
-                      <div class="wn-item-title">
-                        <a href="<?php echo $item[WN_DATA_ITEM_HREF]; ?>" class="wn-item-link" <?php echo $template->getTarget(); ?>>
-                          <span><?php echo $item[WN_DATA_ITEM_TITLE] ?></span>
-                        </a>
-                      </div>
-
-                    <?php
-                    if (!empty($item[WN_DATA_ITEM_DESCRIPTION])):
-                    ?>
-                      <div class="wn-item-description">
-                          <?php echo $template->formatDescription($item[WN_DATA_ITEM_DESCRIPTION]); ?>
-                      </div>
-                    <?php
-                    endif;
-                    ?>
-
-                      <div class="wn-item-date">
-                        <?php echo Template::formatFeedTitle($feed); ?>
-                        <?php if (isset($item[WN_DATA_ITEM_PUB_DATE])): ?>
-                            &nbsp;•&nbsp;&nbsp;<?php echo $item[WN_DATA_ITEM_PUB_DATE]; ?>
-                        <?php endif; ?>
-                      </div>
-
-                    </div><!-- .wn-item-text -->
-                </li>
-            <?php
-            endforeach;
-            ?>
+            <ul id="wn-col-<?php echo $idx ?>" class="wn-col-border <?php echo $template->getColumnClass($idx); ?>">
             </ul>
         </div><!-- .wn-links-wrapper -->
 
@@ -281,6 +212,25 @@ WhoNews follows no ideology or agenda; it is free, open-source, and does not use
 
 
 </div><!-- .tablet-outer -->
+
+
+<script>
+<?php
+$baseQuery = $template->query;
+$urls = [];
+foreach ($template->queryFeeds as $feed) {
+    $baseQuery[WN_KEY_FEED] = $feed;
+    $urls[] = 'column.php?' . http_build_query($baseQuery);
+}
+?>
+
+const urls = [
+    '<?php echo implode("',\n'", $urls) ?>'
+];
+
+urls.map((url, idx) => { loadFeed(url, idx) });
+
+</script>
 
 </body>
 </html>
