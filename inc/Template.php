@@ -60,7 +60,7 @@ class Template
      */
     public function getWrapperClass()
     {
-        $wrapperClass = 'wn-cols-' . count($this->feedData);
+        $wrapperClass = 'wn-cols-' . count($this->queryFeeds);
 
         if (isset($this->query[WN_KEY_SCROLL]) && $this->query[WN_KEY_SCROLL] === 'free') {
             //  Default is scroll-sync
@@ -116,12 +116,20 @@ class Template
      * Format description
      *
      * @param string $descr
+     * @param bool $escape
      * @return string
      */
-    public function formatDescription($descr)
+    public function formatDescription($descr, $escape = false)
     {
-        if (strstr($this->getWrapperClass(), ' wn-description-short') && strlen($descr) > 120) {
+        if (isset($this->query[WN_KEY_DESCRIPTION]) &&
+                $this->query[WN_KEY_DESCRIPTION] === 'short' &&
+                strlen($descr) > 120) {
             $descr = substr($descr, 0, strrpos(substr($descr, 0, 120), ' ')) . '...';
+        }
+        $descr = str_replace(chr(194) . chr(160), ' ', $descr);
+
+        if ($escape === true) {
+            $descr = self::escape($descr);
         }
 
         return $descr;
@@ -130,13 +138,18 @@ class Template
     /**
      * Get target for links, based on key in query
      *
+     * @param bool $escape
      * @return string
      */
-    public function getTarget()
+    public function getTarget($escape = false)
     {
         $target = '';
         if (!isset($this->query[WN_KEY_TARGET]) || $this->query[WN_KEY_TARGET] === 'new') {
             $target = ' target="_blank"';
+        }
+
+        if ($escape === true) {
+            $target = self::escape($target);
         }
 
         return $target;
@@ -189,7 +202,7 @@ class Template
         if ($idx === 0) {
             $colClass .= ' wn-col-left';
         }
-        if ($idx === count($this->feedData) -1) {
+        if ($idx === count($this->queryFeeds) -1) {
             $colClass .= ' wn-col-right';
         }
 
@@ -255,13 +268,18 @@ class Template
      * Get formatted feed label from feed data
      *
      * @param array $feed
+     * @param bool $escape
      * @return string
      */
-    public static function formatFeedLabel($feed)
+    public static function formatFeedLabel($feed, $escape = false)
     {
         $label = $feed[Feeds::SOURCE_LABEL];
         if ($feed[Feeds::FEED_NAME] !== null) {
             $label .= ' : ' . $feed[Feeds::FEED_NAME];
+        }
+
+        if ($escape === true) {
+            $label = self::escape($label);
         }
 
         return $label;
@@ -271,15 +289,31 @@ class Template
      * Get formatted feed title from feed data
      *
      * @param array $feed
+     * @param bool $escape
      * @return string
      */
-    public static function formatFeedTitle($feed)
+    public static function formatFeedTitle($feed, $escape = false)
     {
         $label = $feed[Feeds::SOURCE_TITLE];
         if ($feed[Feeds::FEED_NAME] !== null) {
             $label .= ' &nbsp;⟩&nbsp; ' . $feed[Feeds::FEED_NAME];
         }
 
+        if ($escape === true) {
+            $label = self::escape($label);
+        }
+
         return $label;
+    }
+
+    /**
+     * Escape double quotes for JSON output
+     *
+     * @param string $data
+     * @return string
+     */
+    public static function escape($data)
+    {
+        return str_replace('"', '\"', $data);
     }
 }
