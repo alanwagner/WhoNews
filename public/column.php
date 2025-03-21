@@ -24,45 +24,33 @@ $filter = isset($_GET[WN_KEY_FILTER]) ? $_GET[WN_KEY_FILTER] : null;
 $template->feedData = $controller->getFeedData($template->queryFeeds, $limit, $filter);
 $feed = $template->feedData[0];
 
+$target = $template->getTarget();
+$feedTitle = Template::formatFeedTitle($feed);
+
+$tabData = [
+    'image' => !empty($feed[Feeds::SOURCE_IMAGE]) ? $feed[Feeds::SOURCE_IMAGE] : false,
+    'label' => Template::formatFeedLabel($feed),
+    'url' => $feed[Feeds::FEED_URL],
+    'target' => $target,
+];
+
+$columnData = [];
+foreach ($feed[WN_DATA_FEED_ITEMS] as $item) {
+    $imgUrl = $template->getItemImageUrl($item);
+    $columnData[] = [
+        'imageUrl' => !empty($imgUrl) ? $imgUrl : false,
+        'itemUrl' => $item[WN_DATA_ITEM_HREF],
+        'title' => str_replace(chr(194) . chr(160), ' ', $item[WN_DATA_ITEM_TITLE]),
+        'description' => !empty($item[WN_DATA_ITEM_DESCRIPTION]) ? $template->formatDescription($item[WN_DATA_ITEM_DESCRIPTION]) : false,
+        'feedTitle' => $feedTitle,
+        'date' => $item[WN_DATA_ITEM_PUB_DATE] ?? false,
+        'target' => $target,
+    ];
+}
+
 header('Content-Type: application/json; charset=utf-8');
 ?>
 {
-  "tabHtml": "<?php
-    if (!empty($feed[Feeds::SOURCE_IMAGE])):
-        ?><div class=\"wn-tab-image\" title=\"<?php
-            echo Template::formatFeedLabel($feed, true);
-        ?>\"><span class=\"wn-img-bg\" style=\"background-image: url(img/<?php
-            echo $feed[Feeds::SOURCE_IMAGE];
-        ?>);\"></span><?php
-    else:
-        ?><div class=\"wn-tab-text\"><?php
-    endif;
-    ?><span class=\"wn-tab-label\"><?php
-        echo Template::formatFeedLabel($feed, true);
-    ?></span></div><ul><li><a class=\"wn-link-rss\" href=\"<?php
-                    echo $feed[Feeds::FEED_URL];
-                ?>\" title=\"RSS Link\" <?php echo $template->getTarget(true);
-    ?>><span>RSS Link</span></a></li></ul>",
-
-  "columnHtml": "<?php
-    foreach($feed[WN_DATA_FEED_ITEMS] as $item):
-        ?><li class=\"wn-item\"><?php
-        if ($imgUrl = $template->getItemImageUrl($item)):
-            ?><div class=\"wn-item-image\"><img src=\"<?php echo $imgUrl ?>\" /></div><?php
-        endif;
-        ?><div class=\"wn-item-text\"><div class=\"wn-item-title\"><a href=\"<?php echo $item[WN_DATA_ITEM_HREF]; ?>\" class=\"wn-item-link\" <?php echo $template->getTarget(true); ?>><span><?php
-            echo Template::escape(str_replace(chr(194) . chr(160), ' ', $item[WN_DATA_ITEM_TITLE]))
-        ?></span></a></div><?php
-            if (!empty($item[WN_DATA_ITEM_DESCRIPTION])):
-                ?><div class=\"wn-item-description\"><?php
-                    echo $template->formatDescription($item[WN_DATA_ITEM_DESCRIPTION], true);
-                ?></div><?php
-            endif;
-            ?><div class=\"wn-item-date\"><?php
-                echo Template::formatFeedTitle($feed, true);
-                if (isset($item[WN_DATA_ITEM_PUB_DATE])):
-                    ?>&nbsp;•&nbsp;&nbsp;<?php echo $item[WN_DATA_ITEM_PUB_DATE];
-                endif; ?></div></div></li><?php
-    endforeach;
-    ?>"
+  "tabData": <?php echo json_encode($tabData) ?>,
+  "columnData" : <?php echo json_encode($columnData) ?>
 }

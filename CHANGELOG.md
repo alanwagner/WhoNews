@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.11] - 2025.03.22
+
+Performance Upgrade Release
+
+### Changed
+
+- Generate HTML on client side
+
+
 ## [1.10.1] - 2025.03.21
 
 Bugfix Release
