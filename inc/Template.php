@@ -127,6 +127,7 @@ class Template
             $descr = substr($descr, 0, strrpos(substr($descr, 0, 120), ' ')) . '...';
         }
         $descr = str_replace(chr(194) . chr(160), ' ', $descr);
+        $descr = preg_replace("/[\r\n]+/", ' ', $descr);
 
         if ($escape === true) {
             $descr = self::escape($descr);

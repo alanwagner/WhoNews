@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.10.1] - 2025.03.21
+
+Bugfix Release
+
+### Changed
+
+- Fixed description parsing when there's a line break
+
+
 ## [1.10] - 2025.03.21
 
 Performance Upgrade Release
