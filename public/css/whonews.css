@@ -135,10 +135,16 @@ h1.wn-header-title {
     font-size: 170%;
 }
 
-#wn-about-btn:hover,
 #wn-about-btn.wn-about-btn-active {
     background-color: #313131;
     color: #ddd;
+}
+
+@media (hover:hover) {
+    #wn-about-btn:hover {
+        background-color: #313131;
+        color: #ddd;
+    }
 }
 
 
@@ -162,11 +168,15 @@ h1.wn-header-title {
     display: none;
 }
 
-#wn-settings-btn:hover,
 .wn-settings-btn-active {
     background-color: #313131;
 }
 
+@media (hover:hover) {
+    #wn-settings-btn:hover {
+        background-color: #313131;
+    }
+}
 
 
 
