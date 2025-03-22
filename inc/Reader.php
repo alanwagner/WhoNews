@@ -38,6 +38,7 @@ class Reader
         // Configuration de l'URL et d'autres options
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_ENCODING, 'gzip,deflate');
 
         // Récupération de l'URL
         curl_exec($ch);
