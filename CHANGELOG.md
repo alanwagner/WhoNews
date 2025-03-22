@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.12] - 2025.03.22
+
+Feature and Bugfix Release
+
+### Changed
+
+- Added About panel
+- Default title
+- Moved column.php to data.php
+- Code clean-up
+- Fixed 406 error
+
+
 ## [1.11.1] - 2025.03.22
 
 Bugfix Release

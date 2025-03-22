@@ -25,13 +25,15 @@ if ($url !== null) {
 $template->query = $_GET;
 $template->queryFeeds = $controller->getQueryFeeds($_GET);
 
+$defaultTitle = 'WhoNews.org | Compare RSS news feeds side by side';
+
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title><?php echo $template->getPageTitle(); ?></title>
-<meta name="description" content="WhoNews.org is an online newsfeed viewer which allows users to compare multiple news sources by displaying them side-by-side. 
+<title><?php echo $defaultTitle; ?></title>
+<meta name="description" content="WhoNews.org is an online newsfeed viewer which allows users to compare multiple news sources by displaying them side by side. 
 It currently offers <?php echo Feeds::countFeeds(); ?> feeds from <?php echo Feeds::countSources(); ?> sources. 
 WhoNews follows no ideology or agenda; it is free, open-source, and does not use cookies, trackers, or ads of any kind.
 WhoNews exists in its current form purely as a personal project created by Alan Gerard Wagner (see alanwagner.org).">
@@ -45,12 +47,30 @@ WhoNews exists in its current form purely as a personal project created by Alan 
 
 <div class="wn-tablet-outer <?php echo $template->getWrapperClass(); ?>">
 
+    <div id="wn-about-panel" class="wn-about-hidden">
+        <p>
+            <b>WhoNews</b> is an online newsfeed viewer which allows users to compare 
+            multiple news sources by displaying them side by side. <br />
+            It exists in its current form purely as a personal project created by <a href="https://alanwagner.org" target="_blank">Alan Wagner</a>.
+        </p>
+        <p>
+            WhoNews follows no ideology or agenda; it is free, open-source, and 
+            does not use cookies, trackers, or ads of any kind.
+        </p>
+        <p>
+            We welcome your collaboration!<br />
+            <a href="https://github.com/alanwagner/WhoNews" target="_blank">Github Repository</a><br />
+            <a href="https://www.linkedin.com/in/alanwagner/" target="_blank">Alan Wagner on LinkedIn</a>
+        </p>
+    </div>
     <div class="wn-top-header clearfix">
         <h1 class="wn-header-title">
             <span class="wn-header-title-img"></span>
-            <span class="wn-header-title-text">WhoNews Beta</span>
+            <span class="wn-header-title-text">WhoNews.org</span>
         </h1>
-        <div class="wn-sub-header-text">Pop Your Info Bubble</div>
+        <div id="wn-about-btn" title="About WhoNews" onclick="toggleAbout()">
+            <span>ABOUT</span>
+        </div>
     <?php
     $filterString = $template->getFilterString();
     if (!empty($filterString)):
@@ -215,20 +235,26 @@ WhoNews exists in its current form purely as a personal project created by Alan 
 
 
 <script>
+
 <?php
 $baseQuery = $template->query;
 $urls = [];
 foreach ($template->queryFeeds as $feed) {
     $baseQuery[WN_KEY_FEED] = $feed;
-    $urls[] = 'column.php?' . http_build_query($baseQuery);
+    $urls[] = 'data.php?' . http_build_query($baseQuery);
 }
 ?>
+    const defaultPageTitle = '<?php 
+        if (empty($template->query[WN_KEY_FEED])) {
+            echo $defaultTitle;
+        }
+    ?>';
 
-const urls = [
-    '<?php echo implode("',\n'", $urls) ?>'
-];
+    const urls = [
+        '<?php echo implode("',\n'", $urls) ?>'
+    ];
 
-urls.map((url, idx) => { loadFeed(url, idx) });
+    urls.map((url, idx) => { loadFeed(url, idx) });
 
 </script>
 

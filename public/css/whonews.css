@@ -15,7 +15,6 @@
     --top-header-bg-color: #101010;
     --top-header-height: 7rem;
     --top-header-border-height: 7px;
-    --sub-header-text-color: #e0e0e0;
 
     --sub-header-bg-color: #208000;
     --sub-header-height: 9px;
@@ -25,6 +24,9 @@
     --settings-panel-width: 40rem;
 
     --links-bg-color: #fffffc;
+
+    --about-panel-width: 48rem;
+    --about-panel-height: 37rem;
 }
 
 
@@ -73,6 +75,7 @@ html, body {
     padding: 5px 12px 0;
     height: var(--top-header-height);
     border-top: var(--top-header-border-height) solid var(--sub-header-bg-color);
+    z-index: 2000;
 }
 
 h1.wn-header-title {
@@ -80,7 +83,7 @@ h1.wn-header-title {
     top: 11px;
     left: 12px;
     height: 4.2rem;
-    width: 32rem;
+    width: 23rem;
     margin: 0;
     padding: 0;
     background-image: linear-gradient(#ffffb0, gold);
@@ -90,7 +93,7 @@ h1.wn-header-title {
     display: block;
     width: 100%;
     height: 100%;
-    background-image: url(../img/WhoNews_Beta_Transparent.png);
+    background-image: url(../img/WhoNews_Transparent.png);
     background-size: cover;
 }
 
@@ -99,30 +102,43 @@ h1.wn-header-title {
 }
 
 
-
-.wn-sub-header-text {
-    position: relative;
-    display: block;
-    margin: 4px auto 0;
-    text-align: center;
-    color: var(--sub-header-text-color);
-    font-weight: 300;
-    font-style: italic;
-    font-size: 90%;
-}
-
-
 .wn-keywords {
 	position: relative;
 	float: right;
 	margin-right: calc( var(--top-header-height) * 0.96);
-	font-size: 135%;
+        margin-top: 2.1rem;
+	font-size: 155%;
 	color: #eee;
 	text-align: right;
 }
 
 .wn-keywords-label {
-	color: #a8a8a8;
+	color: #bbb;
+}
+
+
+#wn-about-btn {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    top: 0;
+    left: 26.3rem;
+    padding: 0 1.7rem 4px;
+    height: calc(var(--top-header-height) - var(--top-header-border-height));
+    width: auto;
+    border-top: 1px solid var(--top-header-bg-color);
+    border-bottom: 1px solid var(--top-header-bg-color);
+    cursor: pointer;
+    color: #ccc;
+    font-variant: small-caps;
+    font-size: 170%;
+}
+
+#wn-about-btn:hover,
+#wn-about-btn.wn-about-btn-active {
+    background-color: #313131;
+    color: #ddd;
 }
 
 
@@ -527,6 +543,33 @@ h1.wn-header-title {
 }
 
 
+
+
+#wn-about-panel {
+    position: absolute;
+    top: var(--top-header-height);
+    left: 0px;
+    z-index: 1000;
+    background-color: #eee;
+    border: 1px solid #999;
+    border-top-width: 0;
+    box-shadow: 2px 4px 10px 1px #c0c0c0;
+    width: var(--about-panel-width);
+    height: var(--about-panel-height);
+    padding-top: 1rem;
+    transition: top 0.5s;
+}
+
+
+#wn-about-panel.wn-about-hidden {
+    /*  Leave a margin to hide the drop shadow  */
+    top: calc(-3rem - var(--about-panel-height));
+}
+
+#wn-about-panel  p {
+    padding: 0.7rem 2.5rem 0;
+    font-size: 135%;
+}
 
 
 
