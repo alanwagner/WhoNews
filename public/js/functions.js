@@ -13,6 +13,13 @@ function toggleSettings() {
   buttonPanel.classList.toggle("wn-settings-btn-active");
 }
 
+function toggleAbout() {
+  var elementPanel = document.getElementById("wn-about-panel");
+  elementPanel.classList.toggle("wn-about-hidden");
+  var buttonPanel = document.getElementById("wn-about-btn");
+  buttonPanel.classList.toggle("wn-about-btn-active");
+}
+
 function toggleCustomInput(id, selected) {
   var element = document.getElementById(id);
   if (selected === "custom") {

@@ -47,12 +47,30 @@ WhoNews exists in its current form purely as a personal project created by Alan 
 
 <div class="wn-tablet-outer <?php echo $template->getWrapperClass(); ?>">
 
+    <div id="wn-about-panel" class="wn-about-hidden">
+        <p>
+            <b>WhoNews</b> is an online newsfeed viewer which allows users to compare 
+            multiple news sources by displaying them side by side. <br />
+            It exists in its current form purely as a personal project created by <a href="https://alanwagner.org" target="_blank">Alan Wagner</a>.
+        </p>
+        <p>
+            WhoNews follows no ideology or agenda; it is free, open-source, and 
+            does not use cookies, trackers, or ads of any kind.
+        </p>
+        <p>
+            We welcome your collaboration!<br />
+            <a href="https://github.com/alanwagner/WhoNews" target="_blank">Github Repository</a><br />
+            <a href="https://www.linkedin.com/in/alanwagner/" target="_blank">Alan Wagner on LinkedIn</a>
+        </p>
+    </div>
     <div class="wn-top-header clearfix">
         <h1 class="wn-header-title">
             <span class="wn-header-title-img"></span>
-            <span class="wn-header-title-text">WhoNews Beta</span>
+            <span class="wn-header-title-text">WhoNews.org</span>
         </h1>
-        <div class="wn-sub-header-text">Pop Your Info Bubble</div>
+        <div id="wn-about-btn" title="About WhoNews" onclick="toggleAbout()">
+            <span>ABOUT</span>
+        </div>
     <?php
     $filterString = $template->getFilterString();
     if (!empty($filterString)):
