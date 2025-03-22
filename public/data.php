@@ -1,6 +1,6 @@
 <?php
 /**
- * WhoNews : column.php
+ * WhoNews : data.php
  *
  * @author     Alan G. Wagner <mail@alanwagner.org>
  * @copyright  2025 Alan G. Wagner
@@ -28,8 +28,8 @@ $target = $template->getTarget();
 $feedTitle = Template::formatFeedTitle($feed);
 
 $tabData = [
-    'image' => !empty($feed[Feeds::SOURCE_IMAGE]) ? $feed[Feeds::SOURCE_IMAGE] : false,
     'label' => Template::formatFeedLabel($feed),
+    'image' => !empty($feed[Feeds::SOURCE_IMAGE]) ? $feed[Feeds::SOURCE_IMAGE] : false,
     'url' => $feed[Feeds::FEED_URL],
     'target' => $target,
 ];
@@ -38,19 +38,21 @@ $columnData = [];
 foreach ($feed[WN_DATA_FEED_ITEMS] as $item) {
     $imgUrl = $template->getItemImageUrl($item);
     $columnData[] = [
-        'imageUrl' => !empty($imgUrl) ? $imgUrl : false,
-        'itemUrl' => $item[WN_DATA_ITEM_HREF],
-        'title' => str_replace(chr(194) . chr(160), ' ', $item[WN_DATA_ITEM_TITLE]),
+        'title' => Template::clean($item[WN_DATA_ITEM_TITLE]),
         'description' => !empty($item[WN_DATA_ITEM_DESCRIPTION]) ? $template->formatDescription($item[WN_DATA_ITEM_DESCRIPTION]) : false,
-        'feedTitle' => $feedTitle,
         'date' => $item[WN_DATA_ITEM_PUB_DATE] ?? false,
+        'itemUrl' => $item[WN_DATA_ITEM_HREF],
+        'imageUrl' => !empty($imgUrl) ? $imgUrl : false,
+        'feedTitle' => $feedTitle,
         'target' => $target,
     ];
 }
 
+$output = [
+    "tabData" => $tabData,
+    "columnData" => $columnData,
+];
+
 header('Content-Type: application/json; charset=utf-8');
-?>
-{
-  "tabData": <?php echo json_encode($tabData) ?>,
-  "columnData" : <?php echo json_encode($columnData) ?>
-}
+
+echo json_encode($output);

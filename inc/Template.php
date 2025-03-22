@@ -31,26 +31,20 @@ class Template
     public $feedData = [];
 
     /**
-     * Get page title, based on feedData and existence of query string
+     * Check a for a value in the query array
      *
-     * @return string
+     * @param string $key
+     * @param string $value
+     * @param boolean $asDefault
+     * @return boolean
      */
-    public function getPageTitle()
+    public function checkQuery($key, $value, $asDefault = false)
     {
-        $pageTitle = 'WhoNews Beta | ';
-
-        if (isset($this->query[WN_KEY_FEED])) {
-            foreach ($this->feedData as $idx => $feed) {
-                $pageTitle .= self::formatFeedLabel($feed);
-                if ($idx !== count($this->feedData) - 1) {
-                    $pageTitle .= ' | ';
-                }
-            }
-        } else {
-            $pageTitle .= 'Pop Your Info Bubble';
+        if ($asDefault) {
+            return !isset($this->query[$key]) || $this->query[$key] === $value;
         }
 
-        return $pageTitle;
+        return isset($this->query[$key]) && $this->query[$key] === $value;
     }
 
     /**
@@ -62,7 +56,7 @@ class Template
     {
         $wrapperClass = 'wn-cols-' . count($this->queryFeeds);
 
-        if (isset($this->query[WN_KEY_SCROLL]) && $this->query[WN_KEY_SCROLL] === 'free') {
+        if ($this->checkQuery(WN_KEY_SCROLL, 'free')) {
             //  Default is scroll-sync
             $wrapperClass .= ' wn-scroll-free';
         }
@@ -96,54 +90,13 @@ class Template
     }
 
     /**
-     * Check a for a value in the query array
-     *
-     * @param string $key
-     * @param string $value
-     * @param boolean $asDefault
-     * @return boolean
-     */
-    public function checkQuery($key, $value, $asDefault = false)
-    {
-        if ($asDefault) {
-            return !isset($this->query[$key]) || $this->query[$key] === $value;
-        }
-
-        return isset($this->query[$key]) && $this->query[$key] === $value;
-    }
-
-    /**
-     * Format description
-     *
-     * @param string $descr
-     * @return string
-     */
-    public function formatDescription($descr)
-    {
-        if (isset($this->query[WN_KEY_DESCRIPTION]) &&
-                $this->query[WN_KEY_DESCRIPTION] === 'short' &&
-                strlen($descr) > 120) {
-            $descr = substr($descr, 0, strrpos(substr($descr, 0, 120), ' ')) . '...';
-        }
-        $descr = str_replace(chr(194) . chr(160), ' ', $descr);
-        $descr = preg_replace("/[\r\n]+/", ' ', $descr);
-
-        return $descr;
-    }
-
-    /**
      * Get target for links, based on key in query
      *
      * @return string
      */
     public function getTarget()
     {
-        $target = '';
-        if (!isset($this->query[WN_KEY_TARGET]) || $this->query[WN_KEY_TARGET] === 'new') {
-            $target = '_blank';
-        }
-
-        return $target;
+        return ($this->checkQuery(WN_KEY_TARGET, 'new', true)) ? '_blank' : '';
     }
 
     /**
@@ -232,12 +185,7 @@ class Template
     public function displayImages()
     {
         //  Default is images-small
-        if (isset($this->query[WN_KEY_IMAGES]) && $this->query[WN_KEY_IMAGES] === 'none') {
-
-            return false;
-        }
-
-        return true;
+        return !$this->checkQuery(WN_KEY_IMAGES, 'none');
     }
 
     /**
@@ -256,6 +204,21 @@ class Template
     }
 
     /**
+     * Format description
+     *
+     * @param string $descr
+     * @return string
+     */
+    public function formatDescription($descr)
+    {
+        if ($this->checkQuery(WN_KEY_DESCRIPTION, 'short') && strlen($descr) > 120) {
+            $descr = substr($descr, 0, strrpos(substr($descr, 0, 120), ' ')) . '...';
+        }
+
+        return self::clean($descr);
+    }
+
+    /**
      * Get formatted feed label from feed data
      *
      * @param array $feed
@@ -268,7 +231,7 @@ class Template
             $label .= ' : ' . $feed[Feeds::FEED_NAME];
         }
 
-        return $label;
+        return self::clean($label);
     }
 
     /**
@@ -284,6 +247,20 @@ class Template
             $label .= ' &nbsp;⟩&nbsp; ' . $feed[Feeds::FEED_NAME];
         }
 
-        return $label;
+        return self::clean($label);
+    }
+
+    /**
+     * Clean string for display
+     *
+     * @param string $data
+     * @return string
+     */
+    public static function clean($data)
+    {
+        $data = str_replace(chr(194) . chr(160), ' ', $data);
+        $data = preg_replace("/[\r\n]+/", ' ', $data);
+
+        return $data;
     }
 }

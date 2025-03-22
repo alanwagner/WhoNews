@@ -88,10 +88,16 @@ function loadFeed(url, idx) {
 }
 
 function updatePageTitle() {
-    let title = 'WhoNews Beta ';
-    const labels = document.querySelectorAll('.wn-tab-label');
-    [...labels].map((elt) => {
-       title += ' | ' + elt.innerHTML;
-    });
+    let title = 'WhoNews.org';
+
+    if (defaultPageTitle.length) {
+        title = defaultPageTitle;
+    } else {
+        const labels = document.querySelectorAll('.wn-tab-label');
+        [...labels].map((elt) => {
+           title += ' | ' + elt.innerHTML;
+        });
+    }
+
     document.querySelector('title').innerHTML = title;
 }
