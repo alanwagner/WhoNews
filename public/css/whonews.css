@@ -26,7 +26,7 @@
     --links-bg-color: #fffffc;
 
     --about-panel-width: 48rem;
-    --about-panel-height: 37rem;
+    --about-panel-height: 49.5rem;
 }
 
 
@@ -566,7 +566,7 @@ h1.wn-header-title {
     box-shadow: 2px 4px 10px 1px #c0c0c0;
     width: var(--about-panel-width);
     height: var(--about-panel-height);
-    padding-top: 1rem;
+    padding-top: 1.1rem;
     transition: top 0.5s;
 }
 

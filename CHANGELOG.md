@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.12.2] - 2025.03.24
+
+Upgrade Release
+
+### Changed
+
+- Added info to About panel
+
+
 ## [1.12.1] - 2025.03.22
 
 Bugfix Release

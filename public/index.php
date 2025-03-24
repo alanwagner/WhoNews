@@ -50,12 +50,17 @@ WhoNews exists in its current form purely as a personal project created by Alan 
     <div id="wn-about-panel" class="wn-about-hidden">
         <p>
             <b>WhoNews</b> is an online newsfeed viewer which allows users to compare 
-            multiple news sources by displaying them side by side. <br />
+            multiple news sources by displaying them side by side.<br />
             It exists in its current form purely as a personal project created by <a href="https://alanwagner.org" target="_blank">Alan Wagner</a>.
         </p>
         <p>
             WhoNews follows no ideology or agenda; it is free, open-source, and 
             does not use cookies, trackers, or ads of any kind.
+        </p>
+        <p>
+            The tool currently offers <?php echo Feeds::countFeeds(); ?> RSS feeds
+            from <?php echo Feeds::countSources(); ?> sources, while also allowing 
+            users to enter other feeds, search for keywords and select display options.
         </p>
         <p>
             We welcome your collaboration!<br />
